@@ -14,7 +14,7 @@ public class Hello_World {
             Statement stmt = con.createStatement();
 
             ResultSet rs = stmt.executeQuery("select * from test.adresa");
-            stmt.executeUpdate("insert into test.adresa(mesto, ulica, cislo_domu, psc) values ('Bratislava', 'Zochova', '124', '02901')");
+            stmt.executeUpdate("insert into test.adresa(mesto, ulica_cislo_domu, cislo_domu, psc) values ('Bratislava', 'Zochova', '124', '02901')");
 
 //            while (rs.next()) {
 //                int id = rs.getInt("id");

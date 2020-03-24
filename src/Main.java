@@ -74,7 +74,10 @@ public class Main extends Application {
         GridPane.setConstraints(zipCodeInput, 0, 5);
         Button acceptButton = new Button("Accept");
         acceptButton.setOnAction(e -> {
-            login.insertToDatabase(nameInput.getText(), phoneNumInput.getText(), idCardNumInput.getText(), newEmailInput.getText(), newPasswordInput.getText());
+            login.insertToDatabase(nameInput.getText(), phoneNumInput.getText(),
+                    idCardNumInput.getText(), newEmailInput.getText(),
+                    newPasswordInput.getText(), cityInput.getText(),
+                    streetAdrInput.getText(), zipCodeInput.getText());
             primaryStage.setScene(blank);
         });
         GridPane.setConstraints(acceptButton, 0, 6);
