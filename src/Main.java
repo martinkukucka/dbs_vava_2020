@@ -28,8 +28,10 @@ public class Main extends Application {
         Scene datapage = new Scene(grid3, 300, 450);
 
         TextField emailInput = new TextField();
+        emailInput.setPromptText("E-mail");
         GridPane.setConstraints(emailInput, 0, 0);
         PasswordField passwordInput = new PasswordField();
+        passwordInput.setPromptText("Password");
         GridPane.setConstraints(passwordInput, 0, 1);
         Button loginButton = new Button("Log in");
         loginButton.setOnAction(e -> {
@@ -48,8 +50,10 @@ public class Main extends Application {
         GridPane.setConstraints(registerButton, 0, 3);
 
         TextField newEmailInput = new TextField();
+        newEmailInput.setPromptText("E-mail");
         GridPane.setConstraints(newEmailInput, 0, 0);
-        TextField newPasswordInput = new TextField();
+        PasswordField newPasswordInput = new PasswordField();
+        newPasswordInput.setPromptText("Password");
         GridPane.setConstraints(newPasswordInput, 0, 1);
         Button nextButton = new Button("Next");
         nextButton.setOnAction(e -> {
@@ -61,16 +65,22 @@ public class Main extends Application {
         GridPane.setConstraints(nextButton, 0, 2);
 
         TextField nameInput = new TextField();
+        nameInput.setPromptText("Name");
         GridPane.setConstraints(nameInput, 0, 0);
         TextField phoneNumInput = new TextField();
+        phoneNumInput.setPromptText("Phone number");
         GridPane.setConstraints(phoneNumInput, 0, 1);
         TextField idCardNumInput = new TextField();
+        idCardNumInput.setPromptText("ID card number");
         GridPane.setConstraints(idCardNumInput, 0, 2);
         TextField cityInput = new TextField();
+        cityInput.setPromptText("City");
         GridPane.setConstraints(cityInput, 0, 3);
         TextField streetAdrInput = new TextField();
+        streetAdrInput.setPromptText("Street address");
         GridPane.setConstraints(streetAdrInput, 0, 4);
         TextField zipCodeInput = new TextField();
+        zipCodeInput.setPromptText("Zip code");
         GridPane.setConstraints(zipCodeInput, 0, 5);
         Button acceptButton = new Button("Accept");
         acceptButton.setOnAction(e -> {
