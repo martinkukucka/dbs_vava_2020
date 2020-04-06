@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="mssql-jdbc-8.2.0.jre11">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../mssql-jdbc-8.2.0.jre11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../mysql-connector-java-8.0.19.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../protobuf-java-3.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../sqljdbc_8.2.0.0_enu.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
