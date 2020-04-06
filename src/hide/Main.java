@@ -101,6 +101,5 @@ public class Main extends Application {
         grid3.getChildren().addAll(nameInput, phoneNumInput, idCardNumInput, cityInput, streetAdrInput, zipCodeInput, acceptButton);
         primaryStage.setScene(logScene);
         primaryStage.show();
-
     }
 }
