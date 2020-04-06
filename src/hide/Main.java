@@ -95,7 +95,6 @@ public class Main extends Application {
         });
         GridPane.setConstraints(acceptButton, 0, 6);
 
-
         grid1.getChildren().addAll(emailInput, passwordInput, loginButton, registerButton);
         grid2.getChildren().addAll(newEmailInput, newPasswordInput, nextButton);
         grid3.getChildren().addAll(nameInput, phoneNumInput, idCardNumInput, cityInput, streetAdrInput, zipCodeInput, acceptButton);
