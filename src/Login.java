@@ -4,10 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -17,6 +14,10 @@ import java.sql.*;
 
 public class Login {
 
+    public static Stage stage = new Stage();
+    public static Stage oldstage = new Stage();
+    public static double oldwitdh;
+    public static double oldheight;
     public String databaseURL = "jdbc:mysql://localhost:3306/?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     public String databaseName = "root";
     public String databasePassword = "root";
@@ -38,6 +39,9 @@ public class Login {
 
     @FXML
     private Button backLoginButton;
+
+    @FXML
+    private Hyperlink adminHyperlink;
 
     @FXML
     private void loginButtonAction(ActionEvent event) {
@@ -69,8 +73,20 @@ public class Login {
     }
 
     @FXML
+    private void adminHyperlinkAction(ActionEvent event) throws Exception{
+        oldstage = (Stage) loginButton.getScene().getWindow();
+        oldwitdh = loginButton.getScene().getWidth();
+        oldheight = loginButton.getScene().getHeight();
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/adminlogin.fxml"));
+        Scene scene = new Scene(root,320,280);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    @FXML
     private void backLoginButtonAction(ActionEvent event) throws Exception{
-        Stage stage = (Stage) backLoginButton.getScene().getWindow();
+        stage = (Stage) backLoginButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("GUI/entry.fxml"));
         stage.setScene(new Scene(root, backLoginButton.getScene().getWidth(), backLoginButton.getScene().getHeight()));
     }

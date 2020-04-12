@@ -7,9 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="mssql-jdbc-8.2.0.jre11" level="project" />
-    <orderEntry type="library" name="sqljdbc_8.2.0.0_enu" level="project" />
-    <orderEntry type="library" name="protobuf-java-3.6.1" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-8.0.19" level="project" />
+    <orderEntry type="library" exported="" name="mssql-jdbc-8.2.0.jre11" level="project" />
+    <orderEntry type="library" exported="" name="mysql-connector-java-8.0.19" level="project" />
+    <orderEntry type="library" exported="" name="sqljdbc_8.2.0.0_enu" level="project" />
+    <orderEntry type="library" exported="" name="javafx-swt" level="project" />
+    <orderEntry type="library" exported="" name="protobuf-java-3.6.1" level="project" />
   </component>
 </module>

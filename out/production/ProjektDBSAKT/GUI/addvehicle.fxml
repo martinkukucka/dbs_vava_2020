@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="400.0" minWidth="600.0" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AddVehicle">
+   <children>
+      <GridPane alignment="CENTER" layoutY="25.0" prefHeight="354.0" prefWidth="600.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+         <children>
+            <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="334.0" prefWidth="442.0" spacing="10.0">
+               <children>
+                  <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EČV" wrappingWidth="70.0" />
+                        <TextField fx:id="licensePlateNumberTextField" prefHeight="25.0" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Farba" wrappingWidth="70.0" />
+                        <TextField fx:id="colorTextField" prefHeight="25.0" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rok výroby" wrappingWidth="70.0" />
+                        <TextField fx:id="yearOfProductionTextField" prefHeight="25.0" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nákupná cena" wrappingWidth="70.0" />
+                        <TextField fx:id="priceTextField" prefHeight="25.0" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Model" wrappingWidth="36.0" />
+                        <ComboBox fx:id="modelComboBox" prefHeight="25.0" prefWidth="488.0" visibleRowCount="10" />
+                     </children>
+                  </HBox>
+                  <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                     <children>
+                        <Hyperlink fx:id="addModelHyperlink" onAction="#addModelHyperlinkAction" text="Pridať model" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="addVehicleLabel" prefHeight="17.0" prefWidth="719.0" />
+                  <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                     <children>
+                        <Button fx:id="addVehicleButton" mnemonicParsing="false" onAction="#addVehicleButtonAction" prefHeight="25.0" prefWidth="100.0" text="Pridať vozidlo" textAlignment="CENTER" textOverrun="ELLIPSIS" />
+                     </children>
+                  </HBox>
+                  <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                     <children>
+                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="25.0" prefWidth="100.0" text="Späť" textAlignment="CENTER" textOverrun="ELLIPSIS" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>

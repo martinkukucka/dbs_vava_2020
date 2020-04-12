@@ -79,16 +79,15 @@ public class Register {
 
     @FXML
     private void regRegistrationButtonAction(ActionEvent event) throws Exception {
-        boolean emailExist = false;
         String sqlCustomer = "insert into crdb.customer(name, surname, phonenumber, email, password, idcardnumber, addressid) values (?, ?, ?, ?, ?, ?, ?)";
         String sqlAddress = "insert into crdb.address(region, city, street, housenumber, zipcode) values (?, ?, ?, ?, ?)";
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
+            Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             Statement statement = connection.createStatement();
             int currentAddressID = 0;
 
             ResultSet rs = statement.executeQuery("select * from crdb.customer");
-            while(rs.next() && !emailExist){
+            while(rs.next()){
                 if(rs.getString("email").equals(regEmailTextField.getText())){
                     regLabel.setText("E-mailová adresa existuje");
                     regLabel.setTextFill(Color.RED);
@@ -150,8 +149,6 @@ public class Register {
         } catch(SQLException e) {
             System.out.println("SQL exception occured: " + e);
         }
-
-
 
     }
 
