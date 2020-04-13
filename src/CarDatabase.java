@@ -89,7 +89,6 @@ public class CarDatabase {
     }
 
 
-
     public void buildData() throws SQLException {
         ObservableList<CarInfo> carinfod = FXCollections.observableArrayList();
 
@@ -111,49 +110,8 @@ public class CarDatabase {
         catch(SQLException e) {
             System.out.println("SQL exception occured: " + e);
         }
-
-
-//        carTable.setItems(carInfo);
     }
 
-//    private ObservableList<CarInfo> data = FXCollections.observableArrayList(
-//            new CarInfo(1,"Amos", "Chepchieng","1","1","1",
-//                    1,1,1,"1","1",1, 1)
-//            );
-
-
-//    @FXML
-//    public void initialize() throws SQLException {
-//
-//        licensePlateNumberColumn.setCellValueFactory(new PropertyValueFactory<>("StudentId"));
-//
-////        try {
-////            String sqlModel = ("select * from crdb.model");
-////            Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
-////            PreparedStatement statement = connection.prepareStatement(sqlModel);
-////            ResultSet rs = statement.executeQuery("select * from crdb.model");
-////
-////            while(rs.next()){
-////
-////                Object o[] = {rs.getString("catagory")};
-////                carTable.add
-////
-//////                String carInfo = "ID: "+rs.getString("id")+", "+rs.getString("carbrand")
-//////                        +" - "+rs.getString("carmodel")+", "+rs.getString("category")+", "+rs.getString("transmission")
-//////                        +", "+rs.getString("fuel")+", "+rs.getString("kw")
-//////                        +"kW, počet miest na sedenie: "+rs.getString("seats");
-//////                modelComboBox.getItems().add(carInfo);
-////            }
-////
-////        }
-////        catch(SQLException e) {
-////            System.out.println("SQL exception occured: " + e);
-////        }
-//        ObservableList<CarDatabase> x = FXCollections.observableArrayList(
-//        new CarDatabase("ahoj");
-//        );
-//
-//    }
 
     @FXML
     private void addVehicleButtonAction(ActionEvent event) throws Exception{
@@ -162,12 +120,25 @@ public class CarDatabase {
         stage.setScene(new Scene(root, addVehicleButton.getScene().getWidth(), addVehicleButton.getScene().getHeight()));
     }
 
-//    @FXML
-//    private void removeVehicleButtonAction(ActionEvent event) throws Exception{
-//        stage = (Stage) backLoginButton.getScene().getWindow();
-//        Parent root = FXMLLoader.load(getClass().getResource("GUI/entry.fxml"));
-//        stage.setScene(new Scene(root, backLoginButton.getScene().getWidth(), backLoginButton.getScene().getHeight()));
-//    }
+    @FXML
+    private void removeVehicleButtonAction() {
+        if(!Bindings.isEmpty(carTable.getItems()).get()) {
+            CarInfo selectedItem = carTable.getSelectionModel().getSelectedItem();
+            carTable.getItems().remove(selectedItem);
+            String sqlModel = ("delete from crdb.vehicle where id = ?");
+
+            try {
+                Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+                PreparedStatement statement = connection.prepareStatement(sqlModel);
+
+                statement.setInt(1, selectedItem.getCarID());
+                statement.executeUpdate();
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
     @FXML
     private void backButtonAction(ActionEvent event) throws Exception{

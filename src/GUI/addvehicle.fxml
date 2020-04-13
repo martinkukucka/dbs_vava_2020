@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -48,6 +50,11 @@
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Model" wrappingWidth="36.0" />
                         <ComboBox fx:id="modelComboBox" prefHeight="25.0" prefWidth="488.0" visibleRowCount="10" />
+                        <ImageView fx:id="reloadImage" onMouseClicked='#initialize' fitHeight="28.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@reload.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </HBox>
                   <HBox id="HBox" alignment="CENTER" spacing="5.0">

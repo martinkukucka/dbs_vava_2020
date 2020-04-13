@@ -46,10 +46,10 @@ public class AddVehicle {
     public void initialize(){
         modelComboBox.getItems().clear();
         try {
-            String sqlModel = ("select * from crdb.model");
+            String sqlModel = ("select * from crdb.model order by carbrand, carmodel");
             Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             PreparedStatement statement = connection.prepareStatement(sqlModel);
-            ResultSet rs = statement.executeQuery("select * from crdb.model");
+            ResultSet rs = statement.executeQuery(sqlModel);
 
             while(rs.next()){
                 String carInfo = "ID: "+rs.getString("id")+", "+rs.getString("carbrand")

@@ -77,46 +77,52 @@ public class AddModel {
     private void addModelButtonAction(ActionEvent event) throws Exception {
         boolean modelExist = false;
         String sqlModel = "insert into crdb.model(category, carbrand, carmodel, transmission, fuel, kw, seats) values (?, ?, ?, ?, ?, ?, ?)";
-        try {
-            addModelLabel.setText("");
-            Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
-            Statement statement = connection.createStatement();
 
-            ResultSet rs = statement.executeQuery("select * from crdb.model");
+        if(categoryComboBox.getSelectionModel().isEmpty() || brandTextField.getText().isEmpty()
+                || modelTextField.getText().isEmpty() || transmissionComboBox.getSelectionModel().isEmpty()
+                || fuelComboBox.getSelectionModel().isEmpty() || kwTextField.getText().isEmpty()
+                || seatsTextField.getText().isEmpty()){
+            addModelLabel.setText("Vyplňte všetky údaje.");
+            addModelLabel.setTextFill(Color.RED);}
+        else{
+            try {
+                Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+                Statement statement = connection.createStatement();
 
-            while (rs.next()) {
-                if (rs.getString("category").equals(categoryComboBox.getValue()) &&
-                        rs.getString("carbrand").equals(brandTextField.getText()) &&
-                        rs.getString("carmodel").equals(modelTextField.getText()) &&
-                        rs.getString("transmission").equals(transmissionComboBox.getValue()) &&
-                        rs.getString("fuel").equals(fuelComboBox.getValue())  &&
-                        rs.getString("kw").equals(kwTextField.getText())  &&
-                        rs.getString("seats").equals(seatsTextField.getText())) {
-                    modelExist = true;
+                ResultSet rs = statement.executeQuery("select * from crdb.model");
+
+                while (rs.next()) {
+                    if (rs.getString("category").equals(categoryComboBox.getValue()) &&
+                            rs.getString("carbrand").equals(brandTextField.getText()) &&
+                            rs.getString("carmodel").equals(modelTextField.getText()) &&
+                            rs.getString("transmission").equals(transmissionComboBox.getValue()) &&
+                            rs.getString("fuel").equals(fuelComboBox.getValue())  &&
+                            rs.getString("kw").equals(kwTextField.getText())  &&
+                            rs.getString("seats").equals(seatsTextField.getText())) {
+                        modelExist = true;
+                        addModelLabel.setText("Model už existuje v databáze");
+                        addModelLabel.setTextFill(Color.RED);
+                    }
                 }
-            }
 
-            if(modelExist){
-                addModelLabel.setText("Model už existuje v databáze");
-                addModelLabel.setTextFill(Color.RED);
-            }
+                if(!modelExist){
+                    PreparedStatement preparedStatementModel = connection.prepareStatement(sqlModel);
+                    preparedStatementModel.setString(1, categoryComboBox.getValue());
+                    preparedStatementModel.setString(2, brandTextField.getText());
+                    preparedStatementModel.setString(3, modelTextField.getText());
+                    preparedStatementModel.setString(4, transmissionComboBox.getValue());
+                    preparedStatementModel.setString(5, fuelComboBox.getValue());
+                    preparedStatementModel.setString(6, kwTextField.getText());
+                    preparedStatementModel.setString(7, seatsTextField.getText());
+                    preparedStatementModel.executeUpdate();
+                    addModelLabel.setText("Model úspešne pridaný do databázy");
+                    addModelLabel.setTextFill(Color.GREEN);
+                }
 
-            else {
-                PreparedStatement preparedStatementModel = connection.prepareStatement(sqlModel);
-                preparedStatementModel.setString(1, categoryComboBox.getValue());
-                preparedStatementModel.setString(2, brandTextField.getText());
-                preparedStatementModel.setString(3, modelTextField.getText());
-                preparedStatementModel.setString(4, transmissionComboBox.getValue());
-                preparedStatementModel.setString(5, fuelComboBox.getValue());
-                preparedStatementModel.setString(6, kwTextField.getText());
-                preparedStatementModel.setString(7, seatsTextField.getText());
-                preparedStatementModel.executeUpdate();
-                addModelLabel.setText("Model úspešne pridaný do databázy");
-                addModelLabel.setTextFill(Color.GREEN);
+            } catch(SQLException e) {
+                System.out.println("SQL exception occured: " + e);
             }
-
-        } catch(SQLException e) {
-            System.out.println("SQL exception occured: " + e);
         }
+
     }
 }
