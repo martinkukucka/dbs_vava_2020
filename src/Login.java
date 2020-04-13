@@ -44,11 +44,12 @@ public class Login {
     private Hyperlink adminHyperlink;
 
     @FXML
-    private void loginButtonAction(ActionEvent event) {
-        if(emailTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()){
+    private void loginButtonAction(ActionEvent event) throws Exception {
+        if(emailTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
         wrongdataLabel.setText("Vyplňte všetky údaje.");
-        wrongdataLabel.setTextFill(Color.RED);}
-        else{
+        wrongdataLabel.setTextFill(Color.RED);
+        }
+        else {
                 try {
                     Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
                     Statement statement = connection.createStatement();
@@ -60,6 +61,9 @@ public class Login {
                         if (emailTextField.getText().equals(email) && passwordTextField.getText().equals(password)) {
                             wrongdataLabel.setText("OK");
                             wrongdataLabel.setTextFill(Color.GREEN);
+                            Stage stage = (Stage) loginButton.getScene().getWindow();
+                            Parent root = FXMLLoader.load(getClass().getResource("GUI/createorder.fxml"));
+                            stage.setScene(new Scene(root, loginButton.getScene().getWidth(), loginButton.getScene().getHeight()));
                             return;
                         }
                     }
@@ -69,6 +73,8 @@ public class Login {
                 catch(SQLException e) {
                     System.out.println("SQL exception occured " + e);
                 }
+
+
             }
     }
 

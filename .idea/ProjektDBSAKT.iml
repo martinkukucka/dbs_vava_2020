@@ -8,7 +8,7 @@
     <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="mssql-jdbc-8.2.0.jre11" level="application" />
-    <orderEntry type="library" exported="" name="mysql-connector-java-8.0.19" level="application" />
+    <orderEntry type="library" name="mysql-connector-java-8.0.19" level="application" />
     <orderEntry type="library" exported="" name="protobuf-java-3.6.1" level="application" />
     <orderEntry type="library" exported="" name="javafx.base" level="project" />
     <orderEntry type="library" exported="" name="javafx.controls" level="project" />
@@ -18,5 +18,6 @@
     <orderEntry type="library" exported="" name="javafx.swing" level="project" />
     <orderEntry type="library" exported="" name="javafx.web" level="project" />
     <orderEntry type="library" exported="" name="javafx-swt" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-8.0.191" level="project" />
   </component>
 </module>
