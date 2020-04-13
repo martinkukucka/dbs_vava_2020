@@ -100,15 +100,12 @@ public class AddModel {
                             rs.getString("kw").equals(kwTextField.getText())  &&
                             rs.getString("seats").equals(seatsTextField.getText())) {
                         modelExist = true;
+                        addModelLabel.setText("Model už existuje v databáze");
+                        addModelLabel.setTextFill(Color.RED);
                     }
                 }
 
-                if(modelExist){
-                    addModelLabel.setText("Model už existuje v databáze");
-                    addModelLabel.setTextFill(Color.RED);
-                }
-
-                else {
+                if(!modelExist){
                     PreparedStatement preparedStatementModel = connection.prepareStatement(sqlModel);
                     preparedStatementModel.setString(1, categoryComboBox.getValue());
                     preparedStatementModel.setString(2, brandTextField.getText());
