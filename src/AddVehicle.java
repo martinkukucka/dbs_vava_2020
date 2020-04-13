@@ -108,6 +108,9 @@ public class AddVehicle {
             preparedStatementVehicle.setInt(5, Integer.parseInt(modelID));
             preparedStatementVehicle.executeUpdate();
 
+            addVehicleLabel.setText("Vozidlo úspešne pridané do databázy");
+            addVehicleLabel.setTextFill(Color.GREEN);
+
         } catch(SQLException e) {
             System.out.println("SQL exception occured: " + e);
         }
