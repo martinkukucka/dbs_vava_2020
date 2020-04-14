@@ -62,7 +62,6 @@ public class CreateOrder {
             while (resultSet.next()) {
                 System.out.println(resultSet.getInt("id"));
                 rentedVehicleId = resultSet.getInt("id");
-
             }
             PreparedStatement preparedStatement = conn.prepareStatement(sqlCarRental);
 
