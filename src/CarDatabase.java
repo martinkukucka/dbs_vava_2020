@@ -93,7 +93,8 @@ public class CarDatabase {
         ObservableList<CarInfo> carinfod = FXCollections.observableArrayList();
 
         try{
-            String sqlModel = ("select * from crdb.model, crdb.vehicle where modelid = model.id");
+            String sqlModel = ("select * from crdb.vehicle join crdb.model where modelid = model.id order by carbrand,carmodel");
+
             Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sqlModel);
@@ -101,7 +102,9 @@ public class CarDatabase {
             while(rs.next()){
                 CarInfo carInfo = new CarInfo(rs.getInt("vehicle.id"),rs.getString("category"),rs.getString("carbrand"),
                         rs.getString("carmodel"),rs.getString("transmission"),rs.getString("fuel"),
-                        rs.getInt("kw"),rs.getInt("seats"),rs.getInt("model.id"),rs.getString("licenseplatenumber"),"1",1,5);
+                        rs.getInt("kw"),rs.getInt("seats"),rs.getInt("model.id"),
+                        rs.getString("licenseplatenumber"),rs.getString("color"),
+                        rs.getInt("yearofproduction"),rs.getInt("price"));
                 carinfod.add(carInfo);
             }
             carTable.setItems(carinfod);
@@ -110,6 +113,24 @@ public class CarDatabase {
         catch(SQLException e) {
             System.out.println("SQL exception occured: " + e);
         }
+
+        try{
+            String sqlModel = ("select * from crdb.model join crdb.vehicle where modelid = model.id group by carbrand having AVG(price) >" +
+                    "(SELECT AVG(price) from crdb.vehicle) order by carbrand");
+
+            Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sqlModel);
+
+            while(rs.next()){
+                System.out.println(rs.getString("carbrand"));
+            }
+        }
+
+        catch(SQLException e) {
+            System.out.println("SQL exception occured: " + e);
+        }
+
     }
 
 
