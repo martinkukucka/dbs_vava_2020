@@ -21,6 +21,7 @@ public class Login {
     public String databaseURL = "jdbc:mysql://localhost:3306/?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     public String databaseName = "root";
     public String databasePassword = "root";
+    public static int USERID;
 
     @FXML
     private AnchorPane loginAnchorPane;
@@ -54,15 +55,14 @@ public class Login {
                     Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
                     Statement statement = connection.createStatement();
 
-                    ResultSet resultSet = statement.executeQuery("select email, password from crdb.customer");
+                    ResultSet resultSet = statement.executeQuery("select id, email, password from crdb.customer");
                     while (resultSet.next()) {
                         String email = resultSet.getString("email");
                         String password = resultSet.getString("password");
                         if (emailTextField.getText().equals(email) && passwordTextField.getText().equals(password)) {
-                            wrongdataLabel.setText("OK");
-                            wrongdataLabel.setTextFill(Color.GREEN);
+                            USERID = resultSet.getInt("id");
                             Stage stage = (Stage) loginButton.getScene().getWindow();
-                            Parent root = FXMLLoader.load(getClass().getResource("GUI/createorder.fxml"));
+                            Parent root = FXMLLoader.load(getClass().getResource("GUI/customermenu.fxml"));
                             stage.setScene(new Scene(root, loginButton.getScene().getWidth(), loginButton.getScene().getHeight()));
                             return;
                         }

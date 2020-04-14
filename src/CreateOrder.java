@@ -60,17 +60,15 @@ public class CreateOrder {
             ResultSet resultSet = stmts.executeQuery(sql);
             int rentedVehicleId = 0;
             while (resultSet.next()) {
-                System.out.println(resultSet.getInt("id"));
                 rentedVehicleId = resultSet.getInt("id");
             }
             PreparedStatement preparedStatement = conn.prepareStatement(sqlCarRental);
 
             preparedStatement.setDate(1, Date.valueOf(pickUpDatepicker.getValue()));
             preparedStatement.setDate(2, Date.valueOf(returnDatepicker.getValue()));
-            preparedStatement.setInt(3, 3);
+            preparedStatement.setInt(3, Login.USERID);
             preparedStatement.setInt(4, rentedVehicleId);
             preparedStatement.executeUpdate();
-            System.out.println("tu");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
