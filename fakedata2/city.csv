@@ -1,0 +1,737 @@
+id,cityname,zipcode,regionid
+1,"North Merri",36212-1807,9
+2,"Port Tiffaniebury",10187-7398,16
+3,Nolanland,25113,4
+4,Predovicport,67879-2412,4
+5,Winfredshire,71834,3
+6,"North Shayne",79749-6056,12
+7,"North Bennytown",19268-2404,2
+8,"North Jimmy",60489,12
+9,"South Douglass",16965,8
+10,"Port Velma",08496-3502,8
+11,Russelbury,11591-0920,1
+12,"South Zane",71206-1248,10
+13,Kleinbury,51124,1
+14,"South Gwynethport",77752-6324,2
+15,"East Kylieport",06969,10
+16,"New Amieeburgh",03045-9560,7
+17,"South Normanside",11550,3
+18,"West Isaac",26392,15
+19,"East Ngatown",66833-2019,8
+20,Herzogview,31927,12
+21,O'Keefeberg,85670-8960,11
+22,Kuvaliston,28517,10
+23,Ornberg,58924,8
+24,Hermannfurt,95855-3021,2
+25,"West Verdiechester",12038,2
+26,"Lake Catherinabury",48646-6237,4
+27,"Lake Alexiston",75703-9151,14
+28,"South Ruebenport",06316,6
+29,"Port Ettamouth",50209-0102,5
+30,"New Kyung",17792,11
+31,Cartwrightborough,92409-2933,10
+32,"Lake Merleburgh",08320,2
+33,Ziemeton,42257,13
+34,Bartonmouth,19204,12
+35,"North Betseyside",47157,11
+36,"East Luigi",77115,1
+37,"West Mozelleshire",33943-4369,16
+38,"West Elenor",37193-9112,11
+39,"East Leta",50888,13
+40,"North Sumiko",43810,6
+41,"South Savannahberg",62987-5131,5
+42,"Lake Theresefurt",97567-2679,5
+43,Rickieview,80241-8742,13
+44,Eldoraland,10669-1649,3
+45,Bergestad,35805-3868,11
+46,"East Amiee",51929,10
+47,"South Delois",25509,5
+48,"West Devon",33571-7663,1
+49,Heathcoteburgh,88404,15
+50,"Lake Evangelina",74890-8713,11
+51,"Lake Lashawndaberg",52276,13
+52,"North Wyattborough",31151-7918,8
+53,Anitraside,25297,2
+54,"North Ezratown",20383,10
+55,Nestorfort,34569-3379,5
+56,Bergstromfurt,01792,15
+57,"South Mary",45811,8
+58,Jonbury,80405,3
+59,Douglasfurt,56764-1312,5
+60,"North Catherinaville",72594-2365,14
+61,Hyemouth,96228,15
+62,Andersonchester,26317,6
+63,"Port Martin",13497,3
+64,"North January",26641-8841,4
+65,Lucasmouth,58565,3
+66,"Lake Leonia",70642,13
+67,"Port Vanhaven",52815,4
+68,Gerholdside,80763-6235,13
+69,"West Lorean",34590,3
+70,Boyerstad,83727-9524,15
+71,"Lake Ema",64140,3
+72,Warnertown,66372,3
+73,Jacintoland,80987,1
+74,Shieldsport,53974-4359,12
+75,"New Charlie",71854-1577,3
+76,Legrosfurt,35021,3
+77,"South Lannybury",52886,1
+78,"South Ciaraland",77950,4
+79,Mohrberg,19393-9003,3
+80,"West Linoview",67105-5170,2
+81,"South Nealmouth",56629,8
+82,"West Librada",84378,6
+83,Deangeloburgh,71487-0246,11
+84,Pfannerstillchester,90320,16
+85,Hickleton,77496,12
+86,"North Rodger",72097,8
+87,Frankieburgh,83104,7
+88,"New Winston",51147-4180,4
+89,"New Thersaport",95087,4
+90,"West Leanne",32837,11
+91,"South Frankport",54584,2
+92,Mackenziefurt,62746,7
+93,"Port Delphiaburgh",63587-1539,7
+94,"New Santiagoville",23454-4134,9
+95,"East Shanta",31688-2064,9
+96,"South Nathanieltown",27602,7
+97,"North Quinton",22259,15
+98,"New Nichole",06865-6421,8
+99,Maidaborough,55977-1664,11
+100,Macejkovichaven,30280,9
+101,"North Consuelaside",14932,6
+102,Windlerberg,06141,8
+103,Wolfffort,50461-7915,1
+104,Grantton,54879-4381,14
+105,"Port Estellestad",57527-1502,1
+106,Gulgowskichester,99699-9452,12
+107,Leschville,52007-2877,5
+108,Robertsland,22975-9812,10
+109,"South Sanora",84732,8
+110,"East Johannachester",67996-8194,15
+111,"South Shelashire",72921-2661,13
+112,"East Shana",64515,3
+113,"Lake Kirby",58207,2
+114,"Lake Jamemouth",89781,6
+115,"Lake Roscoemouth",78554,3
+116,Williantown,64498,4
+117,Harbermouth,51271-9749,13
+118,Zulaufland,14411-9782,3
+119,Whiteview,64782,7
+120,Baileytown,25875,5
+121,"Lake Edmond",02597-0951,2
+122,"New Marnimouth",10632-0367,3
+123,"North Tristan",46634,6
+124,Schulistfurt,11366-2736,14
+125,Darnellhaven,14286-9053,11
+126,"North Jeanette",20144-7266,1
+127,Bahringerbury,66510-5699,13
+128,Walkerberg,49502,16
+129,"East Melvinview",63971,4
+130,"New Spencer",30399-2170,16
+131,"Port Laverneport",21450-8358,14
+132,O'Reillyshire,82326-6410,9
+133,Kuhnport,60316,9
+134,Wunschmouth,11267-8219,1
+135,Bartellfurt,58790-4687,14
+136,"New Ricky",35584-4007,8
+137,"New Tod",90831,13
+138,Betsychester,13835,2
+139,Dibbertland,28399,9
+140,"Lake Edgardotown",02488-6482,3
+141,"North Perrytown",16074,11
+142,Fadelland,70750-2450,4
+143,"South Jamie",94620-2650,14
+144,Stehrmouth,87924,14
+145,Andrewbury,29817-2647,8
+146,Wmton,06094,2
+147,Clarenceton,42315,15
+148,"North Agustina",65996,3
+149,"West Joaquin",85350-0994,14
+150,Rosamondport,94531-2126,3
+151,"Port Karri",79286,11
+152,Schaefermouth,10155,13
+153,Koeppburgh,75642-3155,12
+154,Lynseymouth,05689-9165,9
+155,Sauermouth,53584,12
+156,"South Abraham",46298,4
+157,"South Janellemouth",33153-0549,7
+158,"South Timmybury",59999,13
+159,"Port Kristoferstad",43781,1
+160,"New Riamouth",98110-3964,14
+161,Kuhnshire,31818-1874,8
+162,Harrisport,84846,10
+163,"New Rondabury",17207,2
+164,Kurtiston,80143,9
+165,"North Denver",07316-2845,3
+166,"West Jarvishaven",85879,1
+167,Deckowmouth,14901-8970,7
+168,"Lake Josiahshire",37175,6
+169,Samiraside,80032-1509,13
+170,Schummborough,49877,4
+171,Dickinsonstad,57095,10
+172,Boganville,87262,12
+173,Aufderharchester,00296,14
+174,"South Curtisstad",41611-6535,11
+175,Moniqueside,02416-2771,4
+176,"Port Morgan",34344,14
+177,"New Melodymouth",33918-3098,15
+178,Ziemefort,85356-0203,11
+179,Margaritoville,43741-9240,7
+180,Champlinside,81083,3
+181,Terrybury,13535,14
+182,Jakubowskiborough,48121-7366,15
+183,Keenanport,97793,3
+184,Toccarastad,52604,5
+185,Tillmanshire,93372,15
+186,Sipeschester,33457,10
+187,"East Lura",85842-0569,13
+188,Millardland,09043-0153,15
+189,Hillsfort,40340-4764,9
+190,Nickyview,84312,16
+191,Stromanshire,84719,8
+192,"East Madeline",45378,12
+193,Warnerville,57127,16
+194,"Lake Tracyberg",71554-5658,8
+195,Donnyside,66246,3
+196,Rippinborough,65911-2073,8
+197,Leeland,97187,11
+198,"East Jackeline",66195-3031,10
+199,Greggbury,43575,5
+200,"New Larraine",56653-2201,13
+201,"West Chadwickbury",74394,3
+202,Michealview,46166,10
+203,"South Ruthannberg",30808,6
+204,Jacquilineton,75400-7057,14
+205,Rodolfofurt,80196-3310,13
+206,Brandenborough,00279,3
+207,D'Amorefort,58830-7556,9
+208,"South Gladys",44300-1368,12
+209,"Port Edmundostad",58001,16
+210,"New Dignaton",83401,14
+211,"North Zita",91696-3782,5
+212,"North Herthaview",60921,1
+213,Bradtkeville,19485-1607,11
+214,"West Ira",39121,10
+215,"South Crissytown",53277-5542,14
+216,"New Dusty",22976,16
+217,Schaefershire,57936,1
+218,Freddieberg,74132-6013,5
+219,Harveyfort,33747-9158,6
+220,Chiastad,27028-1758,11
+221,Carolmouth,93109,4
+222,Lynchberg,95662-5571,3
+223,"West Stepanie",72630,3
+224,"East Sidney",69222-4660,14
+225,"South Dia",24564-6961,3
+226,"New Wadeville",02915,16
+227,"East Roseanne",09516,5
+228,"South Lindseyview",64631,12
+229,Wallaceburgh,47015,11
+230,Hanhside,07503,11
+231,McLaughlinmouth,97103-4637,12
+232,Granttown,04093,16
+233,"Port Chandrabury",56396-0358,12
+234,Amirahaven,07112,8
+235,"Lake Phylisshire",93856,16
+236,Jeffereybury,14216,11
+237,Schulistside,91876-0012,14
+238,Despinaview,20821-7269,1
+239,"North Lindsaytown",65020,12
+240,"Lake Janeeberg",52733-3358,15
+241,"Port Tressiestad",93713,8
+242,Schambergerview,75440-8028,16
+243,Bernhardview,40372-1979,1
+244,Connellychester,07779-8529,5
+245,"North Keitha",41530,7
+246,"North Ralph",33219,1
+247,"New Sergiomouth",89797-3452,7
+248,Lorisborough,23969,10
+249,Shaunteport,75065-1767,15
+250,Ellanmouth,39169-4677,16
+251,Grimestown,17617,4
+252,"Lake Augustusside",69573,8
+253,"West Dillonfort",38255,2
+254,"West Sharri",51331,7
+255,"New Vaughn",29462-5649,9
+256,Shalaberg,00246-2667,11
+257,"South Rosaurashire",41992,6
+258,Brownhaven,64652,11
+259,Nidaburgh,19134,11
+260,Lovechester,05726-0841,14
+261,"New Edaville",97309-3699,2
+262,Huelschester,43793,5
+263,"North Andresburgh",74647,6
+264,"West Scarlettside",71346,16
+265,Danyellhaven,55151-1902,8
+266,Schowalterport,93651-2844,11
+267,"New Guadalupeberg",65149,3
+268,"South Roselineborough",74876,13
+269,Araceliborough,63004-0521,16
+270,"East Jeannettemouth",93232,10
+271,"New Deonland",78074,12
+272,Erdmanchester,87468-9320,7
+273,Toystad,49988,1
+274,"New Jutta",28709-9194,14
+275,Marcellusland,93389-6787,7
+276,"South Yoshiko",52636-2484,1
+277,Nadertown,71908,8
+278,Saulport,40046,14
+279,"South Corinaborough",62654-4396,6
+280,Haleyfort,33713,7
+281,"Lake Jennaborough",12825,14
+282,"Lake Marvaberg",00628,3
+283,"North Shennaton",56650,9
+284,"East Leroyborough",40310-2967,2
+285,"North Derek",70696-7335,4
+286,"North Willie",15457,7
+287,"South Kenton",86237,13
+288,"Lake Emoryside",60484-8833,9
+289,"North Gerard",99959-9001,4
+290,"Lake Theola",28964-5405,10
+291,"South Byron",36916-9744,3
+292,"Lake Jessburgh",01762,15
+293,"East Janean",73527-0579,16
+294,Rennertown,99497-2693,7
+295,Tameraport,69487-6074,16
+296,"South Ike",53620-7745,13
+297,Russellborough,60490-8639,6
+298,Deckowfurt,54366,6
+299,"South Parker",48720-7391,3
+300,"South Malcomview",95052-7187,14
+301,"South Galenport",24127-6620,7
+302,"Port Quentinmouth",96015,14
+303,"North Isaurafurt",96227-7414,3
+304,Rolandomouth,83858,4
+305,"East Valentinside",99086-7096,10
+306,Ferdinandmouth,72711,13
+307,"West Milan",31618-9261,15
+308,"North Reitachester",96250-6444,1
+309,Gutmannhaven,33698,14
+310,Boyceborough,83951-9356,2
+311,Marxfort,20608-4437,5
+312,Quitzonmouth,79546,5
+313,"East Saulton",24923,8
+314,"New Luz",18789,10
+315,"North Tiesha",13611-3926,7
+316,"New Julius",72514-8967,13
+317,"Port Augustine",61406-3935,4
+318,"Lake Wes",29816,13
+319,"Port Jill",45726-3063,9
+320,"Lake Manuelmouth",09846-3716,13
+321,Keenanview,06724,11
+322,Ellieville,49605-2080,15
+323,Andreasborough,03750,8
+324,Montemouth,62159,12
+325,Kennithport,09871-7753,7
+326,Walterfurt,27494,4
+327,Laraburgh,42696,13
+328,Volkmanview,82076-2543,16
+329,"East Margarettport",88951-8469,1
+330,"Lake Gerald",56001,14
+331,Morarland,01843,11
+332,"West Refugia",96801-8243,11
+333,"East Harris",00306-3275,13
+334,Millerton,73070-6024,10
+335,"South Rocio",85232-2210,10
+336,Spencerside,14190-7960,10
+337,"Port Gregoriotown",54833,3
+338,"Lake Dionbury",26628,11
+339,"New Fredmouth",08819,10
+340,"Port Reatha",36818-7812,16
+341,"South Jeromyfort",54472,2
+342,"South Enochside",45892-7492,14
+343,Mayerttown,98952-6779,14
+344,"South Annemarie",42695,13
+345,"South Tamikohaven",77385,15
+346,Rosenbaumhaven,92264,14
+347,Pourosfurt,66220,13
+348,"New Parischester",53827,11
+349,Tuanland,88045-4115,14
+350,"New Dominic",58159-9167,10
+351,"South Tranview",80029,15
+352,"South Stephantown",57107-2238,6
+353,"New Jacinda",54441-8124,2
+354,"West Marcus",75953-5068,13
+355,Hongborough,45292,11
+356,"Lake Phebe",30243-0995,14
+357,Mitsukostad,79342,2
+358,"Port Brendonstad",60425,9
+359,Kelsichester,40496,4
+360,Rathmouth,45478-9910,6
+361,Errolstad,46301,5
+362,"South Jessicafort",49235,4
+363,Wanitahaven,21638-7616,14
+364,"West Johnnie",66239-8930,2
+365,"East Herman",33743,14
+366,Kingfort,49993-8322,16
+367,Nealchester,68256,6
+368,Hermanbury,57782-0670,1
+369,Dakotaport,51993,6
+370,"West Wilburnland",98227-5220,3
+371,"Lake Marci",43748-7627,5
+372,"Lake Lindsayside",88174-9470,1
+373,Walkerstad,92153-3964,14
+374,"Lake Thomasine",02853-7228,9
+375,"North Kelleyside",02874,5
+376,"Lake Heribertotown",39804,9
+377,Dareside,10999-2074,16
+378,Sawaynfort,63224-9103,3
+379,"New Jasper",63387-3319,2
+380,Cassinfurt,43028-0747,12
+381,Borershire,78467,10
+382,"South Torie",68508,13
+383,"South Vincent",36272,11
+384,"West Ezekiel",53484,12
+385,Kertzmannborough,51314,10
+386,Jereside,04560-2685,1
+387,"Port Augustusberg",18702,9
+388,"Port Robertfurt",92181-2642,6
+389,Eliasberg,59825-7672,15
+390,Katherinafurt,09400,16
+391,"West Gale",80086-6256,6
+392,"North Numbersside",89596-3043,14
+393,"Port Santo",76642-0070,6
+394,Spinkahaven,35699-2148,11
+395,"Port Numbers",49347-9352,10
+396,"South Jerrodside",78835,3
+397,O'Keefestad,14885-8366,7
+398,"West Marylouise",75075,16
+399,"East Kenethhaven",50356-1831,14
+400,"Port Belleland",90380,16
+401,"Lake Mohamed",22695,6
+402,Pollichland,83334-1580,9
+403,Taliaborough,86699-1215,2
+404,Melodieborough,14363-9921,14
+405,Mckinleyburgh,56756-1970,9
+406,Runtefort,65019,2
+407,Theodorebury,69766,6
+408,Jeromeland,51487-9020,9
+409,Cassinmouth,20906-9488,15
+410,Neilland,88339,11
+411,Mitchellfurt,34191,10
+412,"New Estaberg",47492,16
+413,"North Jessie",99800,1
+414,Denesefurt,86208,16
+415,"New Eli",32443-6488,13
+416,Teressamouth,19534,1
+417,"Port Janiece",82041-2308,2
+418,"East Kelleyfort",47142-4451,2
+419,Wallaceville,27546-8590,7
+420,Mayerside,01371-5213,7
+421,Danieltown,73101,1
+422,Doyleshire,77778,3
+423,Robertsmouth,32701,13
+424,Muraziktown,34892-0396,8
+425,Sydneyland,68679,2
+426,Schuppestad,07157-1015,1
+427,"Port Jamison",18106-4088,5
+428,"East Allen",91960-0553,15
+429,Schaeferfurt,90066,16
+430,"Lake Chadwick",97886,5
+431,Jacobsonborough,13282,12
+432,Ferrybury,68305-2794,11
+433,Myronport,91516,1
+434,"West Leannaberg",86827-8778,2
+435,"Port Louvenia",87873-3046,15
+436,"South Jay",37796-7510,16
+437,"New Kerrybury",38798-9309,11
+438,Wuckertchester,98878-4935,10
+439,"New Jan",09949-7548,13
+440,"East Piedadville",13894-4276,11
+441,Stormyland,82530,4
+442,"Lake Leopoldo",49357-7775,11
+443,Westhaven,97783,4
+444,"West Allyson",62248-3578,14
+445,"Lake Cleotown",65184-4974,1
+446,Quinnfort,80425,13
+447,Alfredland,40428-3028,16
+448,Turcotteside,18572,15
+449,Brookshaven,84646-7271,2
+450,D'Amoremouth,96180,13
+451,"West Kip",61009,3
+452,Medhurstfurt,28196-9636,11
+453,Trinidadton,50795,6
+454,"Lake Garthland",12762-9674,6
+455,"South Cameron",24432,13
+456,Marionborough,16102-2199,9
+457,Ebertmouth,03715,16
+458,Powlowskihaven,38826-8308,2
+459,"Lake Rosinafort",70147,5
+460,"West Hollie",37221,15
+461,"North Zack",89245,13
+462,"New Branden",48418-2386,7
+463,Shastahaven,72551,1
+464,"East Gayle",65396-0290,1
+465,Rueckerview,25249,6
+466,"North Corrine",14896-9394,2
+467,"Lake Trey",05214,9
+468,"West Virgil",65096,11
+469,"West Marqueritefort",11257-6687,4
+470,"Port Tammy",53767,1
+471,Swaniawskichester,86402-1986,4
+472,"West Garry",20665,11
+473,"Lake Cruzshire",45076,3
+474,"North Hoseastad",45019-5612,1
+475,Thadport,14996-0248,15
+476,Kinghaven,90697-5392,8
+477,"North Raymonview",66427-7907,6
+478,"North Bryon",66180,5
+479,Emilmouth,17918,4
+480,"North Nicholasbury",23573-1456,6
+481,"North Berta",17931-4819,1
+482,"North Lenard",17512,4
+483,"West Olga",12845-1398,6
+484,"West Eloiston",94535,2
+485,Chanelstad,84158-4769,5
+486,"Lake Jaimeborough",17192-1600,3
+487,Herzogshire,75896,1
+488,Leandramouth,58082,10
+489,"North Lamontbury",01448-5756,6
+490,"East Gabriel",80050-7010,6
+491,Faheymouth,70436-3006,10
+492,Kareemburgh,40689-7671,7
+493,Lockmanfort,93359-7169,12
+494,"South Kasandra",87403-7421,12
+495,Vonmouth,53382-1235,7
+496,"New Brainton",22086-2054,2
+497,"New Lorrifort",79676,2
+498,"New Eugenio",77382-8647,6
+499,"Port Blake",77264-0267,7
+500,Caryborough,21059,2
+501,Wmmouth,05247,16
+502,Davidshire,80420-0025,15
+503,"North Tona",40748-8696,2
+504,Wenberg,37671,7
+505,"Port Reedbury",64505-4565,10
+506,Mayertton,86727,13
+507,"South Morgan",77551,8
+508,Veumtown,07958,1
+509,"Lake Kileymouth",40242,7
+510,Sadyeview,17880,6
+511,Markmouth,82142,2
+512,Reginabury,24547,3
+513,"Lake Rodney",83686-8084,10
+514,"East John",54604,2
+515,Jacobsstad,28892,12
+516,Dejaton,25010,5
+517,"West Alberto",51398-7320,1
+518,Markport,32315-0890,3
+519,Langoshport,65938-7990,1
+520,"North Elane",46039,15
+521,Jerrellhaven,85563-3622,12
+522,Lealand,21736-7680,10
+523,"South Leonfurt",45560-9740,13
+524,Gleichnerton,25780-5311,10
+525,"New Rolandoborough",30303-2938,10
+526,Wolftown,92042-1347,16
+527,Elmerland,55810,10
+528,Pricetown,79166,10
+529,"South Neil",09296-8015,14
+530,Auerside,90477-7307,5
+531,Sipesport,46036-0472,2
+532,Jerrifort,30016,9
+533,"Port Davidland",34259,10
+534,"East Lorena",41399-2029,14
+535,"West Edward",35103,8
+536,Towneburgh,15292,1
+537,Emmetttown,53052-8716,5
+538,Simonisstad,53134,2
+539,"West Maxineport",33873-4543,9
+540,Tobiasport,92030-8290,14
+541,Watsicafort,88867,10
+542,"Lake Patsyshire",82018,7
+543,Lurlinebury,04089,7
+544,"West Hassan",98119,11
+545,Romaguerachester,41564,11
+546,"New Roy",06449-6357,6
+547,"Lake Brooks",65884,3
+548,Wardfurt,13654,9
+549,Erinside,84526,8
+550,"New Ruthton",78666-9547,1
+551,"North Lon",05048-0254,2
+552,Jeremystad,93245,13
+553,Harberborough,58612,4
+554,"East Charise",45404-7242,5
+555,"New Cammyberg",28595,16
+556,"East Randa",60155-4631,1
+557,"East Andriafort",43589-7631,6
+558,Ardithland,57178-4934,6
+559,Jamarstad,27125,12
+560,Edgarville,86445-0740,6
+561,Walshville,09172-7908,15
+562,"New Reed",80049,6
+563,"South Denver",25361,15
+564,Codyfort,94040,8
+565,Eldenland,58525,3
+566,Jeanninebury,26315-7910,13
+567,Robertsfurt,64431,11
+568,Ashleyborough,28656,2
+569,"South Manafort",73299,13
+570,"New Lynelle",51312,12
+571,"Lake Barifort",91571-2572,11
+572,Mckinleyfurt,00914,15
+573,"West Deloisestad",61954-3829,6
+574,Amirafort,43143,7
+575,Ivoryland,87491,8
+576,Emmerichside,07297,4
+577,"Port Renate",21865-8801,6
+578,"Lake Alixview",75775-5301,11
+579,"North Hollisside",68701,7
+580,Nitzscheton,05011-0392,4
+581,"North Chrismouth",62753,8
+582,Sherlyntown,30020,8
+583,Tequilaside,67235,13
+584,"South Cornell",53834,13
+585,"West Augusta",99193,12
+586,"North Paristown",94770,1
+587,Batzview,76271-1222,9
+588,Elizebethtown,70854,16
+589,"North Thersa",62637-4071,15
+590,"South Joslynfort",07862-4106,1
+591,Antoineberg,95479-7625,10
+592,"New Katharina",38520,4
+593,"New Hershelberg",45094,16
+594,Kochberg,40742,7
+595,Kingtown,32889-0476,15
+596,"East Amoston",41737-4104,10
+597,"New Kellyport",75629-9497,4
+598,"East Lorri",82837-5733,14
+599,"South Sydneytown",35980-0925,12
+600,Othatown,75197-4273,16
+601,"Lake Katheleenland",97260-1668,14
+602,"East Michaleton",63929,11
+603,Tyroneport,66451-0922,12
+604,Altenwerthmouth,05681-3166,16
+605,Hettingerburgh,24540-9459,10
+606,McKenzieport,54934-1972,13
+607,Schimmelside,40690-8968,15
+608,Damienbury,83828-1693,15
+609,"East Williams",74060-7064,11
+610,Rathport,28297-8877,6
+611,Lucinashire,58103-1085,9
+612,"New Liz",91706-2205,1
+613,Reannaborough,71806,15
+614,Crooksville,87542-0969,1
+615,"South Vannessaton",48657,2
+616,"East Ewaborough",51862,3
+617,Dickensport,94673-9568,9
+618,"North Phillip",94418-7544,15
+619,"North Chieko",79482,11
+620,"West Adanhaven",49254,5
+621,"East Allafurt",98725,14
+622,Careyberg,14999,14
+623,"East Doyle",77797-8417,10
+624,"Port Rosellaland",38892,11
+625,Derrickview,55663-8286,2
+626,"South Sherlene",32622,9
+627,"North Cletus",84950-3903,12
+628,Nellyhaven,56805,4
+629,"North Dariusview",84436,13
+630,Carleytown,96350,3
+631,Isiahbury,49564,10
+632,"East Dexter",00395,14
+633,Darefort,31152,11
+634,"Lake Refugiabury",58219,7
+635,Kshlerintown,75739-4861,3
+636,Wolftown,69045-8301,2
+637,Delfinahaven,06595-3672,14
+638,"West Edmundomouth",22138-9385,3
+639,"East Jacob",92020-9001,8
+640,Klingfort,59677,8
+641,Sengerstad,50195,16
+642,Sterlingview,04599-4874,2
+643,Watersmouth,83435,3
+644,"North Troyburgh",51976,2
+645,"New Angeloberg",98089-5838,6
+646,"East Refugioburgh",71857,12
+647,"East Norman",55050-7828,12
+648,"North Medatown",28837-0424,2
+649,"West Taneka",82195,11
+650,"Lake Larita",13925-8254,9
+651,Kuhlmanbury,07085,6
+652,Reedmouth,47550-7947,3
+653,Gibsonstad,63605-8889,9
+654,Jerdeburgh,73177,16
+655,Karenahaven,29847,4
+656,Earleenmouth,14420-9382,8
+657,"East Damien",27061-3289,16
+658,"New Ingrid",65612,11
+659,Huelmouth,10153-6947,15
+660,"Port Earnestview",77411-7630,3
+661,"Lake Claricemouth",45994-2959,7
+662,Aubreyfurt,25947,10
+663,"New Cristobal",77814-9855,16
+664,Walterborough,06481,16
+665,"Lake Austinport",20386,3
+666,Delmarberg,74538,11
+667,Bookerchester,64112-0240,15
+668,Kiehnstad,39679,3
+669,Batzmouth,22069-3587,11
+670,Whiteview,90573-1568,15
+671,Watsicaview,11796-1281,11
+672,"Lake Kaley",66771-0073,14
+673,Pfefferton,85043,9
+674,Webershire,75207-5199,11
+675,"New Kristalhaven",99017,3
+676,"South Novaport",73805,6
+677,"Port Jeannaberg",11999-6074,12
+678,"Lake Shawnhaven",28384-6812,7
+679,"New Almeda",36973,9
+680,"Lake Quincy",38478-9478,14
+681,"New Teodoro",72253,7
+682,Streichport,87476-9708,1
+683,Jakubowskiburgh,35015,11
+684,Kristeenville,61299-9559,9
+685,"East Terrellfurt",62341-1779,12
+686,Oliveburgh,85692-4619,4
+687,Braunmouth,93339-0111,8
+688,Judsonmouth,34555,2
+689,"West Ellis",40940-5217,10
+690,"South Lori",06257-6832,14
+691,"North Roderick",60900,8
+692,"North Aracelis",04211-0864,6
+693,Garretttown,54927-2847,14
+694,Irishfort,48864,16
+695,Lockmanfurt,69333,13
+696,Trinidadside,94418-4646,7
+697,"South Bo",90461-9353,9
+698,"Port Jesus",18971-3780,9
+699,Mannchester,24485-0966,10
+700,Grimestown,48652,2
+701,"South Rudy",94602-8399,9
+702,Hintzton,51980,13
+703,"North Erickmouth",04142,6
+704,Drusillaview,87344,3
+705,Christianeside,57265-5733,5
+706,"New Sethberg",35792,15
+707,"New Rochelside",38667-5381,12
+708,Okunevaton,75323-6711,6
+709,Toniland,64592-5369,9
+710,Harberborough,03398-4727,14
+711,"East Will",09984-9227,5
+712,"South Arnoldoview",52321-4782,11
+713,Franeckihaven,34988-3454,16
+714,"Lake Eulaland",08498,13
+715,Andersontown,38038-3445,7
+716,Funkport,33605-9291,2
+717,Nicolasfort,06982,14
+718,"Port Irving",05240-1954,4
+719,"East Annicemouth",81911-9264,13
+720,"Lake Augustinefort",15434-2969,5
+721,"North Sergio",21366,14
+722,Zacharyland,58514-3047,14
+723,"North Gerald",54249-0877,1
+724,Wildermanton,03743,15
+725,"West Keli",33092,9
+726,Carlborough,53297-2661,10
+727,"Lake Maranda",78260,12
+728,Ellisberg,81911-4351,10
+729,"Port Cordeliaville",43812-4220,2
+730,"Port Thurman",27859-6015,10
+731,Willview,22328-0780,5
+732,"West Leif",10443,9
+733,"North Sanfordton",23833-7825,16
+734,"East Mildaburgh",83316-4702,3
+735,Cummerataview,19806-6837,9
+736,"Port Long",05954,13
