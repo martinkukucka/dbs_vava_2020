@@ -96,20 +96,28 @@ public class AddVehicle {
                     return;
                 }
             }
-            String modelID = modelComboBox.getValue();
-            modelID = modelID.substring(modelID.indexOf(" ") + 1, modelID.indexOf(","));
-            System.out.println(modelID);
+            if(modelComboBox.getSelectionModel().isEmpty() || licensePlateNumberTextField.getText().isEmpty()
+                    || colorTextField.getText().isEmpty() || yearOfProductionTextField.getText().isEmpty()
+                    || priceTextField.getText().isEmpty()){
+                addVehicleLabel.setText("Vyplňte všetky údaje");
+                addVehicleLabel.setTextFill(Color.RED);
+            }
+            else{
+                String modelID = modelComboBox.getValue();
+                modelID = modelID.substring(modelID.indexOf(" ") + 1, modelID.indexOf(","));
+                System.out.println(modelID);
 
-            PreparedStatement preparedStatementVehicle = connection.prepareStatement(sqlVehicle);
-            preparedStatementVehicle.setString(1, licensePlateNumberTextField.getText());
-            preparedStatementVehicle.setString(2, colorTextField.getText());
-            preparedStatementVehicle.setString(3, yearOfProductionTextField.getText());
-            preparedStatementVehicle.setString(4, priceTextField.getText());
-            preparedStatementVehicle.setInt(5, Integer.parseInt(modelID));
-            preparedStatementVehicle.executeUpdate();
+                PreparedStatement preparedStatementVehicle = connection.prepareStatement(sqlVehicle);
+                preparedStatementVehicle.setString(1, licensePlateNumberTextField.getText());
+                preparedStatementVehicle.setString(2, colorTextField.getText());
+                preparedStatementVehicle.setString(3, yearOfProductionTextField.getText());
+                preparedStatementVehicle.setString(4, priceTextField.getText());
+                preparedStatementVehicle.setInt(5, Integer.parseInt(modelID));
+                preparedStatementVehicle.executeUpdate();
 
-            addVehicleLabel.setText("Vozidlo úspešne pridané do databázy");
-            addVehicleLabel.setTextFill(Color.GREEN);
+                addVehicleLabel.setText("Vozidlo úspešne pridané do databázy");
+                addVehicleLabel.setTextFill(Color.GREEN);
+            }
 
         } catch(SQLException e) {
             System.out.println("SQL exception occured: " + e);
