@@ -104,17 +104,8 @@ public class Register {
                         rs.getString("zipcode").equals(regZIPTextField.getText())) {
                     currentAddressID = rs.getInt("id");
                     PreparedStatement preparedStatementCustomer = connection.prepareStatement(sqlCustomer);
-                    preparedStatementCustomer.setString(1, regNameTextField.getText());
-                    preparedStatementCustomer.setString(2, regSurnameTextField.getText());
-                    preparedStatementCustomer.setString(3, regPhoneNumberTextField.getText());
-                    preparedStatementCustomer.setString(4, regEmailTextField.getText());
-                    preparedStatementCustomer.setString(5, regPasswordTextField.getText());
-                    preparedStatementCustomer.setString(6, regIDTextField.getText());
-                    preparedStatementCustomer.setInt(7, currentAddressID);
-                    preparedStatementCustomer.executeUpdate();
-                    Stage stage = (Stage) regRegistrationButton.getScene().getWindow();
-                    Parent root = FXMLLoader.load(getClass().getResource("GUI/entry.fxml"));
-                    stage.setScene(new Scene(root, regRegistrationButton.getScene().getWidth(), regRegistrationButton.getScene().getHeight()));
+                    addToDatabase(currentAddressID, preparedStatementCustomer);
+                    return;
                 }
             }
 
@@ -133,23 +124,26 @@ public class Register {
             }
 
             PreparedStatement preparedStatementCustomer = connection.prepareStatement(sqlCustomer);
-            preparedStatementCustomer.setString(1, regNameTextField.getText());
-            preparedStatementCustomer.setString(2, regSurnameTextField.getText());
-            preparedStatementCustomer.setString(3, regPhoneNumberTextField.getText());
-            preparedStatementCustomer.setString(4, regEmailTextField.getText());
-            preparedStatementCustomer.setString(5, regPasswordTextField.getText());
-            preparedStatementCustomer.setString(6, regIDTextField.getText());
-            preparedStatementCustomer.setInt(7, currentAddressID);
-            preparedStatementCustomer.executeUpdate();
-
-            Stage stage = (Stage) regRegistrationButton.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("GUI/entry.fxml"));
-            stage.setScene(new Scene(root, regRegistrationButton.getScene().getWidth(), regRegistrationButton.getScene().getHeight()));
+            addToDatabase(currentAddressID, preparedStatementCustomer);
 
         } catch(SQLException e) {
             System.out.println("SQL exception occured: " + e);
         }
 
+    }
+
+    private void addToDatabase(int currentAddressID, PreparedStatement preparedStatementCustomer) throws SQLException, java.io.IOException {
+        preparedStatementCustomer.setString(1, regNameTextField.getText());
+        preparedStatementCustomer.setString(2, regSurnameTextField.getText());
+        preparedStatementCustomer.setString(3, regPhoneNumberTextField.getText());
+        preparedStatementCustomer.setString(4, regEmailTextField.getText());
+        preparedStatementCustomer.setString(5, regPasswordTextField.getText());
+        preparedStatementCustomer.setString(6, regIDTextField.getText());
+        preparedStatementCustomer.setInt(7, currentAddressID);
+        preparedStatementCustomer.executeUpdate();
+        Stage stage = (Stage) regRegistrationButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/entry.fxml"));
+        stage.setScene(new Scene(root, regRegistrationButton.getScene().getWidth(), regRegistrationButton.getScene().getHeight()));
     }
 
 }
