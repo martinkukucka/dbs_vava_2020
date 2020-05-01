@@ -9,22 +9,25 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="entryAnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="400.0" minWidth="600.0" prefHeight="450" prefWidth="700" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Entry">
+<AnchorPane id="AnchorPane" fx:id="loginAnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="400.0" minWidth="600.0" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CustomerMenu">
    <children>
       <GridPane alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="291.0" prefWidth="231.0" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <children>
                   <HBox id="HBox" alignment="CENTER" spacing="5.0">
                      <children>
-                        <Button fx:id="entryLoginButton" mnemonicParsing="false" onAction="#entryLoginButtonAction" prefHeight="25.0" prefWidth="85.0" text="Prihlásenie" textAlignment="CENTER" textOverrun="ELLIPSIS" />
+                        <Button fx:id="createOrderButton" mnemonicParsing="false" onAction="#creteOrderButtonAction" prefHeight="25.0" prefWidth="140.0" text="Vytvorenie objednávky" textAlignment="CENTER" textOverrun="ELLIPSIS" />
                      </children>
                   </HBox>
-                  <Button fx:id="entryRegisterButton" mnemonicParsing="false" onAction="#entryRegisterButtonAction" prefHeight="25.0" prefWidth="85.0" text="Registrácia" textAlignment="CENTER" textOverrun="ELLIPSIS" />
-                  <HBox id="HBox" alignment="CENTER" spacing="5.0" />
                   <HBox id="HBox" alignment="CENTER" spacing="5.0">
                      <children>
-                        <Button fx:id="entryExitButton" mnemonicParsing="false" onAction="#entryExitButtonAction" prefHeight="25.0" prefWidth="65.0" text="Koniec" textAlignment="CENTER" textOverrun="ELLIPSIS" />
+                        <Button fx:id="changePasswordButton" mnemonicParsing="false" onAction="#changeButtonAction" prefHeight="25.0" prefWidth="140.0" text="Zmena hesla" textAlignment="CENTER" textOverrun="ELLIPSIS" />
+                     </children>
+                  </HBox>
+                  <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                     <children>
+                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="25.0" prefWidth="140.0" text="Späť" textAlignment="CENTER" textOverrun="ELLIPSIS" />
                      </children>
                   </HBox>
                </children>

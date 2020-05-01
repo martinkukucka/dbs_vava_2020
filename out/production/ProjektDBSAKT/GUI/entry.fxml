@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="entryAnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="400.0" minWidth="600.0" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Entry">
+<AnchorPane id="AnchorPane" fx:id="entryAnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="400.0" minWidth="600.0" prefHeight="450" prefWidth="700" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Entry">
    <children>
       <GridPane alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>

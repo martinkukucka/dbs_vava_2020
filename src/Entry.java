@@ -1,3 +1,4 @@
+import animatefx.animation.FadeIn;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,7 @@ public class Entry {
         Stage stage = (Stage) entryLoginButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"));
         stage.setScene(new Scene(root, entryLoginButton.getScene().getWidth(), entryLoginButton.getScene().getHeight()));
+        new FadeIn(root).play();
     }
 
     @FXML
@@ -33,6 +35,7 @@ public class Entry {
         Stage stage = (Stage) entryRegisterButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("GUI/register.fxml"));
         stage.setScene(new Scene(root, entryRegisterButton.getScene().getWidth(), entryRegisterButton.getScene().getHeight()));
+        new FadeIn(root).play();
     }
 
     @FXML

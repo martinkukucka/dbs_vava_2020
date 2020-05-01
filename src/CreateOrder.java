@@ -70,6 +70,7 @@ public class CreateOrder {
             preparedStatement.setInt(4, rentedVehicleId);
             preparedStatement.executeUpdate();
 
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

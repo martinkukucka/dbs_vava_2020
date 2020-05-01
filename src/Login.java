@@ -96,4 +96,6 @@ public class Login {
         Parent root = FXMLLoader.load(getClass().getResource("GUI/entry.fxml"));
         stage.setScene(new Scene(root, backLoginButton.getScene().getWidth(), backLoginButton.getScene().getHeight()));
     }
+
+
 }
