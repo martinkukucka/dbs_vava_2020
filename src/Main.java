@@ -15,10 +15,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/entry.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"));
         primaryStage.setTitle("Car rental");
         primaryStage.setScene(new Scene(root));
-        primaryStage.setMaximized(true);
+//        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 

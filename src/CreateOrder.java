@@ -13,21 +13,9 @@ import java.sql.*;
 
 public class CreateOrder {
 
-    @FXML
-    private DatePicker pickUpDatepicker;
 
-    @FXML
-    private DatePicker returnDatepicker;
 
-    @FXML
-    private ComboBox<String> chooseCarCombobox;
-
-    @FXML
-    private Button nextButton;
-
-    @FXML
-    public void initialize() {
-//        chooseCarCombobox.getItems().add("hello");
+    public void comboBoxInit(ComboBox<String> chooseCarCombobox) {
         try {
             Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             Statement statement = connection.createStatement();
@@ -43,11 +31,9 @@ public class CreateOrder {
         catch(SQLException e) {
             System.out.println("SQL exception occured " + e);
         }
-
     }
 
-    @FXML
-    void nextButtonAction(ActionEvent event) {
+    void insertToDb(ComboBox<String> chooseCarCombobox, DatePicker pickUpDatepicker, DatePicker returnDatepicker) {
         String licencePlate = chooseCarCombobox.getValue();
         licencePlate = licencePlate.substring(licencePlate.indexOf(""), licencePlate.indexOf(","));
 

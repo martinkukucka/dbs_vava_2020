@@ -45,6 +45,9 @@ public class Login {
     private Hyperlink adminHyperlink;
 
     @FXML
+    private Hyperlink createAccountHyperlink;
+
+    @FXML
     private void loginButtonAction(ActionEvent event) throws Exception {
         if(emailTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
         wrongdataLabel.setText("Vyplňte všetky údaje.");
@@ -95,6 +98,14 @@ public class Login {
         stage = (Stage) backLoginButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("GUI/entry.fxml"));
         stage.setScene(new Scene(root, backLoginButton.getScene().getWidth(), backLoginButton.getScene().getHeight()));
+    }
+
+
+    @FXML
+    void createAccountHyperlinkAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) createAccountHyperlink.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/register.fxml"));
+        stage.setScene(new Scene(root, createAccountHyperlink.getScene().getWidth(), createAccountHyperlink.getScene().getHeight()));
     }
 
 
