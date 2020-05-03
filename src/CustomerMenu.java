@@ -94,7 +94,7 @@ public class CustomerMenu {
     @FXML
     void backButtonAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/entry.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"));
         stage.setScene(new Scene(root, backButton.getScene().getWidth(), backButton.getScene().getHeight()));
     }
 

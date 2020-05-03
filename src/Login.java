@@ -87,7 +87,7 @@ public class Login {
         oldwitdh = loginButton.getScene().getWidth();
         oldheight = loginButton.getScene().getHeight();
         Parent root = FXMLLoader.load(getClass().getResource("GUI/adminlogin.fxml"));
-        Scene scene = new Scene(root,320,280);
+        Scene scene = new Scene(root,350,400);
         stage.setScene(scene);
         stage.show();
     }

@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="loginAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login">
+<AnchorPane id="AnchorPane" fx:id="loginAnchorPane" maxHeight="450.0" maxWidth="700.0" minHeight="450.0" minWidth="700.0" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login">
     <children>
         <BorderPane prefHeight="450.0" prefWidth="700.0">
             <left>
@@ -34,15 +34,20 @@
                 <Pane prefHeight="450.0" prefWidth="450.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
                     <children>
                         <TextField fx:id="emailTextField" layoutX="100.0" layoutY="125.0" prefHeight="40.0" prefWidth="250.0" promptText="E-mail" scaleZ="-1.0" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
-                        <PasswordField fx:id="passwordTextField" layoutX="100.0" layoutY="200.0" prefHeight="40.0" prefWidth="250.0" promptText="Password" scaleZ="-1.0" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
-                        <Button fx:id="loginButton" layoutX="200.0" layoutY="315.0" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="35.0" prefWidth="150.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="Sign in" textAlignment="CENTER" textFill="WHITE" />
-                        <Text layoutX="100.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" wrappingWidth="226.93677520751953">
+                        <PasswordField fx:id="passwordTextField" layoutX="100.0" layoutY="200.0" prefHeight="40.0" prefWidth="250.0" promptText="Heslo" scaleZ="-1.0" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+                        <Button fx:id="loginButton" layoutX="200.0" layoutY="315.0" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="35.0" prefWidth="150.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="Prihlásiť sa" textAlignment="CENTER" textFill="WHITE" />
+                        <Text layoutX="100.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vitajte" wrappingWidth="226.93677520751953">
                             <font>
                                 <Font size="33.0" />
                             </font>
                         </Text>
                         <Label fx:id="wrongdataLabel" layoutX="100.0" layoutY="265.0" prefHeight="17.0" prefWidth="250.0" textAlignment="CENTER" />
-                        <Hyperlink layoutX="100.0" layoutY="321.0" text="Create account" />
+                        <Hyperlink fx:id="createAccountHyperlink" layoutX="100.0" layoutY="321.0" onAction="#createAccountHyperlinkAction" text="Registrácia" />
+                  <Hyperlink fx:id="adminHyperlink" layoutX="226.0" layoutY="356.0" onAction="#adminHyperlinkAction" text="Prihlásiť ako správca">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Hyperlink>
                     </children>
                 </Pane>
             </right>
