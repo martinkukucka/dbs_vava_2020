@@ -44,7 +44,7 @@ public class PasswordChange {
     }
 
     @FXML
-    void changeButtonAction(ActionEvent event) throws SQLException {
+    void changeButtonAction() throws SQLException {
         try {
             Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             Statement statement = connection.createStatement();

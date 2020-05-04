@@ -11,21 +11,21 @@ import javafx.stage.Stage;
 import java.sql.*;
 
 public class AddVehicle {
+//
+//    @FXML
+//    private TextField licensePlateNumberTextField;
+//
+//    @FXML
+//    private TextField colorTextField;
+//
+//    @FXML
+//    private TextField yearOfProductionTextField;
+//
+//    @FXML
+//    private TextField priceTextField;
 
-    @FXML
-    private TextField licensePlateNumberTextField;
-
-    @FXML
-    private TextField colorTextField;
-
-    @FXML
-    private TextField yearOfProductionTextField;
-
-    @FXML
-    private TextField priceTextField;
-
-    @FXML
-    private ComboBox<String> modelComboBox;
+//    @FXML
+//    private ComboBox<String> modelComboBox;
 
     @FXML
     private Hyperlink addModelHyperlink;
@@ -39,11 +39,11 @@ public class AddVehicle {
     @FXML
     private ImageView reloadImage;
 
-    @FXML
-    private Label addVehicleLabel;
+//    @FXML
+//    private Label addVehicleLabel;
 
     @FXML
-    public void initialize(){
+    public void initialize(ComboBox<String> modelComboBox){
         modelComboBox.getItems().clear();
         try {
             String sqlModel = ("select * from crdb.model order by carbrand, carmodel");
@@ -65,7 +65,7 @@ public class AddVehicle {
     }
 
     @FXML
-    private void addModelHyperlinkAction(ActionEvent event) throws Exception{
+    void addModelHyperlinkAction() throws Exception{
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("GUI/addmodel.fxml"));
         Scene scene = new Scene(root,800,600);
@@ -81,7 +81,8 @@ public class AddVehicle {
     }
 
     @FXML
-    private void addVehicleButtonAction(ActionEvent event) throws Exception {
+    void addVehicleButtonAction(TextField licensePlateNumberTextField, TextField colorTextField,
+                                TextField yearOfProductionTextField, TextField priceTextField, ComboBox<String> modelComboBox, Label addVehicleLabel) throws Exception {
         String sqlVehicle = "insert into crdb.vehicle(licenseplatenumber, color, yearofproduction, price, modelid) values (?, ?, ?, ?, ?)";
 
         try {

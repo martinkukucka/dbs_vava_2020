@@ -29,46 +29,51 @@ public class CarDatabase {
     @FXML
     private Button backButton;
 
-    @FXML
-    private TableView<CarInfo> carTable;
+//    @FXML
+//    private TableView<CarInfo> carTable;
+//
+//    @FXML
+//    private TableColumn<CarInfo,Integer> vehicleIDColumn;
+//
+//    @FXML
+//    private TableColumn<CarInfo,String> licensePlateNumberColumn;
+//    @FXML
+//    private TableColumn<CarInfo,String> brandColumn;
+//
+//    @FXML
+//    private TableColumn<CarInfo,String> modelColumn;
+//
+//    @FXML
+//    private TableColumn<CarInfo,String> colorColumn;
+//
+//    @FXML
+//    private TableColumn<CarInfo,Integer> modelIDColumn;
+//
+//    @FXML
+//    private TableColumn<CarInfo,String> yearColumn;
+//
+//    @FXML
+//    private TableColumn<CarInfo,Float> priceColumn;
+//
+//    @FXML
+//    private TableColumn<CarInfo,String> categoryColumn;
+//
+//    @FXML
+//    private TableColumn<CarInfo,String> engineColumn;
+//
+//    @FXML
+//    private TableColumn<CarInfo,String> transmissionColumn;
+//
+//    @FXML
+//    private TableColumn<CarInfo,Integer> seatsColumn;
 
-    @FXML
-    private TableColumn<CarInfo,Integer> vehicleIDColumn;
-
-    @FXML
-    private TableColumn<CarInfo,String> licensePlateNumberColumn;
-
-    @FXML
-    private TableColumn<CarInfo,String> brandColumn;
-
-    @FXML
-    private TableColumn<CarInfo,String> modelColumn;
-
-    @FXML
-    private TableColumn<CarInfo,String> colorColumn;
-
-    @FXML
-    private TableColumn<CarInfo,Integer> modelIDColumn;
-
-    @FXML
-    private TableColumn<CarInfo,String> yearColumn;
-
-    @FXML
-    private TableColumn<CarInfo,Float> priceColumn;
-
-    @FXML
-    private TableColumn<CarInfo,String> categoryColumn;
-
-    @FXML
-    private TableColumn<CarInfo,String> engineColumn;
-
-    @FXML
-    private TableColumn<CarInfo,String> transmissionColumn;
-
-    @FXML
-    private TableColumn<CarInfo,Integer> seatsColumn;
-
-    public void initialize() throws SQLException {
+    public void initialize(TableView<CarInfo> carTable,TableColumn<CarInfo,Integer> vehicleIDColumn,
+                           TableColumn<CarInfo,String>licensePlateNumberColumn,TableColumn<CarInfo,String>brandColumn,
+                           TableColumn<CarInfo,String> modelColumn,TableColumn<CarInfo,String> colorColumn,
+                           TableColumn<CarInfo,Integer> modelIDColumn,TableColumn<CarInfo,String> yearColumn,
+                           TableColumn<CarInfo,Float> priceColumn,TableColumn<CarInfo,String> categoryColumn,
+                           TableColumn<CarInfo,String> engineColumn,TableColumn<CarInfo,String> transmissionColumn,
+                           TableColumn<CarInfo,Integer> seatsColumn) throws SQLException {
         vehicleIDColumn.setCellValueFactory(new PropertyValueFactory<>("carID"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         brandColumn.setCellValueFactory(new PropertyValueFactory<>("carBrand"));
@@ -85,11 +90,11 @@ public class CarDatabase {
         colorColumn.setCellValueFactory(new PropertyValueFactory<>("color"));
         yearColumn.setCellValueFactory(new PropertyValueFactory<>("yearOfProduction"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        buildData();
+        buildData(carTable);
     }
 
 
-    public void buildData() throws SQLException {
+    public void buildData(TableView<CarInfo> carTable) throws SQLException {
         ObservableList<CarInfo> carinfod = FXCollections.observableArrayList();
 
         try{
@@ -130,9 +135,7 @@ public class CarDatabase {
         catch(SQLException e) {
             System.out.println("SQL exception occured: " + e);
         }
-
     }
-
 
     @FXML
     private void addVehicleButtonAction(ActionEvent event) throws Exception{
@@ -142,7 +145,7 @@ public class CarDatabase {
     }
 
     @FXML
-    private void removeVehicleButtonAction() {
+    void removeVehicleButtonAction(TableView<CarInfo> carTable) {
         if(!Bindings.isEmpty(carTable.getItems()).get()) {
             CarInfo selectedItem = carTable.getSelectionModel().getSelectedItem();
             carTable.getItems().remove(selectedItem);
@@ -167,5 +170,4 @@ public class CarDatabase {
         Parent root = FXMLLoader.load(getClass().getResource("GUI/entry.fxml"));
         stage.setScene(new Scene(root, backButton.getScene().getWidth(), backButton.getScene().getHeight()));
     }
-
 }

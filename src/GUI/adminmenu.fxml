@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="adminMenuAnchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminMenu">
+   <children>
+      <VBox prefHeight="900.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b;">
+         <children>
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Pridať vozidlo" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="removeVehicleButton" mnemonicParsing="false" onAction="#removeVehicleButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Odstrániť vozidlo" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="showButton" mnemonicParsing="false" onAction="#showButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Zobrazenie vozidiel" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Späť" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Pane fx:id="showPane" layoutX="200.0" prefHeight="900.0" prefWidth="1080.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <TableView fx:id="carTable" prefHeight="900.0" prefWidth="1080.0" tableMenuButtonVisible="true">
+               <columns>
+                  <TableColumn fx:id="vehicleIDColumn" prefWidth="60.0" text="ID" />
+                  <TableColumn fx:id="licensePlateNumberColumn" prefWidth="85.0" text="EČV" />
+                  <TableColumn fx:id="brandColumn" prefWidth="100.0" text="Značka" />
+                  <TableColumn fx:id="modelColumn" prefWidth="110.0" text="Model" />
+                  <TableColumn fx:id="colorColumn" text="Farba" />
+                  <TableColumn fx:id="modelIDColumn" prefWidth="60.0" text="Model ID" />
+                  <TableColumn fx:id="yearColumn" text="Rok výroby" />
+                  <TableColumn fx:id="priceColumn" prefWidth="100.0" text="Nákupná cena" />
+                  <TableColumn fx:id="categoryColumn" prefWidth="100.0" text="Kategória" />
+                  <TableColumn fx:id="engineColumn" prefWidth="100.0" text="Motor" />
+                  <TableColumn fx:id="transmissionColumn" prefWidth="100.0" text="Prevodovka" />
+                  <TableColumn fx:id="seatsColumn" prefWidth="90.0" text="Počet sedadiel" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <Pane fx:id="addVehiclePane" layoutX="200.0" prefHeight="900.0" prefWidth="1080.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <Button fx:id="addVehicleButton" layoutX="509.0" layoutY="645.0" mnemonicParsing="false" onAction="#addVehicleButtonAction" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="Pridať vozidlo" textFill="WHITE" />
+            <TextField fx:id="licensePlateNumberTextField" layoutX="369.0" layoutY="161.0" prefHeight="40.0" prefWidth="370.0" promptText="EČV" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+            <TextField fx:id="colorTextField" layoutX="369.0" layoutY="228.0" prefHeight="40.0" prefWidth="370.0" promptText="Farba" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+            <TextField fx:id="yearOfProductionTextField" layoutX="369.0" layoutY="303.0" prefHeight="40.0" prefWidth="370.0" promptText="Rok výroby" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+            <TextField fx:id="priceTextField" layoutX="369.0" layoutY="373.0" prefHeight="40.0" prefWidth="370.0" promptText="Nákupná cena" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+            <ComboBox fx:id="modelComboBox" layoutX="304.0" layoutY="467.0" prefHeight="30.0" prefWidth="500.0" promptText="Model" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+            <Hyperlink fx:id="addModelHyperlink" layoutX="515.0" layoutY="536.0" onAction="#addModelHyperlinkAction" text="Pridať model" />
+            <ImageView fx:id="reloadImage" fitHeight="28.0" fitWidth="27.0" layoutX="811.0" layoutY="469.0" onMouseClicked="#refresh" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@reload.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="addVehicleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="414.0" layoutY="585.0" prefHeight="17.0" prefWidth="294.0" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <Pane layoutX="200.0" prefHeight="900.0" prefWidth="1080.0" style="-fx-background-color: #FFFFFF;" />
+   </children>
+</AnchorPane>

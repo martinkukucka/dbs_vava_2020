@@ -4,10 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -81,13 +78,31 @@ public class CustomerMenu {
     private ComboBox<String> chooseCarCombobox;
 
     @FXML
+    private Pane changePasswordPane;
+
+    @FXML
+    private PasswordField oldPasswordTextField;
+
+    @FXML
+    private PasswordField newPasswordTextField;
+
+    @FXML
+    private PasswordField confirmNewPasswordTextField;
+
+    @FXML
+    private Button changeButton;
+
+    @FXML
+    private Label passwordLabel;
+
+    @FXML
     private Button makeOrderButton;
 
+    @FXML
     private CreateOrder createOrder = new CreateOrder();
 
     @FXML
     public void initialize() {
-
         createOrder.comboBoxInit(chooseCarCombobox);
     }
 
@@ -99,10 +114,12 @@ public class CustomerMenu {
     }
 
     @FXML
-    void changeButtonAction(ActionEvent event) throws IOException {
-        Stage stage = (Stage) changePasswordButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/passwordchange.fxml"));
-        stage.setScene(new Scene(root, changePasswordButton.getScene().getWidth(), changePasswordButton.getScene().getHeight()));
+    void changePasswordButtonAction(ActionEvent event) throws IOException {
+        passwordLabel.setText("");
+        oldPasswordTextField.setText("");
+        newPasswordTextField.setText("");
+        confirmNewPasswordTextField.setText("");
+        changePasswordPane.toFront();
     }
 
     @FXML
@@ -112,8 +129,6 @@ public class CustomerMenu {
 //        stage.setScene(new Scene(root, createOrderButton.getScene().getWidth(), createOrderButton.getScene().getHeight()));
 //        new FadeIn(objednavkaPane).play();
         objednavkaPane.toFront();
-
-
     }
 
 
@@ -174,6 +189,45 @@ public class CustomerMenu {
     void makeOrder(ActionEvent event) {
         System.out.println(chooseCarCombobox.getValue());
         createOrder.insertToDb(chooseCarCombobox, pickUpDatepicker, returnDatepicker);
+    }
+
+    @FXML
+    void changeButtonAction() throws SQLException {
+        try {
+            Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select id, password from crdb.customer");
+
+            if(confirmNewPasswordTextField.getText().isEmpty() || newPasswordTextField.getText().isEmpty() || oldPasswordTextField.getText().isEmpty()){
+                passwordLabel.setText("Vyplňte všetky údaje");
+                passwordLabel.setTextFill(Color.RED);
+            }
+            else{
+                while(resultSet.next()){
+                    if(resultSet.getInt("id") == Login.USERID){
+                        if(resultSet.getString("password").equals(oldPasswordTextField.getText())){
+                            if(confirmNewPasswordTextField.getText().equals(newPasswordTextField.getText())){
+                                String sql = "update crdb.customer SET password = ? where id = "+Login.USERID+"";
+                                PreparedStatement rs = connection.prepareStatement(sql);
+                                rs.setString(1,newPasswordTextField.getText());
+                                rs.executeUpdate();
+                                passwordLabel.setText("Heslo úspešne zmenené");
+                                passwordLabel.setTextFill(Color.GREEN);
+                                return;
+                            }
+                            passwordLabel.setText("Zlé potvrdenie hesla");
+                            passwordLabel.setTextFill(Color.RED);
+                            return;
+                        }
+                        passwordLabel.setText("Pôvodné heslo sa nezhoduje");
+                        passwordLabel.setTextFill(Color.RED);
+                    }
+                }
+            }
+        }
+        catch (SQLException e) {
+            System.out.println("SQL exception occured: " + e);
+        }
     }
 
 

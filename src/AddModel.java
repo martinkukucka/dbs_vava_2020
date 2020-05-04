@@ -1,33 +1,26 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 import java.sql.*;
 
 public class AddModel {
 
     @FXML
-    private ComboBox<String> categoryComboBox;
-
-    @FXML
-    private TextField brandTextField;
+    private ComboBox<String> fuelComboBox;
 
     @FXML
     private TextField modelTextField;
 
     @FXML
-    private ComboBox<String> transmissionComboBox;
+    private TextField brandTextField;
 
     @FXML
-    private ComboBox<String> fuelComboBox;
+    private Label addModelLabel;
 
     @FXML
     private TextField kwTextField;
@@ -36,10 +29,13 @@ public class AddModel {
     private TextField seatsTextField;
 
     @FXML
-    private Label addModelLabel;
+    private Button addModelButton;
 
     @FXML
-    private Button addModelButton;
+    private ComboBox<String> transmissionComboBox;
+
+    @FXML
+    private ComboBox<String> categoryComboBox;
 
     @FXML
     private Button cancelButton;
