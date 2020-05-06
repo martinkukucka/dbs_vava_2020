@@ -288,7 +288,7 @@ public class Register {
 
     }
 
-    private void findId(Connection connection, Statement statement, String sqlAddress, TextField regStreetTextField, TextField regHouseNumberTextField, String s, String text, String s2) throws SQLException {
+    void findId(Connection connection, Statement statement, String sqlAddress, TextField regStreetTextField, TextField regHouseNumberTextField, String s, String text, String s2) throws SQLException {
         ResultSet rs;
         PreparedStatement preparedStatementAddress = connection.prepareStatement(sqlAddress);
         preparedStatementAddress.setString(1, regStreetTextField.getText());

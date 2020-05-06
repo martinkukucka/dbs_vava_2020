@@ -144,12 +144,13 @@ public class CarDatabase {
         stage.setScene(new Scene(root, addVehicleButton.getScene().getWidth(), addVehicleButton.getScene().getHeight()));
     }
 
+//    vymazanie vozidla zo systému
     @FXML
     void removeVehicleButtonAction(TableView<CarInfo> carTable) {
         if(!Bindings.isEmpty(carTable.getItems()).get()) {
             CarInfo selectedItem = carTable.getSelectionModel().getSelectedItem();
             carTable.getItems().remove(selectedItem);
-            String sqlModel = ("delete from crdb.vehicle where id = ?");
+            String sqlModel = ("delete from crdb.carrepair where vehicleid = ?");
 
             try {
                 Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
@@ -158,9 +159,19 @@ public class CarDatabase {
                 statement.setInt(1, selectedItem.getCarID());
                 statement.executeUpdate();
 
+
+                sqlModel = ("delete from crdb.vehicle where id = ?");
+
+                statement = connection.prepareStatement(sqlModel);
+
+                statement.setInt(1, selectedItem.getCarID());
+                statement.executeUpdate();
+
+
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
+
         }
     }
 

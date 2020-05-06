@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
 
 public class CustomerMenu {
 
@@ -189,6 +190,7 @@ public class CustomerMenu {
     void makeOrder(ActionEvent event) {
         System.out.println(chooseCarCombobox.getValue());
         createOrder.insertToDb(chooseCarCombobox, pickUpDatepicker, returnDatepicker);
+//        pickUpDatepicker.getDatePicker().setMaxDate(System.currentTimeMillis());
     }
 
     @FXML

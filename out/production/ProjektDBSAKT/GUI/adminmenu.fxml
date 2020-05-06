@@ -13,11 +13,21 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" fx:id="adminMenuAnchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminMenu">
    <children>
-      <VBox prefHeight="900.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b;">
+      <VBox prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: #3b3b3b;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <Pane prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Text fill="#00fff4" layoutX="20.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Správa vozidiel" textAlignment="CENTER" wrappingWidth="160.13671875">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
             <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Pridať vozidlo" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -28,11 +38,41 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="showButton" mnemonicParsing="false" onAction="#showButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Zobrazenie vozidiel" textFill="WHITE">
+            <Button fx:id="showButton" mnemonicParsing="false" onAction="#showButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Prehľad vozidiel" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
+            <Button fx:id="servisVehicleButton" mnemonicParsing="false" onAction="#servisVehicleButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Servisovať vozidlo" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Pane prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Text fill="#00fff4" layoutX="20.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Servis vozidiel" textAlignment="CENTER" wrappingWidth="160.13671875">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Button fx:id="servisRegistrationButton" mnemonicParsing="false" onAction="#servisRegistrationButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Registrácia servisu" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="servisShowButton" mnemonicParsing="false" onAction="#servisShowButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Prehľad servisných stredísk" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="servisVehicleShowButton" mnemonicParsing="false" onAction="#servisVehicleShowButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Prehľad servisovaných vozidiel" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Pane prefHeight="63.0" prefWidth="200.0" />
             <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Späť" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -62,7 +102,6 @@
       </Pane>
       <Pane fx:id="addVehiclePane" layoutX="200.0" prefHeight="900.0" prefWidth="1080.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <Button fx:id="addVehicleButton" layoutX="509.0" layoutY="645.0" mnemonicParsing="false" onAction="#addVehicleButtonAction" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="Pridať vozidlo" textFill="WHITE" />
             <TextField fx:id="licensePlateNumberTextField" layoutX="369.0" layoutY="161.0" prefHeight="40.0" prefWidth="370.0" promptText="EČV" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
             <TextField fx:id="colorTextField" layoutX="369.0" layoutY="228.0" prefHeight="40.0" prefWidth="370.0" promptText="Farba" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
             <TextField fx:id="yearOfProductionTextField" layoutX="369.0" layoutY="303.0" prefHeight="40.0" prefWidth="370.0" promptText="Rok výroby" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
@@ -75,8 +114,61 @@
                </image>
             </ImageView>
             <Label fx:id="addVehicleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="414.0" layoutY="585.0" prefHeight="17.0" prefWidth="294.0" textAlignment="CENTER" />
+            <Button fx:id="addVehicleButton" layoutX="509.0" layoutY="645.0" mnemonicParsing="false" onAction="#addVehicleButtonAction" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="Pridať vozidlo" textFill="WHITE" />
          </children>
       </Pane>
-      <Pane layoutX="200.0" prefHeight="900.0" prefWidth="1080.0" style="-fx-background-color: #FFFFFF;" />
+      <Pane fx:id="servisShowPane" layoutX="200.0" layoutY="10.0" prefHeight="900.0" prefWidth="1090.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TableView fx:id="serviceTable" prefHeight="900.0" prefWidth="1090.0" tableMenuButtonVisible="true">
+               <columns>
+                  <TableColumn fx:id="servisIDColumn" prefWidth="50.0" text="ID" />
+                  <TableColumn fx:id="servisNameColumn" minWidth="1.0" prefWidth="150.0" text="Názov" />
+                  <TableColumn fx:id="servisEmailColumn" prefWidth="150.0" text="E-mail" />
+                  <TableColumn fx:id="phoneNumberColumn" prefWidth="120.0" text="Telefónne číslo" />
+                  <TableColumn fx:id="servisRegionColumn" prefWidth="120.0" text="Región" />
+                  <TableColumn fx:id="servisCityColumn" prefWidth="120.0" text="Mesto" />
+                  <TableColumn fx:id="servisStreetColumn" prefWidth="200.0" text="Ulica" />
+                  <TableColumn fx:id="servisHouseNumberColumn" text="Číslo domu" />
+                  <TableColumn fx:id="servisZIPColumn" text="PSČ" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <Pane fx:id="servisRegistrationPane" layoutX="200.0" prefHeight="900.0" prefWidth="1090.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <TextField fx:id="regServiceNameTextField" layoutX="415.0" layoutY="161.0" prefHeight="30.0" prefWidth="250.0" promptText="Názov servisu" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+            <TextField fx:id="regPhoneNumberTextField" layoutX="415.0" layoutY="230.0" prefHeight="30.0" prefWidth="250.0" promptText="Telefónne číslo" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+            <TextField fx:id="regEmailTextField" layoutX="415.0" layoutY="289.0" prefHeight="40.0" prefWidth="250.0" promptText="E-mail" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+            <ComboBox fx:id="regRegionComboBox" layoutX="415.0" layoutY="413.0" prefHeight="30.0" prefWidth="250.0" promptText="Kraj" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+            <TextField fx:id="regCityTextField" layoutX="415.0" layoutY="461.0" prefHeight="30.0" prefWidth="250.0" promptText="Mesto" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+            <TextField fx:id="regStreetTextField" layoutX="415.0" layoutY="512.0" prefHeight="30.0" prefWidth="250.0" promptText="Ulica" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+            <TextField fx:id="regHouseNumberTextField" layoutX="415.0" layoutY="563.0" prefHeight="30.0" prefWidth="250.0" promptText="Číslo domu" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+            <TextField fx:id="regZIPTextField" layoutX="415.0" layoutY="613.0" prefHeight="30.0" prefWidth="250.0" promptText="PSČ" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+            <Button fx:id="regRegistrationButton" layoutX="465.0" layoutY="706.0" mnemonicParsing="false" onAction="#regServisVehicleButtonAction" prefHeight="35.0" prefWidth="150.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="Registrovať" textAlignment="CENTER" textFill="WHITE" />
+            <Label fx:id="regServiceLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="432.0" layoutY="776.0" prefHeight="17.0" prefWidth="227.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="servisVehicleShowPane" layoutX="200.0" layoutY="10.0" prefHeight="900.0" prefWidth="1100.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <TableView fx:id="serviceCarTable" layoutY="-10.0" prefHeight="690.0" prefWidth="1100.0" tableMenuButtonVisible="true">
+               <columns>
+                  <TableColumn fx:id="servisVehicleIDColumn" prefWidth="60.0" text="ID" />
+                  <TableColumn fx:id="servisLicensePlateNumberColumn" prefWidth="85.0" text="EČV" />
+                  <TableColumn fx:id="servisBrandColumn" prefWidth="100.0" text="Značka" />
+                  <TableColumn fx:id="servisModelColumn" prefWidth="110.0" text="Model" />
+                  <TableColumn fx:id="servisColorColumn" text="Farba" />
+                  <TableColumn fx:id="servisYearColumn" text="Rok výroby" />
+                  <TableColumn fx:id="servisEngineColumn" prefWidth="100.0" text="Motor" />
+                  <TableColumn fx:id="servisTransmissionColumn" prefWidth="100.0" text="Prevodovka" />
+                  <TableColumn fx:id="servisCarNameColumn" prefWidth="150.0" text="Názov servisu" />
+                  <TableColumn fx:id="servisStateColumn" prefWidth="120.0" text="Stav vozidla" />
+               </columns>
+            </TableView>
+            <ComboBox fx:id="stateComboBox" layoutX="475.0" layoutY="714.0" prefHeight="30.0" prefWidth="150.0" promptText="Stav vozidla" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+            <Button fx:id="changeStateButton" layoutX="475.0" layoutY="780.0" mnemonicParsing="false" onAction="#changeStateButtonAction" prefHeight="35.0" prefWidth="150.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="Zmeniť" textAlignment="CENTER" textFill="WHITE" />
+            <Label fx:id="stateLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="475.0" layoutY="839.0" prefHeight="17.0" prefWidth="150.0" />
+         </children>
+      </Pane>
+      <Pane layoutX="200.0" layoutY="10.0" prefHeight="900.0" prefWidth="1090.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

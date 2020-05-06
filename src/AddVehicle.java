@@ -56,6 +56,7 @@ public class AddVehicle {
                         +" - "+rs.getString("carmodel")+", "+rs.getString("category")+", "+rs.getString("transmission")
                         +", "+rs.getString("fuel")+", "+rs.getString("kw")
                         +"kW, počet miest na sedenie: "+rs.getString("seats");
+
                 modelComboBox.getItems().add(carInfo);
             }
         }
@@ -106,12 +107,11 @@ public class AddVehicle {
             else{
                 String modelID = modelComboBox.getValue();
                 modelID = modelID.substring(modelID.indexOf(" ") + 1, modelID.indexOf(","));
-                System.out.println(modelID);
 
                 PreparedStatement preparedStatementVehicle = connection.prepareStatement(sqlVehicle);
                 preparedStatementVehicle.setString(1, licensePlateNumberTextField.getText());
                 preparedStatementVehicle.setString(2, colorTextField.getText());
-                preparedStatementVehicle.setString(3, yearOfProductionTextField.getText());
+                preparedStatementVehicle.setInt(3,Integer.parseInt(yearOfProductionTextField.getText()));
                 preparedStatementVehicle.setString(4, priceTextField.getText());
                 preparedStatementVehicle.setInt(5, Integer.parseInt(modelID));
                 preparedStatementVehicle.executeUpdate();
