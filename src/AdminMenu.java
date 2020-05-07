@@ -23,7 +23,7 @@ import java.sql.*;
 
 public class AdminMenu {
 
-    String removeString = "4. vozidlo opravene";
+    String removeString = "4. vozidlo vyzdvihnute";
 
     @FXML
     private AnchorPane adminMenuAnchorPane;
@@ -344,11 +344,10 @@ public class AdminMenu {
         }
     }
 
-
     @FXML
     void backButtonAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"),Login.rb);
         stage.setScene(new Scene(root, Login.oldwitdh, Login.oldheight));
     }
 

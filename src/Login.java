@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class Login {
 
@@ -48,9 +50,42 @@ public class Login {
     private Hyperlink createAccountHyperlink;
 
     @FXML
+    private Button slovakLanguageButton;
+
+    @FXML
+    private Button englishLanguageButton;
+
+    public static ResourceBundle rb = ResourceBundle.getBundle("Language/resource_bundle_sk_SK");
+
+    @FXML
+    private void selectLanguageSK() throws IOException {
+        rb = ResourceBundle.getBundle("Language/resource_bundle_sk_SK");
+
+        Stage stage = (Stage) slovakLanguageButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"), Login.rb);
+        stage.setScene(new Scene(root, slovakLanguageButton.getScene().getWidth(), slovakLanguageButton.getScene().getHeight()));
+    }
+
+    @FXML
+    private void selectLanguageEN() throws IOException {
+        rb = ResourceBundle.getBundle("Language/resource_bundle_en_EN");
+
+        Stage stage = (Stage) englishLanguageButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"), Login.rb);
+        stage.setScene(new Scene(root, englishLanguageButton.getScene().getWidth(), englishLanguageButton.getScene().getHeight()));
+    }
+
+    @FXML
     private void loginButtonAction(ActionEvent event) throws Exception {
+//        ResourceBundle rb = ResourceBundle.getBundle("Language/resource_bundle_en_EN");
+
+//        System.out.println(rb.getString("ahoj"));
+//
+//        Locale.setDefault(new Locale("en", "EN"));
+//        rb = ResourceBundle.getBundle("Language/resource_bundle_en_EN");
+
         if(emailTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
-        wrongdataLabel.setText("Vyplňte všetky údaje.");
+        wrongdataLabel.setText(rb.getString("missingInfo"));
         wrongdataLabel.setTextFill(Color.RED);
         }
         else {
@@ -70,7 +105,7 @@ public class Login {
                             return;
                         }
                     }
-                    wrongdataLabel.setText("Nesprávny e-mail alebo heslo");
+                    wrongdataLabel.setText(rb.getString("wrongInfo"));
                     wrongdataLabel.setTextFill(Color.RED);
                 }
                 catch(SQLException e) {

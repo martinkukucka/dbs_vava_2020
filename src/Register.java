@@ -149,6 +149,7 @@
 //}
 
 
+import com.mysql.cj.log.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -225,7 +226,7 @@ public class Register {
     @FXML
     private void regBackButtonAction(ActionEvent event) throws Exception{
         Stage stage = (Stage) regBackButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"), Login.rb);
         stage.setScene(new Scene(root, regBackButton.getScene().getWidth(), regBackButton.getScene().getHeight()));
     }
 
@@ -310,7 +311,7 @@ public class Register {
         preparedStatementCustomer.setInt(7, currentAddressID);
         preparedStatementCustomer.executeUpdate();
         Stage stage = (Stage) regRegistrationButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"),Login.rb);
         stage.setScene(new Scene(root, regRegistrationButton.getScene().getWidth(), regRegistrationButton.getScene().getHeight()));
     }
 
