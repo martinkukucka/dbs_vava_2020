@@ -1,4 +1,3 @@
-import animatefx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,12 +8,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDate;
 
 public class CustomerMenu {
 
@@ -100,7 +97,31 @@ public class CustomerMenu {
     private Button makeOrderButton;
 
     @FXML
+    private Button seeOrdersButton;
+
+    @FXML
     private CreateOrder createOrder = new CreateOrder();
+
+    @FXML
+    private Pane seeOrdersPane;
+
+    @FXML
+    private TableView<RentalInfo> seeOrderTable;
+
+    @FXML
+    private TableColumn<RentalInfo, String> fromColumn;
+
+    @FXML
+    private TableColumn<RentalInfo, String> toColumn;
+
+    @FXML
+    private TableColumn<RentalInfo, String> brandColumnU;
+
+    @FXML
+    private TableColumn<RentalInfo, String> modelColumnU;
+
+    @FXML
+    private TableColumn<RentalInfo, Double> priceColumnU;
 
     @FXML
     public void initialize() {
@@ -193,6 +214,13 @@ public class CustomerMenu {
 //        pickUpDatepicker.getDatePicker().setMaxDate(System.currentTimeMillis());
     }
 
+
+    @FXML
+    void seeOrdersButtonAction(ActionEvent event) throws SQLException {
+        createOrder.fillTable(seeOrderTable, fromColumn, toColumn, brandColumnU, modelColumnU, priceColumnU);
+        seeOrdersPane.toFront();
+    }
+
     @FXML
     void changeButtonAction() throws SQLException {
         try {
@@ -247,6 +275,9 @@ public class CustomerMenu {
         if (event.getSource() == profilButton) {
             profilButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
         }
+        if (event.getSource() == seeOrdersButton) {
+            seeOrdersButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
+        }
     }
 
     @FXML
@@ -262,6 +293,9 @@ public class CustomerMenu {
         }
         if (event.getSource() == profilButton) {
             profilButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
+        }
+        if (event.getSource() == seeOrdersButton) {
+            seeOrdersButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
         }
     }
 
