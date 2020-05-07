@@ -5,6 +5,8 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -19,7 +21,21 @@
    <children>
       <VBox prefHeight="450.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b;">
          <children>
+            <Pane prefHeight="75.0" prefWidth="200.0">
+               <children>
+                  <Text fill="#00fff4" layoutX="20.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Používateľ UI" textAlignment="CENTER" wrappingWidth="160.13671875">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
             <Button fx:id="createOrderButton" mnemonicParsing="false" onAction="#creteOrderButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Objednávka" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="seeOrdersButton" mnemonicParsing="false" onAction="#seeOrdersButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Prehľad objednávok" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -29,12 +45,12 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Back" textFill="WHITE">
+            <Button fx:id="profilButton" mnemonicParsing="false" onAction="#profilButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Profil" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="profilButton" mnemonicParsing="false" onAction="#profilButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Profil" textFill="WHITE">
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="Back" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -48,7 +64,7 @@
             <ComboBox fx:id="chooseCarCombobox" layoutX="250.0" layoutY="132.0" prefHeight="29.0" prefWidth="229.0" promptText="Auto" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
             <Text layoutX="29.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OD:" />
             <Text layoutX="29.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DO:" />
-            <Button fx:id="makeOrderButton" layoutX="82.0" layoutY="268.0" mnemonicParsing="false" onAction="#makeOrder" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="Ďalej" textFill="WHITE" />
+            <Button fx:id="makeOrderButton" layoutX="82.0" layoutY="268.0" mnemonicParsing="false" onAction="#makeOrder" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="Objednať" textFill="WHITE" />
          </children>
       </Pane>
       <Pane fx:id="profilPane" layoutX="200.0" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF;">
@@ -172,6 +188,19 @@
             <Button fx:id="changeButton" layoutX="175.0" layoutY="310.0" mnemonicParsing="false" onAction="#changeButtonAction" prefHeight="35.0" prefWidth="150.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="Zmeniť" textAlignment="CENTER" textFill="WHITE" />
             <Label fx:id="passwordLabel" layoutX="125.0" layoutY="276.0" prefHeight="17.0" prefWidth="250.0" />
             <PasswordField fx:id="oldPasswordTextField" layoutX="125.0" layoutY="116.0" prefHeight="40.0" prefWidth="250.0" promptText="Staré heslo" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+         </children>
+      </Pane>
+      <Pane fx:id="seeOrdersPane" layoutX="200.0" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <TableView fx:id="seeOrderTable" prefHeight="450.0" prefWidth="400.0">
+              <columns>
+                <TableColumn fx:id="fromColumn" text="OD" />
+                <TableColumn fx:id="toColumn" text="DO" />
+                  <TableColumn fx:id="brandColumnU" text="Značka" />
+                  <TableColumn fx:id="modelColumnU" text="Model" />
+                  <TableColumn fx:id="priceColumnU" text="Cena" />
+              </columns>
+            </TableView>
          </children>
       </Pane>
       <Pane layoutX="200.0" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF;" />
