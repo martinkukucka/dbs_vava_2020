@@ -36,7 +36,7 @@ public class CreateOrder {
 
     int createInvoice(String billTo, double amount) {
         InvoiceEntity invoice = new InvoiceEntity();
-        invoice.setCompanyname("Kotolňa");
+        invoice.setCompanyname("Kotolna");
         invoice.setAmount(amount);
         invoice.setBillto(billTo);
 

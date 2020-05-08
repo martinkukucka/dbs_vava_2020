@@ -1,4 +1,5 @@
 import com.itextpdf.text.*;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -7,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -14,6 +17,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -234,7 +239,7 @@ public class CustomerMenu {
     }
 
     @FXML
-    void invoicePdfButtonAction(ActionEvent event) throws SQLException, DocumentException, FileNotFoundException {
+    void invoicePdfButtonAction(ActionEvent event) throws SQLException, DocumentException, FileNotFoundException, IOException {
         if(!Bindings.isEmpty(seeOrderTable.getItems()).get()) {
             RentalInfo selectedItem = seeOrderTable.getSelectionModel().getSelectedItem();
             int invoiceId = selectedItem.getId() + 1;
@@ -246,9 +251,15 @@ public class CustomerMenu {
                 Statement statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(sqlModel);
                 String meno = null;
+                String firma = null;
+                String auto = null;
+                String cena = null;
 
                 if (rs.next()) {
                     meno = rs.getString("billto");
+                    firma = rs.getString("companyname");
+                    auto = rs.getString("carbrand") + " " + rs.getString("carmodel");
+                    cena = rs.getDouble("amount") + " €";
                 }
 
                 Document document = new Document();
@@ -256,18 +267,29 @@ public class CustomerMenu {
 
                 document.open();
 
-                Font font = FontFactory.getFont(FontFactory.COURIER, 20, BaseColor.BLACK);
-                Chunk chunk = new Chunk("Faktura za pozicanie auta", font);
+                Font titleFont = FontFactory.getFont(FontFactory.TIMES_BOLD, 20, BaseColor.BLACK);
+                Font basicFont = FontFactory.getFont(FontFactory.TIMES, 12, BaseColor.BLACK);
                 Paragraph preface = new Paragraph();
-                // We add one empty line
                 preface.add(new Paragraph(" "));
-                // Lets write a big header
-                preface.add(new Paragraph("Title of the document", font));
+                preface.add(new Paragraph("Faktura za pozicanie auta", titleFont));
                 preface.add(new Paragraph(" "));
+                Paragraph companyParagraph = new Paragraph("Meno spolocnosti: " + firma, basicFont);
+                Paragraph nameParagraph = new Paragraph("Meno zakaznika: " + meno, basicFont);
+                Paragraph carParagraph = new Paragraph("Poziciavane auto: " + auto, basicFont);
+                Paragraph priceParagraph = new Paragraph("Cena: " + cena, basicFont);
+
                 document.add(preface);
-                document.add(chunk);
+                document.add(companyParagraph);
+                document.add(nameParagraph);
+                document.add(carParagraph);
+                document.add(priceParagraph);
 
                 document.close();
+                Desktop desktop = Desktop.getDesktop();
+                File file = new File("bill.pdf");
+                if(file.exists()) {
+                    desktop.open(file);
+                }
 
             }
 
