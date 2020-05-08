@@ -8,12 +8,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
 
 public class CustomerMenu {
+
+    @FXML
+    private Text customerMenuText;
 
     @FXML
     private AnchorPane loginAnchorPane;
@@ -131,7 +135,7 @@ public class CustomerMenu {
     @FXML
     void backButtonAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"), Login.rb);
         stage.setScene(new Scene(root, backButton.getScene().getWidth(), backButton.getScene().getHeight()));
     }
 
@@ -229,7 +233,7 @@ public class CustomerMenu {
             ResultSet resultSet = statement.executeQuery("select id, password from crdb.customer");
 
             if(confirmNewPasswordTextField.getText().isEmpty() || newPasswordTextField.getText().isEmpty() || oldPasswordTextField.getText().isEmpty()){
-                passwordLabel.setText("Vyplňte všetky údaje");
+                passwordLabel.setText(Login.rb.getString("missingInfo"));
                 passwordLabel.setTextFill(Color.RED);
             }
             else{
@@ -241,15 +245,15 @@ public class CustomerMenu {
                                 PreparedStatement rs = connection.prepareStatement(sql);
                                 rs.setString(1,newPasswordTextField.getText());
                                 rs.executeUpdate();
-                                passwordLabel.setText("Heslo úspešne zmenené");
+                                passwordLabel.setText(Login.rb.getString("passwordChanged"));
                                 passwordLabel.setTextFill(Color.GREEN);
                                 return;
                             }
-                            passwordLabel.setText("Zlé potvrdenie hesla");
+                            passwordLabel.setText(Login.rb.getString("wrong2Password"));
                             passwordLabel.setTextFill(Color.RED);
                             return;
                         }
-                        passwordLabel.setText("Pôvodné heslo sa nezhoduje");
+                        passwordLabel.setText(Login.rb.getString("wrong1Password"));
                         passwordLabel.setTextFill(Color.RED);
                     }
                 }

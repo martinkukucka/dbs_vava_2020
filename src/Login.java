@@ -76,12 +76,6 @@ public class Login {
 
     @FXML
     private void loginButtonAction(ActionEvent event) throws Exception {
-//        ResourceBundle rb = ResourceBundle.getBundle("Language/resource_bundle_en_EN");
-
-//        System.out.println(rb.getString("ahoj"));
-//
-//        Locale.setDefault(new Locale("en", "EN"));
-//        rb = ResourceBundle.getBundle("Language/resource_bundle_en_EN");
 
         if(emailTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
         wrongdataLabel.setText(rb.getString("missingInfo"));
@@ -99,7 +93,7 @@ public class Login {
                         if (emailTextField.getText().equals(email) && passwordTextField.getText().equals(password)) {
                             USERID = resultSet.getInt("id");
                             Stage stage = (Stage) loginButton.getScene().getWindow();
-                            Parent root = FXMLLoader.load(getClass().getResource("GUI/customermenu.fxml"));
+                            Parent root = FXMLLoader.load(getClass().getResource("GUI/customermenu.fxml"), Login.rb);
                             stage.setScene(new Scene(root, loginButton.getScene().getWidth(), loginButton.getScene().getHeight()));
                             return;
                         }
@@ -110,8 +104,6 @@ public class Login {
                 catch(SQLException e) {
                     System.out.println("SQL exception occured " + e);
                 }
-
-
             }
     }
 
@@ -120,27 +112,16 @@ public class Login {
         oldstage = (Stage) loginButton.getScene().getWindow();
         oldwitdh = loginButton.getScene().getWidth();
         oldheight = loginButton.getScene().getHeight();
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/adminlogin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/adminlogin.fxml"), Login.rb);
         Scene scene = new Scene(root,350,400);
         stage.setScene(scene);
         stage.show();
     }
 
-
-    @FXML
-    private void backLoginButtonAction(ActionEvent event) throws Exception{
-        stage = (Stage) backLoginButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/entry.fxml"));
-        stage.setScene(new Scene(root, backLoginButton.getScene().getWidth(), backLoginButton.getScene().getHeight()));
-    }
-
-
     @FXML
     void createAccountHyperlinkAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) createAccountHyperlink.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/register.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/register.fxml"), Login.rb);
         stage.setScene(new Scene(root, createAccountHyperlink.getScene().getWidth(), createAccountHyperlink.getScene().getHeight()));
     }
-
-
 }

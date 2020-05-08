@@ -12,7 +12,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"), Login.rb);
         primaryStage.setTitle("Car rental");
         primaryStage.setScene(new Scene(root));
 //        primaryStage.setResizable(false);
