@@ -32,5 +32,6 @@
     <orderEntry type="library" name="mysql-connector-java-8.0.191" level="project" />
     <orderEntry type="library" name="io.github.typhon0:AnimateFX:1.2.1" level="project" />
     <orderEntry type="library" name="Hibernate 5.4.11-5.4.11" level="project" />
+    <orderEntry type="library" name="itextpdf-5.5.13.1" level="application" />
   </component>
 </module>
