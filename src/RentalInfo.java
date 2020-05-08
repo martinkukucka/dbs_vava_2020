@@ -4,19 +4,33 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class RentalInfo {
 
+    private SimpleIntegerProperty id;
     private SimpleStringProperty from;
     private SimpleStringProperty to;
     private SimpleStringProperty carBrandU;
     private SimpleStringProperty carModelU;
     private SimpleDoubleProperty rentalPrice;
 
-    public RentalInfo(String from, String to, String carBrandU,
+    public RentalInfo(Integer id, String from, String to, String carBrandU,
                       String carModelU, double rentalPrice) {
+        this.id = new SimpleIntegerProperty(id);
         this.from = new SimpleStringProperty(from);
         this.to = new SimpleStringProperty(to);
         this.carBrandU = new SimpleStringProperty(carBrandU);
         this.carModelU = new SimpleStringProperty(carModelU);
         this.rentalPrice = new SimpleDoubleProperty(rentalPrice);
+    }
+
+    public int getId() {
+        return id.get();
+    }
+
+    public SimpleIntegerProperty idProperty() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id.set(id);
     }
 
     public String getFrom() {

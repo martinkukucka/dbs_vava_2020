@@ -1,3 +1,6 @@
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +14,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.*;
 
@@ -128,6 +133,9 @@ public class CustomerMenu {
     private TableColumn<RentalInfo, Double> priceColumnU;
 
     @FXML
+    private Button invoicePdfButton;
+
+    @FXML
     public void initialize() {
         createOrder.comboBoxInit(chooseCarCombobox);
     }
@@ -224,6 +232,54 @@ public class CustomerMenu {
         createOrder.fillTable(seeOrderTable, fromColumn, toColumn, brandColumnU, modelColumnU, priceColumnU);
         seeOrdersPane.toFront();
     }
+
+    @FXML
+    void invoicePdfButtonAction(ActionEvent event) throws SQLException, DocumentException, FileNotFoundException {
+        if(!Bindings.isEmpty(seeOrderTable.getItems()).get()) {
+            RentalInfo selectedItem = seeOrderTable.getSelectionModel().getSelectedItem();
+            int invoiceId = selectedItem.getId() + 1;
+
+            try {
+                String sqlModel = ("select * from crdb.carrental inner join crdb.vehicle on crdb.carrental.vehicleid = crdb.vehicle.id inner join crdb.model on crdb.vehicle.modelid = crdb.model.id inner join crdb.invoice on crdb.carrental.invoiceid = crdb.invoice.id where customerid =" + Login.USERID + " and invoiceid = " + invoiceId + "");
+
+                Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+                Statement statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(sqlModel);
+                String meno = null;
+
+                if (rs.next()) {
+                    meno = rs.getString("billto");
+                }
+
+                Document document = new Document();
+                PdfWriter.getInstance(document, new FileOutputStream("bill.pdf"));
+
+                document.open();
+
+                Font font = FontFactory.getFont(FontFactory.COURIER, 20, BaseColor.BLACK);
+                Chunk chunk = new Chunk("Faktura za pozicanie auta", font);
+                Paragraph preface = new Paragraph();
+                // We add one empty line
+                preface.add(new Paragraph(" "));
+                // Lets write a big header
+                preface.add(new Paragraph("Title of the document", font));
+                preface.add(new Paragraph(" "));
+                document.add(preface);
+                document.add(chunk);
+
+                document.close();
+
+            }
+
+            catch(SQLException e) {
+                System.out.println("SQL exception occured: " + e);
+            }
+
+            System.out.println(invoiceId);
+
+        }
+    }
+
 
     @FXML
     void changeButtonAction() throws SQLException {

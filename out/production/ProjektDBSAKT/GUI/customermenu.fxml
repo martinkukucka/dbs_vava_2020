@@ -67,19 +67,6 @@
             <Button fx:id="makeOrderButton" layoutX="82.0" layoutY="268.0" mnemonicParsing="false" onAction="#makeOrder" prefHeight="25.0" prefWidth="91.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="%createOrder" textFill="WHITE" />
          </children>
       </Pane>
-      <Pane fx:id="seeOrdersPane" layoutX="200.0" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF;">
-         <children>
-            <TableView fx:id="seeOrderTable" prefHeight="450.0" prefWidth="400.0">
-              <columns>
-                <TableColumn fx:id="fromColumn" text="%from" />
-                <TableColumn fx:id="toColumn" text="%to" />
-                  <TableColumn fx:id="brandColumnU" text="%carBrand" />
-                  <TableColumn fx:id="modelColumnU" text="%carModel" />
-                  <TableColumn fx:id="priceColumnU" text="%price" />
-              </columns>
-            </TableView>
-         </children>
-      </Pane>
       <Pane fx:id="changePasswordPane" layoutX="200.0" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF;">
          <children>
             <PasswordField fx:id="oldPasswordTextField" layoutX="125.0" layoutY="116.0" prefHeight="40.0" prefWidth="250.0" promptText="%oldPassword" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
@@ -201,6 +188,20 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="seeOrdersPane" layoutX="200.0" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <TableView fx:id="seeOrderTable" prefHeight="450.0" prefWidth="400.0">
+              <columns>
+                <TableColumn fx:id="fromColumn" text="%from" />
+                <TableColumn fx:id="toColumn" text="%to" />
+                  <TableColumn fx:id="brandColumnU" text="%carBrand" />
+                  <TableColumn fx:id="modelColumnU" text="%carModel" />
+                  <TableColumn fx:id="priceColumnU" text="%price" />
+              </columns>
+            </TableView>
+            <Button fx:id="invoicePdfButton" layoutX="405.0" layoutY="75.0" mnemonicParsing="false" onAction="#invoicePdfButtonAction" prefHeight="25.0" prefWidth="90.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="%invoicePdf" textFill="WHITE" />
          </children>
       </Pane>
       <Pane layoutX="200.0" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF;" />

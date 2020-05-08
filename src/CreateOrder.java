@@ -9,7 +9,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import orm.InvoiceEntity;
-
 import javax.persistence.Query;
 import java.sql.*;
 
@@ -122,7 +121,7 @@ public class CreateOrder {
             ResultSet rs = statement.executeQuery(sqlModel);
 
             while (rs.next()) {
-                RentalInfo rentalInfo = new RentalInfo(rs.getString("pickupdate"),
+                RentalInfo rentalInfo = new RentalInfo(rs.getInt("id"), rs.getString("pickupdate"),
                         rs.getString("returndate"), rs.getString("carbrand"),
                         rs.getString("carmodel"), rs.getDouble("amount"));
                 rentalInfod.add(rentalInfo);
