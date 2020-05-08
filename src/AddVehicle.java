@@ -1,3 +1,4 @@
+import com.mysql.cj.log.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,7 +56,7 @@ public class AddVehicle {
                 String carInfo = "ID: "+rs.getString("id")+", "+rs.getString("carbrand")
                         +" - "+rs.getString("carmodel")+", "+rs.getString("category")+", "+rs.getString("transmission")
                         +", "+rs.getString("fuel")+", "+rs.getString("kw")
-                        +"kW, počet miest na sedenie: "+rs.getString("seats");
+                        +"kW, "+Login.rb.getString("seats")+": "+rs.getString("seats");
 
                 modelComboBox.getItems().add(carInfo);
             }
@@ -68,7 +69,7 @@ public class AddVehicle {
     @FXML
     void addModelHyperlinkAction() throws Exception{
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/addmodel.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/addmodel.fxml"),Login.rb);
         Scene scene = new Scene(root,800,600);
         stage.setScene(scene);
         stage.show();
@@ -77,7 +78,7 @@ public class AddVehicle {
     @FXML
     private void backButtonAction(ActionEvent event) throws Exception{
         Stage stage = (Stage) backButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/cardatabase.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/cardatabase.fxml"),Login.rb);
         stage.setScene(new Scene(root, backButton.getScene().getWidth(), backButton.getScene().getHeight()));
     }
 
@@ -93,7 +94,7 @@ public class AddVehicle {
             ResultSet rs = statement.executeQuery("select * from crdb.vehicle");
             while(rs.next()){
                 if(rs.getString("licenseplatenumber").equals(licensePlateNumberTextField.getText())){
-                    addVehicleLabel.setText("Vozidlo s týmto EČV už existuje");
+                    addVehicleLabel.setText(Login.rb.getString("licensePlateExist"));
                     addVehicleLabel.setTextFill(Color.RED);
                     return;
                 }
@@ -101,7 +102,7 @@ public class AddVehicle {
             if(modelComboBox.getSelectionModel().isEmpty() || licensePlateNumberTextField.getText().isEmpty()
                     || colorTextField.getText().isEmpty() || yearOfProductionTextField.getText().isEmpty()
                     || priceTextField.getText().isEmpty()){
-                addVehicleLabel.setText("Vyplňte všetky údaje");
+                addVehicleLabel.setText(Login.rb.getString("missingInfo"));
                 addVehicleLabel.setTextFill(Color.RED);
             }
             else{
@@ -116,7 +117,7 @@ public class AddVehicle {
                 preparedStatementVehicle.setInt(5, Integer.parseInt(modelID));
                 preparedStatementVehicle.executeUpdate();
 
-                addVehicleLabel.setText("Vozidlo úspešne pridané do databázy");
+                addVehicleLabel.setText(Login.rb.getString("vehicleCreated"));
                 addVehicleLabel.setTextFill(Color.GREEN);
             }
 

@@ -37,7 +37,7 @@ public class AdminLogin {
     private void loginButtonAction(ActionEvent event) throws IOException {
         if(nameTextField.getText().equals(adminName) && passwordTextField.getText().equals(adminPassword)){
             loginButton.getScene().getWindow().hide();
-            Parent root = FXMLLoader.load(getClass().getResource("GUI/adminmenu.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("GUI/adminmenu.fxml"), Login.rb);
             Login.oldstage.setScene(new Scene(root, 1280, 900));
         }
     }

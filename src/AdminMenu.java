@@ -1,3 +1,4 @@
+import com.mysql.cj.log.Log;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,8 +23,6 @@ import java.io.IOException;
 import java.sql.*;
 
 public class AdminMenu {
-
-    String removeString = "4. vozidlo vyzdvihnute";
 
     @FXML
     private AnchorPane adminMenuAnchorPane;
@@ -277,7 +276,7 @@ public class AdminMenu {
     void changeStateButtonAction(ActionEvent event) throws IOException, SQLException {
 
         if (!Bindings.isEmpty(serviceCarTable.getItems()).get()) {
-            if (stateComboBox.getValue().equals(removeString)){
+            if (stateComboBox.getValue().equals(Login.rb.getString("status4"))){
                 ServiceCarInfo selectedItem = serviceCarTable.getSelectionModel().getSelectedItem();
                 serviceCarTable.getItems().remove(selectedItem);
                 String sql = ("delete from crdb.carrepair where vehicleid = ?");
@@ -423,10 +422,10 @@ public class AdminMenu {
         );
 
         stateComboBox.getItems().addAll(
-                "1. pripravene na odovzdanie",
-                "2. prebieha oprava",
-                "3. pripravene na vyzdvihnutie",
-                removeString
+                Login.rb.getString("status1"),
+                Login.rb.getString("status2"),
+                Login.rb.getString("status3"),
+                Login.rb.getString("status4")
         );
 
     }
@@ -481,7 +480,7 @@ public class AdminMenu {
                         }
                     }
 
-                    Parent root = FXMLLoader.load(getClass().getResource("GUI/servischoose.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("GUI/servischoose.fxml"), Login.rb);
                     Scene scene = new Scene(root,300,250);
                     Stage stage = new Stage();
                     stage.setScene(scene);
@@ -552,7 +551,7 @@ public class AdminMenu {
                 while (rs.next()) {
                     if (rs.getString("name").equals(regServiceNameTextField.getText())) {
                         servisExist = true;
-                        regServiceLabel.setText("Servis už existuje v databáze");
+                        regServiceLabel.setText(Login.rb.getString("servisExist"));
                         regServiceLabel.setTextFill(Color.RED);
                     }
                 }
@@ -585,7 +584,7 @@ public class AdminMenu {
                     preparedStatement.setString(3, regEmailTextField.getText());
                     preparedStatement.setInt(4, currentAddressID);
                     preparedStatement.executeUpdate();
-                    regServiceLabel.setText("Servis pridaný do databázy");
+                    regServiceLabel.setText(Login.rb.getString("servisCreated"));
                     regServiceLabel.setTextFill(Color.GREEN);
                 }
 

@@ -1,3 +1,4 @@
+import com.mysql.cj.log.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -48,19 +49,19 @@ public class AddModel {
                 "Combi",
                 "Coupe",
                 "MPV",
-                "Dodávka"
+                Login.rb.getString("van")
         );
 
         fuelComboBox.getItems().addAll(
-                "Benzín",
-                "Diesel",
-                "Hybrid",
-                "Elektro"
+                Login.rb.getString("fuel1"),
+                Login.rb.getString("fuel2"),
+                Login.rb.getString("fuel3"),
+                Login.rb.getString("fuel4")
         );
 
         transmissionComboBox.getItems().addAll(
-                "Manuál",
-                "Automat"
+                Login.rb.getString("gearbox1"),
+                Login.rb.getString("gearbox2")
         );
     }
 
@@ -78,7 +79,7 @@ public class AddModel {
                 || modelTextField.getText().isEmpty() || transmissionComboBox.getSelectionModel().isEmpty()
                 || fuelComboBox.getSelectionModel().isEmpty() || kwTextField.getText().isEmpty()
                 || seatsTextField.getText().isEmpty()){
-            addModelLabel.setText("Vyplňte všetky údaje.");
+            addModelLabel.setText(Login.rb.getString("missingInfo"));
             addModelLabel.setTextFill(Color.RED);}
         else{
             try {
@@ -96,7 +97,7 @@ public class AddModel {
                             rs.getString("kw").equals(kwTextField.getText())  &&
                             rs.getString("seats").equals(seatsTextField.getText())) {
                         modelExist = true;
-                        addModelLabel.setText("Model už existuje v databáze");
+                        addModelLabel.setText(Login.rb.getString("modelExist"));
                         addModelLabel.setTextFill(Color.RED);
                     }
                 }
@@ -111,7 +112,7 @@ public class AddModel {
                     preparedStatementModel.setString(6, kwTextField.getText());
                     preparedStatementModel.setString(7, seatsTextField.getText());
                     preparedStatementModel.executeUpdate();
-                    addModelLabel.setText("Model úspešne pridaný do databázy");
+                    addModelLabel.setText(Login.rb.getString("modelCreated"));
                     addModelLabel.setTextFill(Color.GREEN);
                 }
 

@@ -46,7 +46,7 @@ public class ServisChoose {
             ResultSet rs = statement.executeQuery(sqlModel);
 
             while(rs.next()){
-                String servisInfo = "ID: "+rs.getString("id")+", Nazov: "+rs.getString("name");
+                String servisInfo = "ID: "+rs.getString("id")+", "+Login.rb.getString("name")+": "+rs.getString("name");
                 servisChooseComboBox.getItems().add(servisInfo);
             }
         }

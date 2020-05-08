@@ -240,7 +240,7 @@ public class Register {
             ResultSet rs = statement.executeQuery("select * from crdb.customer");
             while(rs.next()){
                 if(rs.getString("email").equals(regEmailTextField.getText())){
-                    regLabel.setText("E-mailová adresa existuje");
+                    regLabel.setText(Login.rb.getString("emailExist"));
                     regLabel.setTextFill(Color.RED);
                     return;
                 }
