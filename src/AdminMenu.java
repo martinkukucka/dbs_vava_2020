@@ -18,9 +18,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
+import orm.CarserviceEntity;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.List;
 import java.util.logging.Level;
 
 public class AdminMenu {
@@ -558,7 +564,7 @@ public class AdminMenu {
     void regServisVehicleButtonAction() {
         isShown = false;
         boolean servisExist = false;
-        String sql = "insert ignore into crdb.carservice(name, phonenumber, email, addressid) values (?, ?, ?, ?)";
+//        String sql = "insert ignore into crdb.carservice(name, phonenumber, email, addressid) values (?, ?, ?, ?)";
 
         if(regRegionComboBox.getSelectionModel().isEmpty() || regServiceNameTextField.getText().isEmpty()
                 || regPhoneNumberTextField.getText().isEmpty() || regCityTextField.getText().isEmpty()
@@ -604,13 +610,28 @@ public class AdminMenu {
                         currentAddressID = rs.getInt("id");
                     }
 
-                    PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//                    PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//
+//                    preparedStatement.setString(1, regServiceNameTextField.getText());
+//                    preparedStatement.setString(2, regPhoneNumberTextField.getText());
+//                    preparedStatement.setString(3, regEmailTextField.getText());
+//                    preparedStatement.setInt(4, currentAddressID);
+//                    preparedStatement.executeUpdate();
 
-                    preparedStatement.setString(1, regServiceNameTextField.getText());
-                    preparedStatement.setString(2, regPhoneNumberTextField.getText());
-                    preparedStatement.setString(3, regEmailTextField.getText());
-                    preparedStatement.setInt(4, currentAddressID);
-                    preparedStatement.executeUpdate();
+                    CarserviceEntity carserviceEntity = new CarserviceEntity();
+                    carserviceEntity.setName(regServiceNameTextField.getText());
+                    carserviceEntity.setPhonenumber(regPhoneNumberTextField.getText());
+                    carserviceEntity.setEmail(regEmailTextField.getText());
+                    carserviceEntity.setAddressid(currentAddressID);
+
+                    SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+                    Session session = sessionFactory.openSession();
+
+                    session.beginTransaction();
+                    session.save(carserviceEntity);
+                    session.getTransaction().commit();
+                    session.close();
+
                     regServiceLabel.setText(Login.rb.getString("servisCreated"));
                     regServiceLabel.setTextFill(Color.GREEN);
                     JavaLogger.logger.log(Level.INFO, "Service center registered successfully");

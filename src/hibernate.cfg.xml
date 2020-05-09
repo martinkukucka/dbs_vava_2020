@@ -10,6 +10,7 @@
         <property name = "hibernate.connection.username">root</property>
         <property name = "hibernate.connection.password">root</property>
         <mapping class="orm.InvoiceEntity"/>
+        <mapping class="orm.CarserviceEntity"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

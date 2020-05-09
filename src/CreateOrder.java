@@ -11,6 +11,8 @@ import org.hibernate.cfg.Configuration;
 import orm.InvoiceEntity;
 import javax.persistence.Query;
 import java.sql.*;
+import java.time.format.DateTimeFormatter;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 public class CreateOrder {
@@ -36,7 +38,7 @@ public class CreateOrder {
         }
     }
 
-    int createInvoice(String billTo, double amount) {
+    private int createInvoice(String billTo, double amount) {
         InvoiceEntity invoice = new InvoiceEntity();
         invoice.setCompanyname("Kotolna");
         invoice.setAmount(amount);
@@ -75,7 +77,11 @@ public class CreateOrder {
             double rentalPrice = 0;
             while (resultSet.next()) {
                 rentedVehicleId = resultSet.getInt("id");
-                rentalPrice = resultSet.getInt("price") * 0.002;
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                Date date1 = Date.valueOf(pickUpDatepicker.getValue().plusDays(1));
+                Date date2 = Date.valueOf(returnDatepicker.getValue().plusDays(1));
+                long daysBetween = TimeUnit.DAYS.convert(date2.getTime() - date1.getTime(), TimeUnit.MILLISECONDS);
+                rentalPrice = resultSet.getInt("price") * 0.002 * daysBetween;
             }
 
             String name = null;
@@ -89,8 +95,8 @@ public class CreateOrder {
 
             PreparedStatement preparedStatement = conn.prepareStatement(sqlCarRental);
 
-            preparedStatement.setDate(1, Date.valueOf(pickUpDatepicker.getValue()));
-            preparedStatement.setDate(2, Date.valueOf(returnDatepicker.getValue()));
+            preparedStatement.setDate(1, Date.valueOf(pickUpDatepicker.getValue().plusDays(1)));
+            preparedStatement.setDate(2, Date.valueOf(returnDatepicker.getValue().plusDays(1)));
             preparedStatement.setInt(3, Login.USERID);
             preparedStatement.setInt(4, rentedVehicleId);
             preparedStatement.setInt(5, invoiceId);

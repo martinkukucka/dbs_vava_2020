@@ -211,6 +211,7 @@ public class CustomerMenu {
 
         menoLabel.setText(meno + " " + priezvisko);
         emailLabel.setText(email);
+        assert meno != null;
         String firstLetter = meno.substring(0, 1).toUpperCase();
         pismenoLabel.setText(firstLetter);
         telLabel.setText(telefon);
