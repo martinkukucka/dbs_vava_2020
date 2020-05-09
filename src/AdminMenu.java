@@ -428,6 +428,25 @@ public class AdminMenu {
                 Login.rb.getString("status4")
         );
 
+        try{
+            String sqlModel = ("SELECT *, COUNT(carmodel) OVER(PARTITION BY carbrand) as grand_total \n" +
+                    "FROM crdb.model order by carbrand");
+
+            Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sqlModel);
+
+            while(rs.next()){
+                System.out.println(rs.getString("carbrand"));
+                System.out.println(rs.getString("grand_total"));
+                System.out.println("\n");
+            }
+        }
+
+        catch(SQLException e) {
+            System.out.println("SQL exception occured: " + e);
+        }
+
     }
 
     @FXML
