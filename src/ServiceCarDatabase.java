@@ -6,6 +6,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.*;
+import java.util.logging.Level;
 
 public class ServiceCarDatabase {
 
@@ -47,8 +48,6 @@ public class ServiceCarDatabase {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sqlModel);
 
-            String u = "unknown";
-
             while(rs.next()){
                 ServiceCarInfo serviceCarInfo = new ServiceCarInfo(rs.getInt("vehicle.id"),rs.getString("vehicle.licenseplatenumber"),
                         rs.getString("model.carbrand"), rs.getString("model.carmodel"),
@@ -58,12 +57,12 @@ public class ServiceCarDatabase {
                 servicecarinfod.add(serviceCarInfo);
             }
             serviceTable.setItems(servicecarinfod);
+            JavaLogger.logger.log(Level.INFO, "Data built successfully");
         }
 
         catch(SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
     }
-
-
 }

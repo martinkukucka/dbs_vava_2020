@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.sql.*;
+import java.util.logging.Level;
 
 public class CarDatabase {
 
@@ -112,6 +113,7 @@ public class CarDatabase {
         }
 
         catch(SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
 
@@ -126,9 +128,12 @@ public class CarDatabase {
             while(rs.next()){
                 System.out.println(rs.getString("carbrand"));
             }
+            JavaLogger.logger.log(Level.INFO, "Data built successfully");
         }
 
+
         catch(SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
     }
@@ -163,8 +168,10 @@ public class CarDatabase {
                 statement.setInt(1, selectedItem.getCarID());
                 statement.executeUpdate();
 
+                JavaLogger.logger.log(Level.WARNING, "Vehicle removed from database");
 
             } catch (SQLException e) {
+                JavaLogger.logger.log(Level.WARNING, "Database problem");
                 System.out.println(e.getMessage());
             }
 

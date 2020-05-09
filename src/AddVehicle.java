@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.sql.*;
+import java.util.logging.Level;
 
 public class AddVehicle {
 //
@@ -62,6 +63,7 @@ public class AddVehicle {
             }
         }
         catch(SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
     }
@@ -96,6 +98,7 @@ public class AddVehicle {
                 if(rs.getString("licenseplatenumber").equals(licensePlateNumberTextField.getText())){
                     addVehicleLabel.setText(Login.rb.getString("licensePlateExist"));
                     addVehicleLabel.setTextFill(Color.RED);
+                    JavaLogger.logger.log(Level.WARNING, "Vehicle with this license plate already exists");
                     return;
                 }
             }
@@ -119,9 +122,11 @@ public class AddVehicle {
 
                 addVehicleLabel.setText(Login.rb.getString("vehicleCreated"));
                 addVehicleLabel.setTextFill(Color.GREEN);
+                JavaLogger.logger.log(Level.INFO, "New vehicle successfully created");
             }
 
         } catch(SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
 

@@ -5,6 +5,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 
 import java.sql.*;
+import java.util.logging.Level;
 
 public class ServisChoose {
 
@@ -51,6 +52,7 @@ public class ServisChoose {
             }
         }
         catch(SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
     }

@@ -163,6 +163,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.sql.*;
+import java.util.logging.Level;
 
 public class Register {
 
@@ -242,6 +243,7 @@ public class Register {
                 if(rs.getString("email").equals(regEmailTextField.getText())){
                     regLabel.setText(Login.rb.getString("emailExist"));
                     regLabel.setTextFill(Color.RED);
+                    JavaLogger.logger.log(Level.WARNING, "This email already exists");
                     return;
                 }
             }
@@ -281,8 +283,10 @@ public class Register {
 
             PreparedStatement preparedStatementCustomer = connection.prepareStatement(sqlCustomer);
             addToDatabase(currentAddressID, preparedStatementCustomer);
+            JavaLogger.logger.log(Level.INFO, "User successfully registered");
 
         } catch(SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
 

@@ -23,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.util.logging.Level;
 
 public class CustomerMenu {
 
@@ -204,6 +205,7 @@ public class CustomerMenu {
 
         }
         catch(SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured " + e);
         }
 
@@ -290,10 +292,11 @@ public class CustomerMenu {
                 if(file.exists()) {
                     desktop.open(file);
                 }
-
+                JavaLogger.logger.log(Level.INFO, "PDF format invoice created successfully");
             }
 
             catch(SQLException e) {
+                JavaLogger.logger.log(Level.WARNING, "Database problem");
                 System.out.println("SQL exception occured: " + e);
             }
 
@@ -325,19 +328,24 @@ public class CustomerMenu {
                                 rs.executeUpdate();
                                 passwordLabel.setText(Login.rb.getString("passwordChanged"));
                                 passwordLabel.setTextFill(Color.GREEN);
+                                JavaLogger.logger.log(Level.INFO, "User changed password successfully");
                                 return;
                             }
                             passwordLabel.setText(Login.rb.getString("wrong2Password"));
                             passwordLabel.setTextFill(Color.RED);
+                            JavaLogger.logger.log(Level.WARNING, "Wrong password confirmation");
                             return;
                         }
                         passwordLabel.setText(Login.rb.getString("wrong1Password"));
                         passwordLabel.setTextFill(Color.RED);
+                        JavaLogger.logger.log(Level.WARNING, "Wrong original password");
+                        return;
                     }
                 }
             }
         }
         catch (SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
     }

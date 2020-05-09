@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 public class Login {
 
@@ -58,6 +59,7 @@ public class Login {
 
     @FXML
     private void selectLanguageSK() throws IOException {
+        JavaLogger.logger.log(Level.INFO, "User selected slovak language");
         rb = ResourceBundle.getBundle("Language/resource_bundle_sk_SK");
 
         Stage stage = (Stage) slovakLanguageButton.getScene().getWindow();
@@ -67,6 +69,7 @@ public class Login {
 
     @FXML
     private void selectLanguageEN() throws IOException {
+        JavaLogger.logger.log(Level.INFO, "User selected english language");
         rb = ResourceBundle.getBundle("Language/resource_bundle_en_EN");
 
         Stage stage = (Stage) englishLanguageButton.getScene().getWindow();
@@ -93,15 +96,18 @@ public class Login {
                         if (emailTextField.getText().equals(email) && passwordTextField.getText().equals(password)) {
                             USERID = resultSet.getInt("id");
                             Stage stage = (Stage) loginButton.getScene().getWindow();
+                            JavaLogger.logger.log(Level.INFO, "User logged in successfully");
                             Parent root = FXMLLoader.load(getClass().getResource("GUI/customermenu.fxml"), Login.rb);
                             stage.setScene(new Scene(root, loginButton.getScene().getWidth(), loginButton.getScene().getHeight()));
                             return;
                         }
                     }
+                    JavaLogger.logger.log(Level.INFO, "User entered wrong email or password");
                     wrongdataLabel.setText(rb.getString("wrongInfo"));
                     wrongdataLabel.setTextFill(Color.RED);
                 }
                 catch(SQLException e) {
+                    JavaLogger.logger.log(Level.WARNING, "Database problem");
                     System.out.println("SQL exception occured " + e);
                 }
             }

@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.logging.Level;
 
 public class AdminMenu {
 
@@ -287,9 +288,11 @@ public class AdminMenu {
 
                     statement.setInt(1, selectedItem.getCarID());
                     statement.executeUpdate();
+                    JavaLogger.logger.log(Level.INFO, "Vehicle fixed");
 
 
                 } catch (SQLException e) {
+                    JavaLogger.logger.log(Level.WARNING, "Database problem");
                     System.out.println(e.getMessage());
                 }
             }
@@ -325,6 +328,7 @@ public class AdminMenu {
                 PreparedStatement rs = connection.prepareStatement(sql);
                 rs.setString(1,stateComboBox.getValue());
                 rs.executeUpdate();
+                JavaLogger.logger.log(Level.INFO, "Serviced vehicle status changed");
 
 
 
@@ -439,11 +443,11 @@ public class AdminMenu {
             while(rs.next()){
                 System.out.println(rs.getString("carbrand"));
                 System.out.println(rs.getString("grand_total"));
-                System.out.println("\n");
             }
         }
 
         catch(SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
 
@@ -507,6 +511,7 @@ public class AdminMenu {
 
                 }
                 catch (SQLException e) {
+                    JavaLogger.logger.log(Level.WARNING, "Database problem");
                     System.out.println(e.getMessage());
                 }
             }
@@ -537,9 +542,11 @@ public class AdminMenu {
                     preparedStatementModel.setInt(1, Integer.parseInt(IDs));
                     preparedStatementModel.setInt(2, selectedItemCar.getCarID());
                     preparedStatementModel.executeUpdate();
+                    JavaLogger.logger.log(Level.INFO, "Vehicle added to service center management");
 
                 }
                 catch (SQLException e) {
+                    JavaLogger.logger.log(Level.WARNING, "Database problem");
                     System.out.println(e.getMessage());
                 }
     }
@@ -572,6 +579,7 @@ public class AdminMenu {
                         servisExist = true;
                         regServiceLabel.setText(Login.rb.getString("servisExist"));
                         regServiceLabel.setTextFill(Color.RED);
+                        JavaLogger.logger.log(Level.WARNING, "Service center already exists");
                     }
                 }
 
@@ -605,9 +613,11 @@ public class AdminMenu {
                     preparedStatement.executeUpdate();
                     regServiceLabel.setText(Login.rb.getString("servisCreated"));
                     regServiceLabel.setTextFill(Color.GREEN);
+                    JavaLogger.logger.log(Level.INFO, "Service center registered successfully");
                 }
 
             } catch(SQLException e) {
+                JavaLogger.logger.log(Level.WARNING, "Database problem");
                 System.out.println("SQL exception occured: " + e);
             }
 

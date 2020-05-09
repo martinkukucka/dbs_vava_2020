@@ -11,6 +11,7 @@ import org.hibernate.cfg.Configuration;
 import orm.InvoiceEntity;
 import javax.persistence.Query;
 import java.sql.*;
+import java.util.logging.Level;
 
 public class CreateOrder {
 
@@ -30,6 +31,7 @@ public class CreateOrder {
             }
         }
         catch(SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured " + e);
         }
     }
@@ -51,6 +53,9 @@ public class CreateOrder {
 
 
         session.close();
+
+        JavaLogger.logger.log(Level.INFO, "Invoice created successfully");
+
         return result;
 
     }
@@ -91,8 +96,10 @@ public class CreateOrder {
             preparedStatement.setInt(5, invoiceId);
             preparedStatement.executeUpdate();
 
+            JavaLogger.logger.log(Level.INFO, "New order added to database");
 
         } catch (SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println(e.getMessage());
         }
 
@@ -131,6 +138,7 @@ public class CreateOrder {
         }
 
         catch(SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
     }

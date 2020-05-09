@@ -5,6 +5,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.*;
+import java.util.logging.Level;
 
 public class ServiceDatabase {
 
@@ -45,9 +46,11 @@ public class ServiceDatabase {
                 serviceinfod.add(serviceInfo);
             }
             serviceTable.setItems(serviceinfod);
+            JavaLogger.logger.log(Level.INFO, "Data built successfully");
         }
 
         catch(SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
     }
