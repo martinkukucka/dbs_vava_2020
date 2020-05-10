@@ -9,6 +9,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.*;
 
+// Pomocna trieda pre vkladanie informacii o servisoch do tabulky v gui
+// Obsahuje aj gettre a settre, cize informacie mozu byt pouzite v roznych metodach
 public class ServiceInfo {
 
     private SimpleIntegerProperty servisID;
@@ -21,9 +23,8 @@ public class ServiceInfo {
     private SimpleStringProperty housenumber;
     private SimpleIntegerProperty zipCode;
 
-    public ServiceInfo(Integer servisID, String name, String phoneNumber, String email, String region, String city, String street,
-                       String housenumber, Integer zipCode)
-    {
+    ServiceInfo(Integer servisID, String name, String phoneNumber, String email, String region, String city, String street,
+                String housenumber, Integer zipCode) {
         this.servisID = new SimpleIntegerProperty(servisID);
         this.name = new SimpleStringProperty(name);
         this.phoneNumber = new SimpleStringProperty(phoneNumber);
@@ -142,7 +143,6 @@ public class ServiceInfo {
     public void setZipCode(int zipCode) {
         this.zipCode.set(zipCode);
     }
-
 
 
 }

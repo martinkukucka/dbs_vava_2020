@@ -1,56 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="loginAnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="400.0" minWidth="600.0" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login">
+<AnchorPane id="AnchorPane" fx:id="loginAnchorPane" maxHeight="450.0" maxWidth="700.0" minHeight="450.0" minWidth="700.0" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login">
     <children>
-        <GridPane alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <BorderPane prefHeight="450.0" prefWidth="700.0">
+            <left>
+                <Pane prefHeight="450.0" prefWidth="250.0" style="-fx-background-color: #3b3b3b;" BorderPane.alignment="CENTER">
                     <children>
-                        <Label text="E-mailová adresa" />
-                        <TextField fx:id="emailTextField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="210.0" promptText="" />
-                        <Label text="Heslo" />
-                  <PasswordField fx:id="passwordTextField" prefHeight="25.0" prefWidth="205.0" />
-                  <Label fx:id="wrongdataLabel" prefHeight="17.0" prefWidth="208.0" />
-                  <HBox id="HBox" alignment="CENTER" spacing="5.0">
-                     <children>
-                        <Hyperlink fx:id="adminHyperlink" onAction="#adminHyperlinkAction" prefHeight="23.0" prefWidth="120.0" text="Prihlásiť ako správca" />
-                     </children>
-                  </HBox>
-                        <HBox id="HBox" alignment="CENTER" spacing="5.0">
-                            <children>
-                                <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="25.0" prefWidth="65.0" text="Prihlásiť" textAlignment="CENTER" textOverrun="ELLIPSIS" />
-                            </children>
-                        </HBox>
-                  <HBox id="HBox" alignment="CENTER" spacing="5.0">
-                     <children>
-                        <Button fx:id="backLoginButton" mnemonicParsing="false" onAction="#backLoginButtonAction" prefHeight="25.0" prefWidth="65.0" text="Späť" textAlignment="CENTER" textOverrun="ELLIPSIS" />
-                     </children>
-                  </HBox>
+                        <Text fill="WHITE" layoutX="80.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CAR" textAlignment="CENTER" wrappingWidth="89.547607421875">
+                            <font>
+                                <Font size="40.0" />
+                            </font>
+                        </Text>
+                        <Text fill="WHITE" layoutX="74.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="rental">
+                            <font>
+                                <Font size="40.0" />
+                            </font>
+                        </Text>
+                    </children></Pane>
+            </left>
+            <right>
+                <Pane prefHeight="450.0" prefWidth="450.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+                    <children>
+                        <TextField fx:id="emailTextField" layoutX="100.0" layoutY="125.0" prefHeight="40.0" prefWidth="250.0" promptText="%email" scaleZ="-1.0" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+                        <PasswordField fx:id="passwordTextField" layoutX="100.0" layoutY="200.0" prefHeight="40.0" prefWidth="250.0" promptText="%password" scaleZ="-1.0" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+                        <Button fx:id="loginButton" layoutX="200.0" layoutY="315.0" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="35.0" prefWidth="150.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="%login" textAlignment="CENTER" textFill="WHITE" />
+                        <Text layoutX="100.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%welcome" wrappingWidth="226.93677520751953">
+                            <font>
+                                <Font size="33.0" />
+                            </font>
+                        </Text>
+                        <Label fx:id="wrongdataLabel" layoutX="100.0" layoutY="265.0" prefHeight="17.0" prefWidth="250.0" textAlignment="CENTER" />
+                        <Hyperlink fx:id="createAccountHyperlink" layoutX="100.0" layoutY="321.0" onAction="#createAccountHyperlinkAction" text="%register" />
+                        <Hyperlink fx:id="adminHyperlink" layoutX="226.0" layoutY="356.0" onAction="#adminHyperlinkAction" text="%loginAsAdmin">
+                            <font>
+                                <Font size="10.0" />
+                            </font>
+                        </Hyperlink>
+                        <Button fx:id="slovakLanguageButton" layoutX="381.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectLanguageSK" prefHeight="35.0" prefWidth="50.0">
+                            <graphic>
+                                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@sk.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic></Button>
+                        <Button fx:id="englishLanguageButton" layoutX="381.0" layoutY="57.0" mnemonicParsing="false" onAction="#selectLanguageEN" prefHeight="25.0" prefWidth="50.0">
+                            <graphic>
+                                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@british-flag-graphic.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic></Button>
                     </children>
-                    <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                    </padding>
-                </VBox>
-            </children>
-            <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-        </GridPane>
+                </Pane>
+            </right>
+        </BorderPane>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#313131" height="392.0" layoutX="-67.0" layoutY="-165.0" rotate="48.0" stroke="TRANSPARENT" strokeType="INSIDE" width="146.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2c2c2c" height="392.0" layoutX="-59.0" layoutY="-224.0" rotate="48.0" stroke="TRANSPARENT" strokeType="INSIDE" width="146.0" />
     </children>
 </AnchorPane>

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
-
+// Metoda na ktorej skusam rozne funkcionality pred tym ako ich pouzijem v programe :D
 public class printTables {
 
 

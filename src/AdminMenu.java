@@ -1,17 +1,9 @@
-import com.mysql.cj.log.Log;
 import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -21,18 +13,23 @@ import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Restrictions;
 import orm.CarserviceEntity;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.List;
 import java.util.logging.Level;
 
+// Menu s moznostami vyberu akcii, ktore moze vykonat iba admin
 public class AdminMenu {
 
-    @FXML
-    private AnchorPane adminMenuAnchorPane;
+    // Itemy, ktore su potrebne na gui
+    public AnchorPane adminMenuAnchorPane;
+    public Hyperlink addModelHyperlink;
+    public ImageView reloadImage;
+    public Button addVehicleButton;
+    public Button regRegistrationButton;
+    public Button changeStateButton;
+    public Label stateLabel;
 
     @FXML
     private Button addButton;
@@ -65,46 +62,43 @@ public class AdminMenu {
     private TableView<CarInfo> carTable;
 
     @FXML
-    private TableColumn<CarInfo,Integer> vehicleIDColumn;
+    private TableColumn<CarInfo, Integer> vehicleIDColumn;
 
     @FXML
-    private TableColumn<CarInfo,String> licensePlateNumberColumn;
+    private TableColumn<CarInfo, String> licensePlateNumberColumn;
 
     @FXML
-    private TableColumn<CarInfo,String> brandColumn;
+    private TableColumn<CarInfo, String> brandColumn;
 
     @FXML
-    private TableColumn<CarInfo,String> modelColumn;
+    private TableColumn<CarInfo, String> modelColumn;
 
     @FXML
-    private TableColumn<CarInfo,String> colorColumn;
+    private TableColumn<CarInfo, String> colorColumn;
 
     @FXML
-    private TableColumn<CarInfo,Integer> modelIDColumn;
+    private TableColumn<CarInfo, Integer> modelIDColumn;
 
     @FXML
-    private TableColumn<CarInfo,String> yearColumn;
+    private TableColumn<CarInfo, String> yearColumn;
 
     @FXML
-    private TableColumn<CarInfo,Float> priceColumn;
+    private TableColumn<CarInfo, Float> priceColumn;
 
     @FXML
-    private TableColumn<CarInfo,String> categoryColumn;
+    private TableColumn<CarInfo, String> categoryColumn;
 
     @FXML
-    private TableColumn<CarInfo,String> engineColumn;
+    private TableColumn<CarInfo, String> engineColumn;
 
     @FXML
-    private TableColumn<CarInfo,String> transmissionColumn;
+    private TableColumn<CarInfo, String> transmissionColumn;
 
     @FXML
-    private TableColumn<CarInfo,Integer> seatsColumn;
+    private TableColumn<CarInfo, Integer> seatsColumn;
 
     @FXML
     private Pane addVehiclePane;
-
-    @FXML
-    private Button addVehicleButton;
 
     @FXML
     private TextField licensePlateNumberTextField;
@@ -120,12 +114,6 @@ public class AdminMenu {
 
     @FXML
     private ComboBox<String> modelComboBox;
-
-    @FXML
-    private Hyperlink addModelHyperlink;
-
-    @FXML
-    private ImageView reloadImage;
 
     @FXML
     private Label addVehicleLabel;
@@ -156,9 +144,6 @@ public class AdminMenu {
 
     @FXML
     private TextField regZIPTextField;
-
-    @FXML
-    private Button regRegistrationButton;
 
     @FXML
     private Pane servisShowPane;
@@ -203,19 +188,7 @@ public class AdminMenu {
     private ComboBox<String> stateComboBox;
 
     @FXML
-    private Button changeStateButton;
-
-    @FXML
-    private Label stateLabel;
-
-    @FXML
     private Label regServiceLabel;
-
-    @FXML
-    private ComboBox<String> servisComboBox;
-
-    @FXML
-    private Button chooseServisButton;
 
     @FXML
     private TableColumn<ServiceCarInfo, String> servisVehicleIDColumn;
@@ -264,26 +237,31 @@ public class AdminMenu {
 
     private boolean isShown = false;
 
+    // Zobrazenie okna pre pridanie modelu
     @FXML
-    void addModelHyperlinkAction(ActionEvent event) throws Exception {
+    void addModelHyperlinkAction() throws Exception {
         addVehicle.addModelHyperlinkAction();
     }
 
+    // Button k priadaniu vozidla do databazy
     @FXML
-    void addVehicleButtonAction(ActionEvent event) throws Exception {
-        addVehicle.addVehicleButtonAction(licensePlateNumberTextField,colorTextField,yearOfProductionTextField,priceTextField,modelComboBox,addVehicleLabel);
+    void addVehicleButtonAction() {
+        addVehicle.addVehicleButtonAction(licensePlateNumberTextField, colorTextField, yearOfProductionTextField, priceTextField, modelComboBox, addVehicleLabel);
     }
 
+    // Zobrazenie panelu pre ragistraciu servisov
     @FXML
-    void servisRegistrationButtonAction(ActionEvent event) throws IOException {
+    void servisRegistrationButtonAction() {
         servisRegistrationPane.toFront();
     }
 
+    // Menenie stavu vozidla, ktore bolo urcene na servisovanie
     @FXML
-    void changeStateButtonAction(ActionEvent event) throws IOException, SQLException {
+    void changeStateButtonAction() throws SQLException {
 
+        // Vozidlo bolo uz opravene, takze moze byt odstranene z tabulky carrepair
         if (!Bindings.isEmpty(serviceCarTable.getItems()).get()) {
-            if (stateComboBox.getValue().equals(Login.rb.getString("status4"))){
+            if (stateComboBox.getValue().equals(Login.rb.getString("status4"))) {
                 ServiceCarInfo selectedItem = serviceCarTable.getSelectionModel().getSelectedItem();
                 serviceCarTable.getItems().remove(selectedItem);
                 String sql = ("delete from crdb.carrepair where vehicleid = ?");
@@ -301,67 +279,45 @@ public class AdminMenu {
                     JavaLogger.logger.log(Level.WARNING, "Database problem");
                     System.out.println(e.getMessage());
                 }
-            }
-
-            else{
-
-//                while(resultSet.next()){
-//                    if(resultSet.getInt("id") == Login.USERID){
-//                        if(resultSet.getString("password").equals(oldPasswordTextField.getText())){
-//                            if(confirmNewPasswordTextField.getText().equals(newPasswordTextField.getText())){
-//                                String sql = "update crdb.customer SET password = ? where id = "+Login.USERID+"";
-//                                PreparedStatement rs = connection.prepareStatement(sql);
-//                                rs.setString(1,newPasswordTextField.getText());
-//                                rs.executeUpdate();
-//                                passwordLabel.setText("Heslo úspešne zmenené");
-//                                passwordLabel.setTextFill(Color.GREEN);
-//                                return;
-//                            }
-//                            passwordLabel.setText("Zlé potvrdenie hesla");
-//                            passwordLabel.setTextFill(Color.RED);
-//                            return;
-//                        }
-//                        passwordLabel.setText("Pôvodné heslo sa nezhoduje");
-//                        passwordLabel.setTextFill(Color.RED);
-//                    }
-//                }
-
-
+            } else {
+                // Vozidlu sa zmeni stav podla toho ako urci admin
                 ServiceCarInfo selectedItem = serviceCarTable.getSelectionModel().getSelectedItem();
 
-                String sql = "update crdb.carrepair SET description = ? where vehicleid = "+selectedItem.getCarID()+"";
+                String sql = "update crdb.carrepair SET description = ? where vehicleid = " + selectedItem.getCarID() + "";
                 Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
                 PreparedStatement rs = connection.prepareStatement(sql);
-                rs.setString(1,stateComboBox.getValue());
+                rs.setString(1, stateComboBox.getValue());
                 rs.executeUpdate();
                 JavaLogger.logger.log(Level.INFO, "Serviced vehicle status changed");
-
-
-
-//                String sql = "update crdb.carrepair(description) values (?)";
-
-//                try {
-//                    Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
-//                    PreparedStatement statement = connection.prepareStatement(sql);
-//                    statement.setString(1, stateComboBox.getValue());
-//                    statement.executeUpdate();
-//
-//                } catch (SQLException e) {
-//                    System.out.println(e.getMessage());
-//                }
             }
         }
     }
 
+    // Button na vratenie sa na zaciatok
     @FXML
-    void backButtonAction(ActionEvent event) throws IOException {
+    void backButtonAction() throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"),Login.rb);
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"), Login.rb);
         stage.setScene(new Scene(root, Login.oldwitdh, Login.oldheight));
     }
 
+    // Akcia ked kurzor prejde cez button
     @FXML
     void enterButton(MouseEvent event) {
+        buttonHoverEnter(event, addButton, removeVehicleButton, showButton, backButton, servisRegistrationButton);
+        if (event.getSource() == servisShowButton) {
+            servisShowButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
+        }
+        if (event.getSource() == servisVehicleButton) {
+            servisVehicleButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
+        }
+        if (event.getSource() == servisVehicleShowButton) {
+            servisVehicleShowButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
+        }
+    }
+
+    // Button mierne zmeni farbu a zvacsi pismo
+    static void buttonHoverEnter(MouseEvent event, Button addButton, Button removeVehicleButton, Button showButton, Button backButton, Button servisRegistrationButton) {
         if (event.getSource() == addButton) {
             addButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
         }
@@ -377,19 +333,25 @@ public class AdminMenu {
         if (event.getSource() == servisRegistrationButton) {
             servisRegistrationButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
         }
+    }
+
+    // Akcia ked kurzor opusti button
+    @FXML
+    void exitButton(MouseEvent event) {
+        buttonHoverExit(event, addButton, removeVehicleButton, showButton, backButton, servisRegistrationButton);
         if (event.getSource() == servisShowButton) {
-            servisShowButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
+            servisShowButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
         }
         if (event.getSource() == servisVehicleButton) {
-            servisVehicleButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
+            servisVehicleButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
         }
         if (event.getSource() == servisVehicleShowButton) {
-            servisVehicleShowButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
+            servisVehicleShowButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
         }
     }
 
-    @FXML
-    void exitButton(MouseEvent event) {
+    // Button sa vrati do povodneho stavu
+    static void buttonHoverExit(MouseEvent event, Button addButton, Button removeVehicleButton, Button showButton, Button backButton, Button servisRegistrationButton) {
         if (event.getSource() == addButton) {
             addButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
         }
@@ -405,18 +367,9 @@ public class AdminMenu {
         if (event.getSource() == servisRegistrationButton) {
             servisRegistrationButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
         }
-        if (event.getSource() == servisShowButton) {
-            servisShowButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
-        }
-        if (event.getSource() == servisVehicleButton) {
-            servisVehicleButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
-        }
-        if (event.getSource() == servisVehicleShowButton) {
-            servisVehicleShowButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
-        }
     }
 
-
+    // Naplnenie comboboxov
     @FXML
     public void initialize() {
         addVehicle.initialize(modelComboBox);
@@ -438,7 +391,8 @@ public class AdminMenu {
                 Login.rb.getString("status4")
         );
 
-        try{
+        // !
+        try {
             String sqlModel = ("SELECT *, COUNT(carmodel) OVER(PARTITION BY carbrand) as grand_total \n" +
                     "FROM crdb.model order by carbrand");
 
@@ -446,77 +400,67 @@ public class AdminMenu {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sqlModel);
 
-            while(rs.next()){
+            while (rs.next()) {
                 System.out.println(rs.getString("carbrand"));
                 System.out.println(rs.getString("grand_total"));
             }
-        }
-
-        catch(SQLException e) {
+        } catch (SQLException e) {
             JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
 
     }
 
+    // Zobrazenie sceny na pridanie vozidiel
     @FXML
-    void addButtonAction(ActionEvent event) throws Exception {
+    void addButtonAction() {
         addVehiclePane.toFront();
         isShown = false;
     }
 
+    // Refreshnutie comboboxu modelComboBox po tom ako bol pridany model
     @FXML
-    void refresh(){
+    void refresh() {
         addVehicle.initialize(modelComboBox);
     }
 
+    // Odstranenie vozidla
     @FXML
     void removeVehicleButtonAction() {
-        if(isShown){
+        if (isShown) {
             carDatabase.removeVehicleButtonAction(carTable);
         }
     }
 
+    // Vypis vsetkych dostupnych vozidiel
     @FXML
-    void showButtonAction(ActionEvent event) throws SQLException {
-        carDatabase.initialize(carTable,vehicleIDColumn,licensePlateNumberColumn,brandColumn,modelColumn,colorColumn,
-                modelIDColumn,yearColumn,priceColumn,categoryColumn,engineColumn,transmissionColumn,seatsColumn);
+    void showButtonAction() {
+        carDatabase.initialize(carTable, vehicleIDColumn, licensePlateNumberColumn, brandColumn, modelColumn, colorColumn,
+                modelIDColumn, yearColumn, priceColumn, categoryColumn, engineColumn, transmissionColumn, seatsColumn);
         showPane.toFront();
         isShown = true;
     }
 
-    public static CarInfo selectedItemCar;
+    private static CarInfo selectedItemCar;
 
-//    zaradenie vozidla medzi servisované vozidlá
+    // Zaradenie vozidla medzi servisovane vozidla
     @FXML
-    void servisVehicleButtonAction(ActionEvent event) throws Exception {
-        if(isShown){
-
-            String sql = "insert into crdb.carrepair(carserviceid, vehicleid) values (?,?)";
-
-            if(!Bindings.isEmpty(carTable.getItems()).get()) {
+    void servisVehicleButtonAction() throws Exception {
+        if (isShown) {
+            if (!Bindings.isEmpty(carTable.getItems()).get()) {
                 selectedItemCar = carTable.getSelectionModel().getSelectedItem();
 
+                // Moznost vybrat si servisne stredisko
                 try {
-                    Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
-
-                    Statement statement = connection.createStatement();
-                    ResultSet rs = statement.executeQuery("select * from crdb.carrepair");
-
-                    while (rs.next()) {
-                        if (rs.getInt("vehicleid") == selectedItemCar.getCarID()) {
-                            return;
-                        }
-                    }
+                    if (selectItemId()) return;
 
                     Parent root = FXMLLoader.load(getClass().getResource("GUI/servischoose.fxml"), Login.rb);
-                    Scene scene = new Scene(root,300,250);
+                    Scene scene = new Scene(root, 300, 250);
                     Stage stage = new Stage();
                     stage.setScene(scene);
                     stage.show();
 
-                }
-                catch (SQLException e) {
+                } catch (SQLException e) {
                     JavaLogger.logger.log(Level.WARNING, "Database problem");
                     System.out.println(e.getMessage());
                 }
@@ -525,54 +469,58 @@ public class AdminMenu {
         }
     }
 
+    // !
+    private boolean selectItemId() throws SQLException {
+        Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery("select * from crdb.carrepair");
+
+        while (rs.next()) {
+            if (rs.getInt("vehicleid") == selectedItemCar.getCarID()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @FXML
     void servisVehicleButtonAction2(String IDs) throws Exception {
 
-            String sql = "insert into crdb.carrepair(carserviceid, vehicleid) values (?,?)";
+        String sql = "insert into crdb.carrepair(carserviceid, vehicleid) values (?,?)";
+        Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
 
+        try {
+            if (selectItemId()) return;
 
-                try {
-                    Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+            PreparedStatement preparedStatementModel = connection.prepareStatement(sql);
+            preparedStatementModel.setInt(1, Integer.parseInt(IDs));
+            preparedStatementModel.setInt(2, selectedItemCar.getCarID());
+            preparedStatementModel.executeUpdate();
+            JavaLogger.logger.log(Level.INFO, "Vehicle added to service center management");
 
-                    Statement statement = connection.createStatement();
-                    ResultSet rs = statement.executeQuery("select * from crdb.carrepair");
-
-                    while (rs.next()) {
-                        if (rs.getInt("vehicleid") == selectedItemCar.getCarID()) {
-                            return;
-                        }
-                    }
-
-                    PreparedStatement preparedStatementModel = connection.prepareStatement(sql);
-                    preparedStatementModel.setInt(1, Integer.parseInt(IDs));
-                    preparedStatementModel.setInt(2, selectedItemCar.getCarID());
-                    preparedStatementModel.executeUpdate();
-                    JavaLogger.logger.log(Level.INFO, "Vehicle added to service center management");
-
-                }
-                catch (SQLException e) {
-                    JavaLogger.logger.log(Level.WARNING, "Database problem");
-                    System.out.println(e.getMessage());
-                }
+        } catch (SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
+            System.out.println(e.getMessage());
+        }
     }
 
 
-
-    //registrácia servisu do databázy
+    // Registracia servisu do databazy
     @FXML
     void regServisVehicleButtonAction() {
         isShown = false;
         boolean servisExist = false;
-//        String sql = "insert ignore into crdb.carservice(name, phonenumber, email, addressid) values (?, ?, ?, ?)";
 
-        if(regRegionComboBox.getSelectionModel().isEmpty() || regServiceNameTextField.getText().isEmpty()
+        // Neboli vyplnene vsetky udaje
+        if (regRegionComboBox.getSelectionModel().isEmpty() || regServiceNameTextField.getText().isEmpty()
                 || regPhoneNumberTextField.getText().isEmpty() || regCityTextField.getText().isEmpty()
                 || regStreetTextField.getText().isEmpty() || regEmailTextField.getText().isEmpty()
-                || regHouseNumberTextField.getText().isEmpty() || regZIPTextField.getText().isEmpty()){
+                || regHouseNumberTextField.getText().isEmpty() || regZIPTextField.getText().isEmpty()) {
             regServiceLabel.setText("Vyplňte všetky údaje.");
-            regServiceLabel.setTextFill(Color.RED);}
-        else{
+            regServiceLabel.setTextFill(Color.RED);
+        } else {
 
             try {
                 Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
@@ -580,6 +528,7 @@ public class AdminMenu {
 
                 ResultSet rs = statement.executeQuery("select * from crdb.carservice");
 
+                // Servis uz existuje
                 while (rs.next()) {
                     if (rs.getString("name").equals(regServiceNameTextField.getText())) {
                         servisExist = true;
@@ -589,10 +538,12 @@ public class AdminMenu {
                     }
                 }
 
-                if(!servisExist){
+                // Ak neexistuje, bude pridany do tabulky carservice
+                if (!servisExist) {
 
                     int currentAddressID = 0;
 
+                    // Servisu je pridelena aj adresa
                     String sqlRegion = "insert ignore into crdb.region(regionname) values (?)";
                     PreparedStatement preparedStatementRegion = connection.prepareStatement(sqlRegion);
                     preparedStatementRegion.setString(1, regRegionComboBox.getValue());
@@ -610,14 +561,7 @@ public class AdminMenu {
                         currentAddressID = rs.getInt("id");
                     }
 
-//                    PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//
-//                    preparedStatement.setString(1, regServiceNameTextField.getText());
-//                    preparedStatement.setString(2, regPhoneNumberTextField.getText());
-//                    preparedStatement.setString(3, regEmailTextField.getText());
-//                    preparedStatement.setInt(4, currentAddressID);
-//                    preparedStatement.executeUpdate();
-
+                    // Zapis do tabulky je realizovany pomocou Hibernate orm
                     CarserviceEntity carserviceEntity = new CarserviceEntity();
                     carserviceEntity.setName(regServiceNameTextField.getText());
                     carserviceEntity.setPhonenumber(regPhoneNumberTextField.getText());
@@ -637,7 +581,7 @@ public class AdminMenu {
                     JavaLogger.logger.log(Level.INFO, "Service center registered successfully");
                 }
 
-            } catch(SQLException e) {
+            } catch (SQLException e) {
                 JavaLogger.logger.log(Level.WARNING, "Database problem");
                 System.out.println("SQL exception occured: " + e);
             }
@@ -645,19 +589,22 @@ public class AdminMenu {
         }
     }
 
+    // Zobrazenie servisnych stredisk
     @FXML
-    void servisShowButtonAction(ActionEvent event) throws SQLException {
+    void servisShowButtonAction() {
         isShown = false;
-        serviceDatabase.initialize(serviceTable,servisIDColumn,servisNameColumn,servisEmailColumn,phoneNumberColumn,
-                servisRegionColumn,servisCityColumn,servisStreetColumn,servisHouseNumberColumn,servisZIPColumn);
+        serviceDatabase.initialize(serviceTable, servisIDColumn, servisNameColumn, servisEmailColumn, phoneNumberColumn,
+                servisRegionColumn, servisCityColumn, servisStreetColumn, servisHouseNumberColumn, servisZIPColumn);
         servisShowPane.toFront();
     }
 
+    // Zobrazenie aut, ktore boli vybrane adminom na servisovanie
     @FXML
-    void servisVehicleShowButtonAction(ActionEvent event) throws SQLException {
+    void servisVehicleShowButtonAction() {
         isShown = false;
-        serviceCarDatabase.initialize(serviceCarTable,servisVehicleIDColumn,servisLicensePlateNumberColumn,servisBrandColumn,servisModelColumn,servisColorColumn,
-                servisYearColumn,servisEngineColumn,servisTransmissionColumn,servisCarNameColumn,servisStateColumn);
+        serviceCarDatabase.initialize(serviceCarTable, servisVehicleIDColumn, servisLicensePlateNumberColumn,
+                servisBrandColumn, servisModelColumn, servisColorColumn, servisYearColumn, servisEngineColumn,
+                servisTransmissionColumn, servisCarNameColumn, servisStateColumn);
         servisVehicleShowPane.toFront();
     }
 }

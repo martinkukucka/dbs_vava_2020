@@ -1,5 +1,3 @@
-import com.mysql.cj.log.Log;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -10,8 +8,11 @@ import javafx.scene.paint.Color;
 import java.sql.*;
 import java.util.logging.Level;
 
+// Metoda umoznuje adminovi pridat novy model auta do databazy
 public class AddModel {
 
+    // Itemy, ktore su potrebne na gui
+    public Button addModelButton;
     @FXML
     private ComboBox<String> fuelComboBox;
 
@@ -31,9 +32,6 @@ public class AddModel {
     private TextField seatsTextField;
 
     @FXML
-    private Button addModelButton;
-
-    @FXML
     private ComboBox<String> transmissionComboBox;
 
     @FXML
@@ -42,6 +40,7 @@ public class AddModel {
     @FXML
     private Button cancelButton;
 
+    // Naplnenie comboboxov
     @FXML
     public void initialize() {
         categoryComboBox.getItems().addAll(
@@ -66,36 +65,42 @@ public class AddModel {
         );
     }
 
+    // Zatvorenie okna na pridavanie modelov
     @FXML
-    void cancelButtonAction(ActionEvent event) {
+    void cancelButtonAction() {
         cancelButton.getScene().getWindow().hide();
     }
 
+    // Pridavanie novych modelov
     @FXML
-    private void addModelButtonAction(ActionEvent event) throws Exception {
+    private void addModelButtonAction() {
         boolean modelExist = false;
-        String sqlModel = "insert into crdb.model(category, carbrand, carmodel, transmission, fuel, kw, seats) values (?, ?, ?, ?, ?, ?, ?)";
+        // Modely sa vkladaju do databazy pre mozne buduce pouzitie
+        String sqlModel = "insert into crdb.model(category, carbrand, carmodel, transmission, fuel, kw, seats) " +
+                "values (?, ?, ?, ?, ?, ?, ?)";
 
-        if(categoryComboBox.getSelectionModel().isEmpty() || brandTextField.getText().isEmpty()
+        // Neboli vyplnene vsetky udaje
+        if (categoryComboBox.getSelectionModel().isEmpty() || brandTextField.getText().isEmpty()
                 || modelTextField.getText().isEmpty() || transmissionComboBox.getSelectionModel().isEmpty()
                 || fuelComboBox.getSelectionModel().isEmpty() || kwTextField.getText().isEmpty()
-                || seatsTextField.getText().isEmpty()){
+                || seatsTextField.getText().isEmpty()) {
             addModelLabel.setText(Login.rb.getString("missingInfo"));
-            addModelLabel.setTextFill(Color.RED);}
-        else{
+            addModelLabel.setTextFill(Color.RED);
+        } else {
             try {
                 Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
                 Statement statement = connection.createStatement();
 
                 ResultSet rs = statement.executeQuery("select * from crdb.model");
 
+                // Model uz existuje
                 while (rs.next()) {
                     if (rs.getString("category").equals(categoryComboBox.getValue()) &&
                             rs.getString("carbrand").equals(brandTextField.getText()) &&
                             rs.getString("carmodel").equals(modelTextField.getText()) &&
                             rs.getString("transmission").equals(transmissionComboBox.getValue()) &&
-                            rs.getString("fuel").equals(fuelComboBox.getValue())  &&
-                            rs.getString("kw").equals(kwTextField.getText())  &&
+                            rs.getString("fuel").equals(fuelComboBox.getValue()) &&
+                            rs.getString("kw").equals(kwTextField.getText()) &&
                             rs.getString("seats").equals(seatsTextField.getText())) {
                         modelExist = true;
                         addModelLabel.setText(Login.rb.getString("modelExist"));
@@ -103,7 +108,8 @@ public class AddModel {
                     }
                 }
 
-                if(!modelExist){
+                // Pridanie noveho modelu
+                if (!modelExist) {
                     PreparedStatement preparedStatementModel = connection.prepareStatement(sqlModel);
                     preparedStatementModel.setString(1, categoryComboBox.getValue());
                     preparedStatementModel.setString(2, brandTextField.getText());
@@ -118,7 +124,7 @@ public class AddModel {
                     JavaLogger.logger.log(Level.INFO, "New model successfully created");
                 }
 
-            } catch(SQLException e) {
+            } catch (SQLException e) {
                 JavaLogger.logger.log(Level.WARNING, "Database problem");
                 System.out.println("SQL exception occured: " + e);
             }

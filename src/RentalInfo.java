@@ -2,6 +2,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+// Pomocna trieda pre vkladanie informacii o pozicani do tabulky v gui
+// Obsahuje aj gettre a settre, cize informacie mozu byt pouzite v roznych metodach
 public class RentalInfo {
 
     private SimpleIntegerProperty id;
@@ -11,8 +13,8 @@ public class RentalInfo {
     private SimpleStringProperty carModelU;
     private SimpleDoubleProperty rentalPrice;
 
-    public RentalInfo(Integer id, String from, String to, String carBrandU,
-                      String carModelU, double rentalPrice) {
+    RentalInfo(Integer id, String from, String to, String carBrandU,
+               String carModelU, double rentalPrice) {
         this.id = new SimpleIntegerProperty(id);
         this.from = new SimpleStringProperty(from);
         this.to = new SimpleStringProperty(to);

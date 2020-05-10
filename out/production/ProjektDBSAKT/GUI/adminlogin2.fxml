@@ -5,32 +5,30 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane id="AnchorPane" fx:id="loginAnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="400.0" minWidth="600.0" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminLogin">
+<AnchorPane id="AnchorPane" fx:id="loginAnchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminLogin">
    <children>
-      <GridPane alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <VBox alignment="CENTER_LEFT" layoutX="50.0" layoutY="74.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" spacing="10.0">
                <children>
-                  <Label text="E-mailová adresa" />
-                  <TextField fx:id="nameTextField" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="210.0" promptText="" />
-                  <Label text="Heslo" />
-                  <PasswordField fx:id="passwordTextField" prefHeight="25.0" prefWidth="205.0" />
+                  <Label text="%name" />
+                  <TextField fx:id="nameTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="210.0" promptText="" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="199.0" />
+                  <Label text="%password" />
+                  <PasswordField fx:id="passwordTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="210.0" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2; -fx-border-color: #3b3b3b; -fx-background-color: #FFFFFF;" />
                   <HBox id="HBox" alignment="CENTER" spacing="5.0" />
-                  <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="199.0" />
+                  <HBox id="HBox" alignment="CENTER" spacing="50.0">
                      <children>
-                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="25.0" prefWidth="65.0" text="Prihlásiť" textAlignment="CENTER" textOverrun="ELLIPSIS" />
-                     </children>
-                  </HBox>
-                  <HBox id="HBox" alignment="CENTER" spacing="5.0">
-                     <children>
-                        <Button fx:id="backLoginButton" mnemonicParsing="false" onAction="#backLoginButtonAction" prefHeight="25.0" prefWidth="65.0" text="Späť" textAlignment="CENTER" textOverrun="ELLIPSIS" />
+                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="%login" textAlignment="CENTER" textFill="WHITE" textOverrun="ELLIPSIS" />
                      </children>
                   </HBox>
                </children>
@@ -39,12 +37,14 @@
                </padding>
             </VBox>
          </children>
-         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-      </GridPane>
+      </Pane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#313131" height="392.0" layoutX="-67.0" layoutY="-165.0" rotate="48.0" stroke="TRANSPARENT" strokeType="INSIDE" width="146.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2c2c2c" height="392.0" layoutX="-59.0" layoutY="-224.0" rotate="48.0" stroke="TRANSPARENT" strokeType="INSIDE" width="146.0" />
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="-4.0" layoutY="2.0" rotate="90.0">
+         <image>
+            <Image url="@sipka.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backLoginButton" mnemonicParsing="false" onAction="#backLoginButtonAction" opacity="0.0" prefHeight="30.0" prefWidth="24.0" textAlignment="CENTER" textFill="WHITE" textOverrun="ELLIPSIS" />
    </children>
 </AnchorPane>

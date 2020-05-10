@@ -2,7 +2,6 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,19 +18,20 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.logging.Level;
 
+// Menu s moznostami vyberu pre pouzivatela
 public class CustomerMenu {
 
-    @FXML
-    private Text customerMenuText;
-
-    @FXML
-    private AnchorPane loginAnchorPane;
+    // Itemy, ktore su potrebne na gui
+    public AnchorPane loginAnchorPane;
+    public Text customerMenuText;
+    public Button makeOrderButton;
+    public Button changeButton;
+    public Button invoicePdfButton;
 
     @FXML
     private Button createOrderButton;
@@ -103,13 +103,7 @@ public class CustomerMenu {
     private PasswordField confirmNewPasswordTextField;
 
     @FXML
-    private Button changeButton;
-
-    @FXML
     private Label passwordLabel;
-
-    @FXML
-    private Button makeOrderButton;
 
     @FXML
     private Button seeOrdersButton;
@@ -138,23 +132,23 @@ public class CustomerMenu {
     @FXML
     private TableColumn<RentalInfo, Double> priceColumnU;
 
-    @FXML
-    private Button invoicePdfButton;
-
+    // Inicializacia hodnot do comboboxu chooseCarCombobox, ktory sluzi k vyberu auta
     @FXML
     public void initialize() {
         createOrder.comboBoxInit(chooseCarCombobox);
     }
 
+    // Button na vratenie sa na zaciatok
     @FXML
-    void backButtonAction(ActionEvent event) throws IOException {
+    void backButtonAction() throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("GUI/login.fxml"), Login.rb);
         stage.setScene(new Scene(root, backButton.getScene().getWidth(), backButton.getScene().getHeight()));
     }
 
+    // Button, ktory zobrazi panel kde je mozne zmenit pouzivatelovi heslo
     @FXML
-    void changePasswordButtonAction(ActionEvent event) throws IOException {
+    void changePasswordButtonAction() {
         passwordLabel.setText("");
         oldPasswordTextField.setText("");
         newPasswordTextField.setText("");
@@ -162,18 +156,15 @@ public class CustomerMenu {
         changePasswordPane.toFront();
     }
 
+    // Zobrazi moznost vytvorenia objednavky
     @FXML
-    void creteOrderButtonAction(ActionEvent event) throws IOException {
-//        Stage stage = (Stage) createOrderButton.getScene().getWindow();
-//        Parent root = FXMLLoader.load(getClass().getResource("GUI/createorder.fxml"));
-//        stage.setScene(new Scene(root, createOrderButton.getScene().getWidth(), createOrderButton.getScene().getHeight()));
-//        new FadeIn(objednavkaPane).play();
+    void creteOrderButtonAction() {
         objednavkaPane.toFront();
     }
 
-
+    // Profilova stranka pouzivatela, kde moze vidiet vsetky informacie o sebe
     @FXML
-    void profilButtonAction(ActionEvent event) {
+    void profilButtonAction() {
         String meno = null;
         String priezvisko = null;
         String email = null;
@@ -185,11 +176,12 @@ public class CustomerMenu {
         String psc = null;
         String region = null;
 
+        // Vsetky informacie o pouzivatelovi pochadzaju z jednej velkej joinutej tabulky
         try {
             Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             Statement statement = connection.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("select * from crdb.customer inner join crdb.address on crdb.customer.addressid = crdb.address.id inner join crdb.city on crdb.address.cityid = crdb.city.id inner join crdb.region on crdb.city.regionid = crdb.region.id where crdb.customer.id = "+Login.USERID+"");
+            ResultSet resultSet = statement.executeQuery("select * from crdb.customer inner join crdb.address on crdb.customer.addressid = crdb.address.id inner join crdb.city on crdb.address.cityid = crdb.city.id inner join crdb.region on crdb.city.regionid = crdb.region.id where crdb.customer.id = " + Login.USERID + "");
             while (resultSet.next()) {
                 meno = resultSet.getString("name");
                 priezvisko = resultSet.getString("surname");
@@ -203,12 +195,12 @@ public class CustomerMenu {
                 region = resultSet.getString("regionname");
             }
 
-        }
-        catch(SQLException e) {
+        } catch (SQLException e) {
             JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured " + e);
         }
 
+        // Zobrazenie informacii
         menoLabel.setText(meno + " " + priezvisko);
         emailLabel.setText(email);
         assert meno != null;
@@ -221,32 +213,34 @@ public class CustomerMenu {
         mestoLabel.setText(mesto);
         pscLabel.setText(psc);
         regionLabel.setText(region);
-
-//        new FadeIn(profilPane).play();
         profilPane.toFront();
 
     }
 
+
+    // Potvrdenie objednavky
     @FXML
-    void makeOrder(ActionEvent event) {
+    void makeOrder() {
         System.out.println(chooseCarCombobox.getValue());
         createOrder.insertToDb(chooseCarCombobox, pickUpDatepicker, returnDatepicker);
-//        pickUpDatepicker.getDatePicker().setMaxDate(System.currentTimeMillis());
     }
 
-
+    // Zobrazenie vsetkych vytvorenych objednavok
     @FXML
-    void seeOrdersButtonAction(ActionEvent event) throws SQLException {
+    void seeOrdersButtonAction() {
         createOrder.fillTable(seeOrderTable, fromColumn, toColumn, brandColumnU, modelColumnU, priceColumnU);
         seeOrdersPane.toFront();
     }
 
+    // Vytvorenie pdf suboru objednavky
     @FXML
-    void invoicePdfButtonAction(ActionEvent event) throws SQLException, DocumentException, FileNotFoundException, IOException {
-        if(!Bindings.isEmpty(seeOrderTable.getItems()).get()) {
+    void invoicePdfButtonAction() throws DocumentException, IOException {
+        // Pre kazdu objednavku je subor iny
+        if (!Bindings.isEmpty(seeOrderTable.getItems()).get()) {
             RentalInfo selectedItem = seeOrderTable.getSelectionModel().getSelectedItem();
             int invoiceId = selectedItem.getId() + 1;
 
+            // Informacie o objednavke z joinutej tabulky
             try {
                 String sqlModel = ("select * from crdb.carrental inner join crdb.vehicle on crdb.carrental.vehicleid = crdb.vehicle.id inner join crdb.model on crdb.vehicle.modelid = crdb.model.id inner join crdb.invoice on crdb.carrental.invoiceid = crdb.invoice.id where customerid =" + Login.USERID + " and invoiceid = " + invoiceId + "");
 
@@ -265,6 +259,7 @@ public class CustomerMenu {
                     cena = rs.getDouble("amount") + " €";
                 }
 
+                // Vytvorenie pdf
                 Document document = new Document();
                 PdfWriter.getInstance(document, new FileOutputStream("bill.pdf"));
 
@@ -288,15 +283,15 @@ public class CustomerMenu {
                 document.add(priceParagraph);
 
                 document.close();
+
+                // Okamzite otvorenie prave vytvoreneho suboru
                 Desktop desktop = Desktop.getDesktop();
                 File file = new File("bill.pdf");
-                if(file.exists()) {
+                if (file.exists()) {
                     desktop.open(file);
                 }
                 JavaLogger.logger.log(Level.INFO, "PDF format invoice created successfully");
-            }
-
-            catch(SQLException e) {
+            } catch (SQLException e) {
                 JavaLogger.logger.log(Level.WARNING, "Database problem");
                 System.out.println("SQL exception occured: " + e);
             }
@@ -306,37 +301,41 @@ public class CustomerMenu {
         }
     }
 
-
+    // Potvrdenie zmeny hesla
     @FXML
-    void changeButtonAction() throws SQLException {
+    void changeButtonAction() {
+        // Tahanie udajov z tabulky user
         try {
             Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select id, password from crdb.customer");
 
-            if(confirmNewPasswordTextField.getText().isEmpty() || newPasswordTextField.getText().isEmpty() || oldPasswordTextField.getText().isEmpty()){
+            // Ak nie su vyplnene vsetky udaje
+            if (confirmNewPasswordTextField.getText().isEmpty() || newPasswordTextField.getText().isEmpty() || oldPasswordTextField.getText().isEmpty()) {
                 passwordLabel.setText(Login.rb.getString("missingInfo"));
                 passwordLabel.setTextFill(Color.RED);
-            }
-            else{
-                while(resultSet.next()){
-                    if(resultSet.getInt("id") == Login.USERID){
-                        if(resultSet.getString("password").equals(oldPasswordTextField.getText())){
-                            if(confirmNewPasswordTextField.getText().equals(newPasswordTextField.getText())){
-                                String sql = "update crdb.customer SET password = ? where id = "+Login.USERID+"";
+            } else {
+                // Prebehne zmena hesla, udaje budu updatnute aj v databaze
+                while (resultSet.next()) {
+                    if (resultSet.getInt("id") == Login.USERID) {
+                        if (resultSet.getString("password").equals(oldPasswordTextField.getText())) {
+                            if (confirmNewPasswordTextField.getText().equals(newPasswordTextField.getText())) {
+                                String sql = "update crdb.customer SET password = ? where id = " + Login.USERID + "";
                                 PreparedStatement rs = connection.prepareStatement(sql);
-                                rs.setString(1,newPasswordTextField.getText());
+                                rs.setString(1, newPasswordTextField.getText());
                                 rs.executeUpdate();
                                 passwordLabel.setText(Login.rb.getString("passwordChanged"));
                                 passwordLabel.setTextFill(Color.GREEN);
                                 JavaLogger.logger.log(Level.INFO, "User changed password successfully");
                                 return;
                             }
+                            // Zle zadane heslo pri potvrdzovani
                             passwordLabel.setText(Login.rb.getString("wrong2Password"));
                             passwordLabel.setTextFill(Color.RED);
                             JavaLogger.logger.log(Level.WARNING, "Wrong password confirmation");
                             return;
                         }
+                        // Zle zadane povodne heslo
                         passwordLabel.setText(Login.rb.getString("wrong1Password"));
                         passwordLabel.setTextFill(Color.RED);
                         JavaLogger.logger.log(Level.WARNING, "Wrong original password");
@@ -344,50 +343,23 @@ public class CustomerMenu {
                     }
                 }
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
     }
 
 
+    // Akcia ked kurzor prejde cez button
     @FXML
     void enterButton(MouseEvent event) {
-        if (event.getSource() == createOrderButton) {
-            createOrderButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
-        }
-        if (event.getSource() == changePasswordButton) {
-            changePasswordButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
-        }
-        if (event.getSource() == backButton) {
-            backButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
-        }
-        if (event.getSource() == profilButton) {
-            profilButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
-        }
-        if (event.getSource() == seeOrdersButton) {
-            seeOrdersButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
-        }
+        AdminMenu.buttonHoverEnter(event, createOrderButton, changePasswordButton, backButton, profilButton, seeOrdersButton);
     }
 
+    // Akcia ked kurzor opusti button
     @FXML
     void exitButton(MouseEvent event) {
-        if (event.getSource() == createOrderButton) {
-            createOrderButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
-        }
-        if (event.getSource() == changePasswordButton) {
-            changePasswordButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
-        }
-        if (event.getSource() == backButton) {
-            backButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
-        }
-        if (event.getSource() == profilButton) {
-            profilButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
-        }
-        if (event.getSource() == seeOrdersButton) {
-            seeOrdersButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
-        }
+        AdminMenu.buttonHoverExit(event, createOrderButton, changePasswordButton, backButton, profilButton, seeOrdersButton);
     }
 
 }

@@ -1,6 +1,8 @@
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+// Pomocna trieda pre vkladanie informacii o vozidle do tabulky v gui
+// Obsahuje aj gettre a settre, cize informacie mozu byt pouzite v roznych metodach
 public class CarInfo {
 
     private SimpleIntegerProperty modelID;
@@ -18,10 +20,9 @@ public class CarInfo {
     private SimpleIntegerProperty price;
 
 
-    public CarInfo(Integer carID, String category, String carBrand, String carModel, String transmission,
-                   String fuel, Integer kw, Integer seats, Integer modelID, String licensePlateNumber,
-                   String color, Integer yearOfProduction, Integer price)
-    {
+    CarInfo(Integer carID, String category, String carBrand, String carModel, String transmission,
+            String fuel, Integer kw, Integer seats, Integer modelID, String licensePlateNumber,
+            String color, Integer yearOfProduction, Integer price) {
         this.carID = new SimpleIntegerProperty(carID);
         this.category = new SimpleStringProperty(category);
         this.carBrand = new SimpleStringProperty(carBrand);
