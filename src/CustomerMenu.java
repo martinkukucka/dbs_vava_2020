@@ -132,6 +132,9 @@ public class CustomerMenu {
     @FXML
     private TableColumn<RentalInfo, Double> priceColumnU;
 
+    @FXML
+    private Label wrongDateLabel;
+
     // Inicializacia hodnot do comboboxu chooseCarCombobox, ktory sluzi k vyberu auta
     @FXML
     public void initialize() {
@@ -222,7 +225,19 @@ public class CustomerMenu {
     @FXML
     void makeOrder() {
         System.out.println(chooseCarCombobox.getValue());
-        createOrder.insertToDb(chooseCarCombobox, pickUpDatepicker, returnDatepicker);
+        if (chooseCarCombobox.getValue() == null) {
+            wrongDateLabel.setText("Vyplnte vsetky udaje");
+            wrongDateLabel.setTextFill(Color.RED);
+            return;
+        }
+        try {
+            createOrder.insertToDb(chooseCarCombobox, pickUpDatepicker, returnDatepicker, wrongDateLabel);
+        }
+        catch (NullPointerException e) {
+            wrongDateLabel.setText("Vyplnte vsetky udaje");
+            wrongDateLabel.setTextFill(Color.RED);
+        }
+
     }
 
     // Zobrazenie vsetkych vytvorenych objednavok

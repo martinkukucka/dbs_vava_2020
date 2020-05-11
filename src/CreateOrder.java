@@ -1,10 +1,8 @@
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -12,6 +10,9 @@ import orm.InvoiceEntity;
 
 import javax.persistence.Query;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -62,7 +63,37 @@ public class CreateOrder {
     }
 
     // Ulozenie udajov o pozicani auta
-    void insertToDb(ComboBox<String> chooseCarCombobox, DatePicker pickUpDatepicker, DatePicker returnDatepicker) {
+    void insertToDb(ComboBox<String> chooseCarCombobox, DatePicker pickUpDatepicker, DatePicker returnDatepicker, Label wrongDateLabel) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate finPickUpDate = LocalDate.parse(String.valueOf(Date.valueOf(pickUpDatepicker.getValue())), dtf);
+        LocalDate finReturnDate = LocalDate.parse(String.valueOf(Date.valueOf(returnDatepicker.getValue())), dtf);
+        LocalDate finCurrentDate = LocalDate.parse(String.valueOf(new java.sql.Date(System.currentTimeMillis())), dtf);
+
+        long daysFromToday = ChronoUnit.DAYS.between(finCurrentDate, finPickUpDate);
+        long checkNumOfDays = ChronoUnit.DAYS.between(finPickUpDate, finReturnDate);
+        System.out.println(pickUpDatepicker.getValue());
+        System.out.println(returnDatepicker.getValue());
+        System.out.println ("Days: " + checkNumOfDays);
+        if (daysFromToday < 0) {
+//            System.out.println("Neda sa objednat");
+            wrongDateLabel.setText("Najskorsi mozny datum vyzdvihnutia je dnesny datum");
+            wrongDateLabel.setTextFill(Color.RED);
+            return;
+        }
+        if (checkNumOfDays == 0) {
+            wrongDateLabel.setText("Minimalna objednavka je jeden den");
+            wrongDateLabel.setTextFill(Color.RED);
+            return;
+        }
+        if (checkNumOfDays < 0) {
+            wrongDateLabel.setText("Datum odovzdania nesmie byt pred datumom vyzdvihnutia");
+            wrongDateLabel.setTextFill(Color.RED);
+            return;
+        }
+
+        wrongDateLabel.setText("Objednavka bola zaregistrovana");
+        wrongDateLabel.setTextFill(Color.GREEN);
+
         String licencePlate = chooseCarCombobox.getValue();
         licencePlate = licencePlate.substring(licencePlate.indexOf(""), licencePlate.indexOf(","));
 
@@ -80,8 +111,11 @@ public class CreateOrder {
                 rentedVehicleId = resultSet.getInt("id");
                 Date date1 = Date.valueOf(pickUpDatepicker.getValue().plusDays(1));
                 Date date2 = Date.valueOf(returnDatepicker.getValue().plusDays(1));
+//                System.out.println(date1);
                 long daysBetween = TimeUnit.DAYS.convert(date2.getTime() - date1.getTime(), TimeUnit.MILLISECONDS);
                 rentalPrice = resultSet.getInt("price") * 0.002 * daysBetween;
+                System.out.println(rentalPrice);
+                rentalPrice = Math.round(rentalPrice);
             }
 
             String name = null;
