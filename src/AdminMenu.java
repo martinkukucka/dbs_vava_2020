@@ -245,7 +245,7 @@ public class AdminMenu {
 
     // Button k priadaniu vozidla do databazy
     @FXML
-    void addVehicleButtonAction() {
+    void addVehicleButtonAction() throws SQLException {
         addVehicle.addVehicleButtonAction(licensePlateNumberTextField, colorTextField, yearOfProductionTextField, priceTextField, modelComboBox, addVehicleLabel);
     }
 
@@ -265,9 +265,10 @@ public class AdminMenu {
                 ServiceCarInfo selectedItem = serviceCarTable.getSelectionModel().getSelectedItem();
                 serviceCarTable.getItems().remove(selectedItem);
                 String sql = ("delete from crdb.carrepair where vehicleid = ?");
+                Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+                connection.setAutoCommit(false);
 
                 try {
-                    Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
                     PreparedStatement statement = connection.prepareStatement(sql);
 
                     statement.setInt(1, selectedItem.getCarID());
@@ -276,9 +277,11 @@ public class AdminMenu {
 
 
                 } catch (SQLException e) {
+                    connection.rollback();
                     JavaLogger.logger.log(Level.WARNING, "Database problem");
                     System.out.println(e.getMessage());
                 }
+                connection.commit();
             } else {
                 // Vozidlu sa zmeni stav podla toho ako urci admin
                 ServiceCarInfo selectedItem = serviceCarTable.getSelectionModel().getSelectedItem();
@@ -426,7 +429,7 @@ public class AdminMenu {
 
     // Odstranenie vozidla
     @FXML
-    void removeVehicleButtonAction() {
+    void removeVehicleButtonAction() throws SQLException {
         if (isShown) {
             carDatabase.removeVehicleButtonAction(carTable);
         }
@@ -509,7 +512,7 @@ public class AdminMenu {
 
     // Registracia servisu do databazy
     @FXML
-    void regServisVehicleButtonAction() {
+    void regServisVehicleButtonAction() throws SQLException {
         isShown = false;
         boolean servisExist = false;
 
@@ -521,9 +524,8 @@ public class AdminMenu {
             regServiceLabel.setText("Vyplňte všetky údaje.");
             regServiceLabel.setTextFill(Color.RED);
         } else {
-
+            Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             try {
-                Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
                 Statement statement = connection.createStatement();
 
                 ResultSet rs = statement.executeQuery("select * from crdb.carservice");
@@ -585,7 +587,6 @@ public class AdminMenu {
                 JavaLogger.logger.log(Level.WARNING, "Database problem");
                 System.out.println("SQL exception occured: " + e);
             }
-
         }
     }
 

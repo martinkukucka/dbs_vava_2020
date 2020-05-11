@@ -62,12 +62,13 @@ public class AddVehicle {
     // Potvrdenie pridanie vozidla
     @FXML
     void addVehicleButtonAction(TextField licensePlateNumberTextField, TextField colorTextField,
-                                TextField yearOfProductionTextField, TextField priceTextField, ComboBox<String> modelComboBox, Label addVehicleLabel) {
+                                TextField yearOfProductionTextField, TextField priceTextField, ComboBox<String> modelComboBox, Label addVehicleLabel) throws SQLException {
         // Vozidlo bude vlozene do tabulky vehicle
         String sqlVehicle = "insert into crdb.vehicle(licenseplatenumber, color, yearofproduction, price, modelid) values (?, ?, ?, ?, ?)";
 
+        Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+        connection.setAutoCommit(false);
         try {
-            Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             Statement statement = connection.createStatement();
 
             // Vozidlo uz existuje
@@ -104,9 +105,11 @@ public class AddVehicle {
             }
 
         } catch (SQLException e) {
+            connection.rollback();
             JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
+        connection.commit();
 
     }
 }

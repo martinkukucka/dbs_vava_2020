@@ -73,7 +73,7 @@ public class AddModel {
 
     // Pridavanie novych modelov
     @FXML
-    private void addModelButtonAction() {
+    private void addModelButtonAction() throws SQLException {
         boolean modelExist = false;
         // Modely sa vkladaju do databazy pre mozne buduce pouzitie
         String sqlModel = "insert into crdb.model(category, carbrand, carmodel, transmission, fuel, kw, seats) " +
@@ -87,8 +87,9 @@ public class AddModel {
             addModelLabel.setText(Login.rb.getString("missingInfo"));
             addModelLabel.setTextFill(Color.RED);
         } else {
+            Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+            connection.setAutoCommit(false);
             try {
-                Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
                 Statement statement = connection.createStatement();
 
                 ResultSet rs = statement.executeQuery("select * from crdb.model");
@@ -125,9 +126,11 @@ public class AddModel {
                 }
 
             } catch (SQLException e) {
+                connection.rollback();
                 JavaLogger.logger.log(Level.WARNING, "Database problem");
                 System.out.println("SQL exception occured: " + e);
             }
+            connection.commit();
         }
 
     }

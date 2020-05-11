@@ -63,7 +63,7 @@ public class CreateOrder {
     }
 
     // Ulozenie udajov o pozicani auta
-    void insertToDb(ComboBox<String> chooseCarCombobox, DatePicker pickUpDatepicker, DatePicker returnDatepicker, Label wrongDateLabel) {
+    void insertToDb(ComboBox<String> chooseCarCombobox, DatePicker pickUpDatepicker, DatePicker returnDatepicker, Label wrongDateLabel) throws SQLException {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate finPickUpDate = LocalDate.parse(String.valueOf(Date.valueOf(pickUpDatepicker.getValue())), dtf);
         LocalDate finReturnDate = LocalDate.parse(String.valueOf(Date.valueOf(returnDatepicker.getValue())), dtf);
@@ -101,8 +101,10 @@ public class CreateOrder {
         String sql = "select * from crdb.vehicle where licenseplatenumber = '" + licencePlate + "'";
         String sqlCarRental = "insert into crdb.carrental(pickupdate, returndate, customerid, vehicleid, invoiceid)" +
                 " values (?, ?, ?, ?, ?)";
+
+        Connection conn = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+        conn.setAutoCommit(false);
         try {
-            Connection conn = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             Statement stmts = conn.createStatement();
             ResultSet resultSet = stmts.executeQuery(sql);
             int rentedVehicleId = 0;
@@ -139,9 +141,11 @@ public class CreateOrder {
             JavaLogger.logger.log(Level.INFO, "New order added to database");
 
         } catch (SQLException e) {
+            conn.rollback();
             JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println(e.getMessage());
         }
+        conn.commit();
     }
 
 

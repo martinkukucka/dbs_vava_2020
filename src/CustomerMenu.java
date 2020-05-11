@@ -223,7 +223,7 @@ public class CustomerMenu {
 
     // Potvrdenie objednavky
     @FXML
-    void makeOrder() {
+    void makeOrder() throws SQLException {
         System.out.println(chooseCarCombobox.getValue());
         if (chooseCarCombobox.getValue() == null) {
             wrongDateLabel.setText("Vyplnte vsetky udaje");
@@ -318,10 +318,11 @@ public class CustomerMenu {
 
     // Potvrdenie zmeny hesla
     @FXML
-    void changeButtonAction() {
+    void changeButtonAction() throws SQLException {
         // Tahanie udajov z tabulky user
+        Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+        connection.setAutoCommit(false);
         try {
-            Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select id, password from crdb.customer");
 
@@ -341,27 +342,32 @@ public class CustomerMenu {
                                 rs.executeUpdate();
                                 passwordLabel.setText(Login.rb.getString("passwordChanged"));
                                 passwordLabel.setTextFill(Color.GREEN);
+                                connection.commit();
                                 JavaLogger.logger.log(Level.INFO, "User changed password successfully");
                                 return;
                             }
                             // Zle zadane heslo pri potvrdzovani
                             passwordLabel.setText(Login.rb.getString("wrong2Password"));
                             passwordLabel.setTextFill(Color.RED);
+                            connection.rollback();
                             JavaLogger.logger.log(Level.WARNING, "Wrong password confirmation");
                             return;
                         }
                         // Zle zadane povodne heslo
                         passwordLabel.setText(Login.rb.getString("wrong1Password"));
                         passwordLabel.setTextFill(Color.RED);
+                        connection.rollback();
                         JavaLogger.logger.log(Level.WARNING, "Wrong original password");
                         return;
                     }
                 }
             }
         } catch (SQLException e) {
+            connection.rollback();
             JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
+        connection.commit();
     }
 
 

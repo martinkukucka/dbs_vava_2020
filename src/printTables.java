@@ -33,21 +33,21 @@ public class printTables {
 //        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //        LocalDateTime now = LocalDateTime.now();
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        Date date1 = Date.valueOf("2020-05-10");
-        Date date2 = new java.sql.Date(System.currentTimeMillis());
-
-        String inputString1 = String.valueOf(date1);
-        String inputString2 = String.valueOf(date2);
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        Date date1 = Date.valueOf("2020-05-10");
+//        Date date2 = new java.sql.Date(System.currentTimeMillis());
+//
+//        String inputString1 = String.valueOf(date1);
+//        String inputString2 = String.valueOf(date2);
 //        System.out.println(inputString1);
 //        System.out.println(inputString2);
-        LocalDate finDate1 = LocalDate.parse(inputString1, dtf);
-        LocalDate finDate2 = LocalDate.parse(inputString2, dtf);
-        System.out.println(finDate1);
-        System.out.println(finDate2);
+//        LocalDate finDate1 = LocalDate.parse(inputString1, dtf);
+//        LocalDate finDate2 = LocalDate.parse(inputString2, dtf);
+//        System.out.println(finDate1);
+//        System.out.println(finDate2);
 //        long daysBetween = Duration.between(finDate1, finDate2).toDays();
-        long daysBetween = ChronoUnit.DAYS.between(finDate1, finDate2);
-        System.out.println ("Days: " + daysBetween);
+//        long daysBetween = ChronoUnit.DAYS.between(finDate1, finDate2);
+//        System.out.println ("Days: " + daysBetween);
 //        System.out.println ("Days: " + daysBetween);
 
 //        long daysBetween = TimeUnit.DAYS.convert(date1.getTime() - date2.getTime(), TimeUnit.MILLISECONDS);

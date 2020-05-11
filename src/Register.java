@@ -84,8 +84,9 @@ public class Register {
     private void regRegistrationButtonAction() throws Exception {
         // Ulozenie osobnych udajov usera
         String sqlCustomer = "insert into crdb.customer(name, surname, phonenumber, email, password, idcardnumber, addressid) values (?, ?, ?, ?, ?, ?, ?)";
+        Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+        connection.setAutoCommit(false);
         try {
-            Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             Statement statement = connection.createStatement();
             int currentAddressID = 0;
 
@@ -123,10 +124,11 @@ public class Register {
             JavaLogger.logger.log(Level.INFO, "User successfully registered");
 
         } catch (SQLException e) {
+            connection.rollback();
             JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
-
+        connection.commit();
     }
 
     // Metoda zisti id z tabulky region podla zadanych udajov

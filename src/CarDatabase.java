@@ -105,15 +105,16 @@ public class CarDatabase {
 
     // Vymazanie vozidla zo systemu
     @FXML
-    void removeVehicleButtonAction(TableView<CarInfo> carTable) {
+    void removeVehicleButtonAction(TableView<CarInfo> carTable) throws SQLException {
         if (!Bindings.isEmpty(carTable.getItems()).get()) {
             CarInfo selectedItem = carTable.getSelectionModel().getSelectedItem();
             carTable.getItems().remove(selectedItem);
             // Vymazanie vozidla zo vsetkych tabuliek kde sa nachadza
             String sqlModel = ("delete from crdb.carrepair where vehicleid = ?");
 
+            Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+            connection.setAutoCommit(false);
             try {
-                Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
                 PreparedStatement statement = connection.prepareStatement(sqlModel);
 
                 statement.setInt(1, selectedItem.getCarID());
@@ -127,10 +128,11 @@ public class CarDatabase {
                 JavaLogger.logger.log(Level.WARNING, "Vehicle removed from database");
 
             } catch (SQLException e) {
+                connection.rollback();
                 JavaLogger.logger.log(Level.WARNING, "Database problem");
                 System.out.println(e.getMessage());
             }
-
+            connection.commit();
         }
     }
 
