@@ -91,9 +91,6 @@ public class CreateOrder {
             return;
         }
 
-        wrongDateLabel.setText("Objednavka bola zaregistrovana");
-        wrongDateLabel.setTextFill(Color.GREEN);
-
         String licencePlate = chooseCarCombobox.getValue();
         licencePlate = licencePlate.substring(licencePlate.indexOf(""), licencePlate.indexOf(","));
 
@@ -109,11 +106,15 @@ public class CreateOrder {
             ResultSet resultSet = stmts.executeQuery(sql);
             int rentedVehicleId = 0;
             double rentalPrice = 0;
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 rentedVehicleId = resultSet.getInt("id");
+
+                if (checkRentedCars(rentedVehicleId, pickUpDatepicker, returnDatepicker, wrongDateLabel)) {
+                    return;
+                }
+
                 Date date1 = Date.valueOf(pickUpDatepicker.getValue().plusDays(1));
                 Date date2 = Date.valueOf(returnDatepicker.getValue().plusDays(1));
-//                System.out.println(date1);
                 long daysBetween = TimeUnit.DAYS.convert(date2.getTime() - date1.getTime(), TimeUnit.MILLISECONDS);
                 rentalPrice = resultSet.getInt("price") * 0.002 * daysBetween;
                 System.out.println(rentalPrice);
@@ -137,6 +138,9 @@ public class CreateOrder {
             preparedStatement.setInt(4, rentedVehicleId);
             preparedStatement.setInt(5, invoiceId);
             preparedStatement.executeUpdate();
+
+            wrongDateLabel.setText("Objednavka bola zaregistrovana");
+            wrongDateLabel.setTextFill(Color.GREEN);
 
             JavaLogger.logger.log(Level.INFO, "New order added to database");
 
@@ -186,6 +190,52 @@ public class CreateOrder {
             JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
         }
+    }
+
+    private boolean checkRentedCars(int rentedVehicleId, DatePicker pickUpDatepicker, DatePicker returnDatepicker, Label wrongDateLabel) {
+
+        try {
+            String sql = ("select * from crdb.carrental where vehicleid = " + rentedVehicleId + "");
+
+            Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate carRentedFrom;
+            LocalDate carRentedTo = null;
+
+            while (resultSet.next()) {
+                carRentedFrom = LocalDate.parse(String.valueOf(resultSet.getDate("pickupdate").toLocalDate()), dtf);
+                carRentedTo = LocalDate.parse(String.valueOf(resultSet.getDate("returndate").toLocalDate()), dtf);
+
+                LocalDate pickUpDate = LocalDate.parse(String.valueOf(Date.valueOf(pickUpDatepicker.getValue())), dtf);
+                LocalDate returnDate = LocalDate.parse(String.valueOf(Date.valueOf(returnDatepicker.getValue())), dtf);
+//                System.out.println(carRentedFrom + " " + carRentedTo);
+
+                if (!(pickUpDate.isBefore(carRentedFrom) || pickUpDate.isAfter(carRentedTo)) ||
+                        !(returnDate.isBefore(carRentedFrom) || returnDate.isAfter(carRentedTo))) {
+                    wrongDateLabel.setText("Vozidlo je nedostupne");
+                    wrongDateLabel.setTextFill(Color.RED);
+                    return true;
+                }
+            }
+
+            if (carRentedTo == null) {
+                return false;
+            }
+
+//            LocalDate pickUpDate = LocalDate.parse(String.valueOf(Date.valueOf(pickUpDatepicker.getValue())), dtf);
+//            wrongDateLabel.setText("Vozidlo je nedostupne");
+//            wrongDateLabel.setTextFill(Color.RED);
+
+//            long daysBetween = ChronoUnit.DAYS.between(carRentedTo, pickUpDate);
+//            return daysBetween < 0;
+
+        } catch (SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
+            System.out.println("SQL exception occured: " + e);
+        }
+        return false;
     }
 
 }
