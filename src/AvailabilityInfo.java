@@ -2,6 +2,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+// Pomocna trieda pre vkladanie informacii o konkretnom pozicanom vozidle do tabulky v gui
+// Obsahuje aj gettre a settre, cize informacie mozu byt pouzite v roznych metodach
 public class AvailabilityInfo {
 
     private SimpleStringProperty from;

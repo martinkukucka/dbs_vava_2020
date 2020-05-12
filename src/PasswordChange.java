@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 
 import java.sql.*;
 
-// ?
 public class PasswordChange {
 
     @FXML

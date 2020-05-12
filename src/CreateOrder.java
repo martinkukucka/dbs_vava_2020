@@ -192,6 +192,7 @@ public class CreateOrder {
         }
     }
 
+    // Obmedzenie objednania auta podla datumov
     private boolean checkRentedCars(int rentedVehicleId, DatePicker pickUpDatepicker, DatePicker returnDatepicker, Label wrongDateLabel) {
 
         try {
@@ -204,6 +205,7 @@ public class CreateOrder {
             LocalDate carRentedFrom;
             LocalDate carRentedTo = null;
 
+            // Zistovanie ci auto je pozicane v zadanych datumoch
             while (resultSet.next()) {
                 carRentedFrom = LocalDate.parse(String.valueOf(resultSet.getDate("pickupdate").toLocalDate()), dtf);
                 carRentedTo = LocalDate.parse(String.valueOf(resultSet.getDate("returndate").toLocalDate()), dtf);

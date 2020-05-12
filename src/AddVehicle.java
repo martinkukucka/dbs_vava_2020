@@ -51,7 +51,6 @@ public class AddVehicle {
         stage.show();
     }
 
-    // ?
     @FXML
     private void backButtonAction() throws Exception {
         Stage stage = (Stage) backButton.getScene().getWindow();

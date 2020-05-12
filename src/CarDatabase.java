@@ -76,7 +76,6 @@ public class CarDatabase {
             System.out.println("SQL exception occured: " + e);
         }
 
-        // !
         try {
             String sqlModel = ("select * from crdb.model join crdb.vehicle where modelid = model.id group by carbrand having AVG(price) >" +
                     "(SELECT AVG(price) from crdb.vehicle) order by carbrand");
@@ -95,7 +94,6 @@ public class CarDatabase {
         }
     }
 
-    // ?
     @FXML
     private void addVehicleButtonAction() throws Exception {
         Stage stage = (Stage) addVehicleButton.getScene().getWindow();
@@ -136,7 +134,6 @@ public class CarDatabase {
         }
     }
 
-    // ?
     @FXML
     private void backButtonAction() throws Exception {
         Stage stage = (Stage) backButton.getScene().getWindow();

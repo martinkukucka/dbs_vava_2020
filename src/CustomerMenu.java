@@ -235,8 +235,7 @@ public class CustomerMenu {
         }
         try {
             createOrder.insertToDb(chooseCarCombobox, pickUpDatepicker, returnDatepicker, wrongDateLabel);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             wrongDateLabel.setText(Login.rb.getString("missingInfo"));
             wrongDateLabel.setTextFill(Color.RED);
         }
@@ -373,6 +372,7 @@ public class CustomerMenu {
         connection.commit();
     }
 
+    // Zistenie id pozicaneho auta
     @FXML
     void carAvailabilityButtonAcion() throws IOException {
         String licencePlate = chooseCarCombobox.getValue();

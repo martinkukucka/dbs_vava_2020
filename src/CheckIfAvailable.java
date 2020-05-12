@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import java.sql.*;
 import java.util.logging.Level;
 
+// Trieda, ktora zisti kedy je dane auto vypozicane
 public class CheckIfAvailable {
     @FXML
     private AnchorPane loginAnchorPane;
@@ -39,6 +40,7 @@ public class CheckIfAvailable {
         toColumnA.setCellValueFactory(new PropertyValueFactory<>("to"));
         ObservableList<AvailabilityInfo> availabilityInfod = FXCollections.observableArrayList();
 
+        // Naplnenie tabulky udajmi z databazy
         try {
             String sqlModel = ("select * from crdb.carrental where vehicleid =" + vehicleId + "");
 

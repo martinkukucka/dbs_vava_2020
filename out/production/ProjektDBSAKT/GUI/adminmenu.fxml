@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -40,6 +41,11 @@
          </font>
       </Button>
       <Button fx:id="servisVehicleButton" mnemonicParsing="false" onAction="#servisVehicleButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="%serviceVehicle" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="brandInfosButton" mnemonicParsing="false" onAction="#brandInfosButtonAction" onMouseEntered="#enterButton" onMouseExited="#exitButton" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #3b3b3b;" text="%brandInfos" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -131,8 +137,8 @@
       <Button fx:id="regRegistrationButton" layoutX="465.0" layoutY="706.0" mnemonicParsing="false" onAction="#regServisVehicleButtonAction" prefHeight="35.0" prefWidth="150.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="%register" textAlignment="CENTER" textFill="WHITE" />
       <Label fx:id="regServiceLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="432.0" layoutY="776.0" prefHeight="17.0" prefWidth="227.0" />
    </Pane>
-   <Pane fx:id="servisVehicleShowPane" layoutX="200.0" layoutY="10.0" prefHeight="900.0" prefWidth="1100.0" style="-fx-background-color: #FFFFFF;">
-      <TableView fx:id="serviceCarTable" layoutY="-10.0" prefHeight="625.0" prefWidth="1100.0" tableMenuButtonVisible="true">
+   <Pane fx:id="servisVehicleShowPane" layoutX="200.0" prefHeight="900.0" prefWidth="1090.0" style="-fx-background-color: #FFFFFF;">
+      <TableView fx:id="serviceCarTable" prefHeight="625.0" prefWidth="1100.0" tableMenuButtonVisible="true">
          <columns>
             <TableColumn fx:id="servisVehicleIDColumn" prefWidth="60.0" text="ID" />
             <TableColumn fx:id="servisLicensePlateNumberColumn" prefWidth="85.0" text="%licensePlateNumber" />
@@ -151,4 +157,7 @@
       <Label fx:id="stateLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="475.0" layoutY="839.0" prefHeight="17.0" prefWidth="150.0" />
    </Pane>
    <Pane layoutX="200.0" layoutY="10.0" prefHeight="900.0" prefWidth="1090.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   <Pane fx:id="brandInfoPane" layoutX="200.0" layoutY="10.0" prefHeight="900.0" prefWidth="1090.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TextArea fx:id="brandInfoTextArea" layoutX="50.0" layoutY="32.0" prefHeight="700.0" prefWidth="400.0" />
+   </Pane>
 </AnchorPane>

@@ -414,7 +414,7 @@ public class AdminMenu {
                 Login.rb.getString("status4")
         );
 
-        // !
+        // Vypis poctu aut kazdej znacky, ktore pozicovna ponuka
         try {
             brandInfoTextArea.clear();
 //            String sqlModel = ("SELECT *, COUNT(carmodel) OVER(PARTITION BY carbrand) as grand_total \n" +
@@ -437,7 +437,6 @@ public class AdminMenu {
             for (String s : ar) {
                 brandInfoTextArea.appendText(s);
                 brandInfoTextArea.appendText("\n");
-//                System.out.println(s);
             }
 
         } catch (SQLException e) {
@@ -506,7 +505,6 @@ public class AdminMenu {
         }
     }
 
-    // !
     private boolean selectItemId() throws SQLException {
         Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
 

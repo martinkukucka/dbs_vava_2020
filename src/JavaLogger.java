@@ -1,7 +1,7 @@
 import java.util.logging.*;
 import java.io.IOException;
 
-// !
+// Logovanie
 public class JavaLogger {
 
     public static Logger logger = Logger.getLogger("Logger");
