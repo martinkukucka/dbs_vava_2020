@@ -256,7 +256,7 @@ public class CustomerMenu {
         // Pre kazdu objednavku je subor iny
         if (!Bindings.isEmpty(seeOrderTable.getItems()).get()) {
             RentalInfo selectedItem = seeOrderTable.getSelectionModel().getSelectedItem();
-            int invoiceId = selectedItem.getId() + 1;
+            int invoiceId = selectedItem.getId();
 
             // Informacie o objednavke z joinutej tabulky
             try {

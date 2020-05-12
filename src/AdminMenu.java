@@ -17,6 +17,8 @@ import orm.CarserviceEntity;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 
 // Menu s moznostami vyberu akcii, ktore moze vykonat iba admin
@@ -30,6 +32,13 @@ public class AdminMenu {
     public Button regRegistrationButton;
     public Button changeStateButton;
     public Label stateLabel;
+    public TextArea brandInfoTextArea;
+
+    @FXML
+    public Button brandInfosButton;
+
+    @FXML
+    public Pane brandInfoPane;
 
     @FXML
     private Button addButton;
@@ -317,6 +326,9 @@ public class AdminMenu {
         if (event.getSource() == servisVehicleShowButton) {
             servisVehicleShowButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
         }
+        if (event.getSource() == brandInfosButton) {
+            brandInfosButton.setStyle("-fx-background-color: #323232; -fx-font-size: 14; -fx-font-weight: bold");
+        }
     }
 
     // Button mierne zmeni farbu a zvacsi pismo
@@ -351,6 +363,9 @@ public class AdminMenu {
         if (event.getSource() == servisVehicleShowButton) {
             servisVehicleShowButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
         }
+        if (event.getSource() == brandInfosButton) {
+            brandInfosButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
+        }
     }
 
     // Button sa vrati do povodneho stavu
@@ -370,6 +385,11 @@ public class AdminMenu {
         if (event.getSource() == servisRegistrationButton) {
             servisRegistrationButton.setStyle("-fx-background-color: #3b3b3b; -fx-font-size: 12; -fx-font-weight: bold");
         }
+    }
+
+    @FXML
+    void brandInfosButtonAction() {
+        brandInfoPane.toFront();
     }
 
     // Naplnenie comboboxov
@@ -396,17 +416,30 @@ public class AdminMenu {
 
         // !
         try {
-            String sqlModel = ("SELECT *, COUNT(carmodel) OVER(PARTITION BY carbrand) as grand_total \n" +
-                    "FROM crdb.model order by carbrand");
+            brandInfoTextArea.clear();
+//            String sqlModel = ("SELECT *, COUNT(carmodel) OVER(PARTITION BY carbrand) as grand_total \n" +
+//                    "FROM crdb.model order by carbrand");
+
+            String sql = ("select *, COUNT(carmodel) OVER(PARTITION BY carbrand) as grand_total from crdb.vehicle inner join crdb.model on vehicle.modelid = model.id order by carbrand");
 
             Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(sqlModel);
+            ResultSet rs = statement.executeQuery(sql);
+            ArrayList<String> ar = new ArrayList<String>();
 
             while (rs.next()) {
-                System.out.println(rs.getString("carbrand"));
-                System.out.println(rs.getString("grand_total"));
+                String carBrandInfo = rs.getString("carbrand") + " " + rs.getString("grand_total");
+                if (!(ar.contains(carBrandInfo))) {
+                    ar.add(carBrandInfo);
+                }
             }
+
+            for (String s : ar) {
+                brandInfoTextArea.appendText(s);
+                brandInfoTextArea.appendText("\n");
+//                System.out.println(s);
+            }
+
         } catch (SQLException e) {
             JavaLogger.logger.log(Level.WARNING, "Database problem");
             System.out.println("SQL exception occured: " + e);
@@ -433,6 +466,7 @@ public class AdminMenu {
         if (isShown) {
             carDatabase.removeVehicleButtonAction(carTable);
         }
+        initialize();
     }
 
     // Vypis vsetkych dostupnych vozidiel
