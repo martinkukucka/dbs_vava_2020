@@ -32,6 +32,9 @@ public class CustomerMenu {
     public Button makeOrderButton;
     public Button changeButton;
     public Button invoicePdfButton;
+    public Button carAvailabilityButton;
+
+    static int rentedVehicleId = 0;
 
     @FXML
     private Button createOrderButton;
@@ -226,7 +229,7 @@ public class CustomerMenu {
     void makeOrder() throws SQLException {
         System.out.println(chooseCarCombobox.getValue());
         if (chooseCarCombobox.getValue() == null) {
-            wrongDateLabel.setText("Vyplnte vsetky udaje");
+            wrongDateLabel.setText(Login.rb.getString("missingInfo"));
             wrongDateLabel.setTextFill(Color.RED);
             return;
         }
@@ -234,7 +237,7 @@ public class CustomerMenu {
             createOrder.insertToDb(chooseCarCombobox, pickUpDatepicker, returnDatepicker, wrongDateLabel);
         }
         catch (NullPointerException e) {
-            wrongDateLabel.setText("Vyplnte vsetky udaje");
+            wrongDateLabel.setText(Login.rb.getString("missingInfo"));
             wrongDateLabel.setTextFill(Color.RED);
         }
 
@@ -368,6 +371,38 @@ public class CustomerMenu {
             System.out.println("SQL exception occured: " + e);
         }
         connection.commit();
+    }
+
+    @FXML
+    void carAvailabilityButtonAcion() throws IOException {
+        String licencePlate = chooseCarCombobox.getValue();
+        licencePlate = licencePlate.substring(licencePlate.indexOf(""), licencePlate.indexOf(","));
+
+        String sql = "select * from crdb.vehicle where licenseplatenumber = '" + licencePlate + "'";
+
+        try {
+            Connection conn = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+            Statement stmts = conn.createStatement();
+            ResultSet resultSet = stmts.executeQuery(sql);
+
+
+            if (resultSet.next()) {
+                rentedVehicleId = resultSet.getInt("id");
+            }
+            System.out.println(rentedVehicleId);
+
+
+        } catch (SQLException e) {
+            JavaLogger.logger.log(Level.WARNING, "Database problem");
+            System.out.println(e.getMessage());
+        }
+
+
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/caravailability.fxml"), Login.rb);
+        Scene scene = new Scene(root, 300, 250);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
 
 

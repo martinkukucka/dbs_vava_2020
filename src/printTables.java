@@ -1,5 +1,8 @@
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -8,7 +11,7 @@ import orm.InvoiceEntity;
 import javax.persistence.Query;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.sql.Date;
+import java.sql.*;
 import java.text.ParseException;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -16,12 +19,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+
 
 // Metoda na ktorej skusam rozne funkcionality pred tym ako ich pouzijem v programe :D
 public class printTables {
 
 
     public static void main(String[] args) throws DocumentException, FileNotFoundException {
+
 
 
 //        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();

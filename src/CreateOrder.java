@@ -76,17 +76,17 @@ public class CreateOrder {
         System.out.println ("Days: " + checkNumOfDays);
         if (daysFromToday < 0) {
 //            System.out.println("Neda sa objednat");
-            wrongDateLabel.setText("Najskorsi mozny datum vyzdvihnutia je dnesny datum");
+            wrongDateLabel.setText(Login.rb.getString("today"));
             wrongDateLabel.setTextFill(Color.RED);
             return;
         }
         if (checkNumOfDays == 0) {
-            wrongDateLabel.setText("Minimalna objednavka je jeden den");
+            wrongDateLabel.setText(Login.rb.getString("oneDay"));
             wrongDateLabel.setTextFill(Color.RED);
             return;
         }
         if (checkNumOfDays < 0) {
-            wrongDateLabel.setText("Datum odovzdania nesmie byt pred datumom vyzdvihnutia");
+            wrongDateLabel.setText(Login.rb.getString("dateDiff"));
             wrongDateLabel.setTextFill(Color.RED);
             return;
         }
@@ -139,7 +139,7 @@ public class CreateOrder {
             preparedStatement.setInt(5, invoiceId);
             preparedStatement.executeUpdate();
 
-            wrongDateLabel.setText("Objednavka bola zaregistrovana");
+            wrongDateLabel.setText(Login.rb.getString("orderSuccess"));
             wrongDateLabel.setTextFill(Color.GREEN);
 
             JavaLogger.logger.log(Level.INFO, "New order added to database");
@@ -214,7 +214,7 @@ public class CreateOrder {
 
                 if (!(pickUpDate.isBefore(carRentedFrom) || pickUpDate.isAfter(carRentedTo)) ||
                         !(returnDate.isBefore(carRentedFrom) || returnDate.isAfter(carRentedTo))) {
-                    wrongDateLabel.setText("Vozidlo je nedostupne");
+                    wrongDateLabel.setText(Login.rb.getString("rentedAlready"));
                     wrongDateLabel.setTextFill(Color.RED);
                     return true;
                 }
