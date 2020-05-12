@@ -13,6 +13,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -26,12 +27,26 @@ public class CreateOrder {
             Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             Statement statement = connection.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("select * from crdb.vehicle inner join crdb.model" +
+            ResultSet rs = statement.executeQuery("select vehicleid from crdb.carrepair");
+            ArrayList<Integer> ar = new ArrayList<Integer>();
+            while (rs.next()) {
+                ar.add(rs.getInt("vehicleid"));
+            }
+
+            connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
+            statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("select vehicle.id, licenseplatenumber, carbrand, " +
+                    "carmodel, color from crdb.vehicle inner join crdb.model" +
                     " on crdb.vehicle.modelid = crdb.model.id order by carbrand");
+
             while (resultSet.next()) {
-                String chooseCar = (resultSet.getString("licenseplatenumber") + ", " + resultSet.getString("carbrand") +
-                        ", " + resultSet.getString("carmodel") + ", " + resultSet.getString("color"));
-                chooseCarCombobox.getItems().add(chooseCar);
+                if (!(ar.contains(resultSet.getInt("id")))) {
+                    String chooseCar = (resultSet.getString("licenseplatenumber") + ", " + resultSet.getString("carbrand") +
+                            ", " + resultSet.getString("carmodel") + ", " + resultSet.getString("color"));
+                    chooseCarCombobox.getItems().add(chooseCar);
+                }
+
             }
         } catch (SQLException e) {
             JavaLogger.logger.log(Level.WARNING, "Database problem");
