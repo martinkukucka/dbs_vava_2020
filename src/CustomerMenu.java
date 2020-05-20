@@ -1,6 +1,7 @@
 import com.itextpdf.text.*;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.VerticalPositionMark;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -255,7 +256,7 @@ public class CustomerMenu {
         // Pre kazdu objednavku je subor iny
         if (!Bindings.isEmpty(seeOrderTable.getItems()).get()) {
             RentalInfo selectedItem = seeOrderTable.getSelectionModel().getSelectedItem();
-            int invoiceId = selectedItem.getId();
+            int invoiceId = selectedItem.getId() + 1;
 
             // Informacie o objednavke z joinutej tabulky
             try {
@@ -264,16 +265,37 @@ public class CustomerMenu {
                 Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
                 Statement statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(sqlModel);
+                String pozicaneOd = null;
+                String pozicaneDo = null;
                 String meno = null;
                 String firma = null;
                 String auto = null;
-                String cena = null;
+                double cena = 0;
+                int customerID = 0;
+
 
                 if (rs.next()) {
+                    pozicaneOd = rs.getString("pickupdate");
+                    pozicaneDo = rs.getString("returndate");
+                    customerID = rs.getInt("customerid");
                     meno = rs.getString("billto");
                     firma = rs.getString("companyname");
                     auto = rs.getString("carbrand") + " " + rs.getString("carmodel");
-                    cena = rs.getDouble("amount") + " €";
+                    cena = rs.getDouble("amount");
+
+                }
+
+                ResultSet resultSet = statement.executeQuery("select * from crdb.customer inner join crdb.address on crdb.customer.addressid = crdb.address.id inner join crdb.city on crdb.address.cityid = crdb.city.id inner join crdb.region on crdb.city.regionid = crdb.region.id where crdb.customer.id = " + customerID + "");
+
+                String ulica = null;
+                String cisloDomu = null;
+                String mesto = null;
+                String psc = null;
+                if (resultSet.next()) {
+                    ulica = resultSet.getString("street");
+                    cisloDomu = resultSet.getString("housenumber");
+                    mesto = resultSet.getString("cityname");
+                    psc = resultSet.getString("zipcode");
                 }
 
                 // Vytvorenie pdf
@@ -282,22 +304,45 @@ public class CustomerMenu {
 
                 document.open();
 
-                Font titleFont = FontFactory.getFont(FontFactory.TIMES_BOLD, 20, BaseColor.BLACK);
-                Font basicFont = FontFactory.getFont(FontFactory.TIMES, 12, BaseColor.BLACK);
+                // Vytvorenie paragrafov, ktore sa budu zobrazovat
+                Font titleFont = FontFactory.getFont(FontFactory.TIMES_BOLD, 32, BaseColor.BLACK);
+                Font basicFont = FontFactory.getFont(FontFactory.TIMES, 13, BaseColor.BLACK);
                 Paragraph preface = new Paragraph();
                 preface.add(new Paragraph(" "));
                 preface.add(new Paragraph("Faktura za pozicanie auta", titleFont));
                 preface.add(new Paragraph(" "));
-                Paragraph companyParagraph = new Paragraph("Meno spolocnosti: " + firma, basicFont);
-                Paragraph nameParagraph = new Paragraph("Meno zakaznika: " + meno, basicFont);
-                Paragraph carParagraph = new Paragraph("Poziciavane auto: " + auto, basicFont);
-                Paragraph priceParagraph = new Paragraph("Cena: " + cena, basicFont);
+                Chunk glue = new Chunk(new VerticalPositionMark());
+                Paragraph dodParagraph = new Paragraph("DODAVATEL", FontFactory.getFont(FontFactory.TIMES_BOLD, 14, BaseColor.BLACK));
+                dodParagraph.add(new Chunk(glue));
+                dodParagraph.add("ODOBERATEL");
+                Paragraph companyParagraph = new Paragraph(firma, basicFont);
+                companyParagraph.add(new Chunk(glue));
+                companyParagraph.add(meno);
+                Paragraph nameParagraph = new Paragraph("ICO: 83694176", basicFont);
+                nameParagraph.add(new Chunk(glue));
+                nameParagraph.add(ulica + " " + cisloDomu);
+                Paragraph pomLine = new Paragraph("DIC:156932475", basicFont);
+                pomLine.add(new Chunk(glue));
+                pomLine.add(psc + " " + mesto);
+                pomLine.add("\n ");
 
+                Paragraph polParagraph = new Paragraph("NAZOV POLOZKY", FontFactory.getFont(FontFactory.TIMES_BOLD, 14, BaseColor.BLACK));
+                Paragraph carParagraph = new Paragraph("Poziciavane auto: " + auto + "\nPozicane od: " + pozicaneOd + "\nPozicane do: " + pozicaneDo, basicFont);
+                Paragraph priceParagraph = new Paragraph("Cena bez DPH: " + Math.round(cena * 0.8) + "€\nCena s DPH: " + (int)cena + "€\n ", basicFont);
+                Paragraph payParagraph = new Paragraph("PLATBA", FontFactory.getFont(FontFactory.TIMES_BOLD, 14, BaseColor.BLACK));
+                Paragraph payInfoParagraph = new Paragraph("Cislo faktury: " + invoiceId + "\nForma uhrady: prevod\nIban: SK25 7500 0000 0040 1449 0096", basicFont);
+
+                // Pridanie paragrafov na stranu
                 document.add(preface);
+                document.add(dodParagraph);
                 document.add(companyParagraph);
                 document.add(nameParagraph);
+                document.add(pomLine);
+                document.add(polParagraph);
                 document.add(carParagraph);
                 document.add(priceParagraph);
+                document.add(payParagraph);
+                document.add(payInfoParagraph);
 
                 document.close();
 

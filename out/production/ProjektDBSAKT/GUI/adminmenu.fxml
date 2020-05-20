@@ -156,8 +156,8 @@
       <Button fx:id="changeStateButton" layoutX="475.0" layoutY="670.0" mnemonicParsing="false" onAction="#changeStateButtonAction" prefHeight="35.0" prefWidth="150.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #3b3b3b;" text="%change" textAlignment="CENTER" textFill="WHITE" />
       <Label fx:id="stateLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="475.0" layoutY="839.0" prefHeight="17.0" prefWidth="150.0" />
    </Pane>
-   <Pane layoutX="200.0" layoutY="10.0" prefHeight="900.0" prefWidth="1090.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    <Pane fx:id="brandInfoPane" layoutX="200.0" layoutY="10.0" prefHeight="900.0" prefWidth="1090.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <TextArea fx:id="brandInfoTextArea" layoutX="50.0" layoutY="32.0" prefHeight="700.0" prefWidth="400.0" />
    </Pane>
+   <Pane layoutX="200.0" layoutY="10.0" prefHeight="900.0" prefWidth="1090.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 </AnchorPane>
