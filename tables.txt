@@ -1,0 +1,100 @@
+CREATE TABLE `region` (
+	`id` INT auto_increment NOT NULL,
+	`regionname` VARCHAR(50) NOT NULL CHECK (`regionname` <> ''),
+	PRIMARY KEY (`id`),
+    constraint region_regionname_uindex unique (regionname)
+);
+
+CREATE TABLE `city` (
+	`id` INT auto_increment NOT NULL,
+	`cityname` VARCHAR(50) NOT NULL CHECK (`cityname` <> ''),
+	`zipcode` VARCHAR(10) NOT NULL CHECK (`zipcode` <> ''),
+    `regionid` INT NOT NULL,
+	PRIMARY KEY (`id`),
+    FOREIGN KEY(regionid) REFERENCES region(id),
+    constraint city_zipcode_uindex unique (zipcode)
+);
+
+CREATE TABLE `address` (
+	`id` INT auto_increment NOT NULL,
+	`street` VARCHAR(50) NOT NULL CHECK (`street` <> ''),
+	`housenumber` VARCHAR(50) NOT NULL CHECK (`housenumber` <> ''),
+    `cityid` INT NOT NULL,
+	PRIMARY KEY (`id`),
+    FOREIGN KEY(cityid) REFERENCES city(id)
+);
+
+CREATE TABLE `customer` (
+	`id` INT auto_increment NOT NULL,
+	`name` VARCHAR(50) NOT NULL CHECK (`name` <> ''),
+	`surname` VARCHAR(50) NOT NULL CHECK (`surname` <> ''),
+	`phonenumber` VARCHAR(20) CHECK (`phonenumber` <> ''),
+	`email` VARCHAR(50) NOT NULL CHECK (`email` <> ''),
+	`password` VARCHAR(50) NOT NULL CHECK (`password` <> ''),
+	`idcardnumber` VARCHAR(20) NOT NULL CHECK (`idcardnumber` <> ''),
+	`addressid` INT NOT NULL,
+	PRIMARY KEY (`id`),
+    FOREIGN KEY(addressid) REFERENCES address(id)
+);
+
+CREATE TABLE `model` (
+	`id` INT auto_increment NOT NULL,
+	`category` VARCHAR(50) NOT NULL CHECK (`category` <> ''),
+	`carbrand` VARCHAR(50) NOT NULL CHECK (`carbrand` <> ''),
+	`carmodel` VARCHAR(50) NOT NULL CHECK (`carmodel` <> ''),
+	`transmission` VARCHAR(50) NOT NULL CHECK (`transmission` <> ''),
+	`fuel` VARCHAR(50) NOT NULL CHECK (`fuel` <> ''),
+    `kw` VARCHAR(50) NOT NULL CHECK (`kw` <> ''),
+	`seats` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `vehicle` (
+	`id` INT auto_increment NOT NULL,
+    `licenseplatenumber` VARCHAR(50) NOT NULL CHECK (`licenseplatenumber` <> ''),
+	`color` VARCHAR(50) NOT NULL CHECK (`color` <> ''),
+	`yearofproduction` YEAR NOT NULL,
+	`price` FLOAT NOT NULL,
+	`modelid` INT NOT NULL,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY(modelid) REFERENCES model(id)
+);
+
+CREATE TABLE `invoice` (
+	`id` INT auto_increment NOT NULL,
+	`companyname` VARCHAR(50) NOT NULL CHECK (`companyname` <> ''),
+    `billto` VARCHAR(50) NOT NULL CHECK (`billto` <> ''),
+	`amount` double NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `carrental` (
+	`id` INT auto_increment NOT NULL,
+    `pickupdate` DATE NOT NULL,
+	`returndate` DATE NOT NULL,
+	`customerid` INT NOT NULL,
+	`vehicleid` INT NOT NULL,
+    `invoiceid` INT NOT NULL,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY(customerid) REFERENCES customer(id),
+    FOREIGN KEY(vehicleid) REFERENCES vehicle(id),
+    FOREIGN KEY(invoiceid) REFERENCES invoice(id)
+);
+
+CREATE TABLE `carservice` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL,
+    `phonenumber` VARCHAR(50) NOT NULL,
+    `email` VARCHAR(50) NOT NULL,
+	`addressid` INT NOT NULL,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY(addressid) REFERENCES address(id)
+);
+
+CREATE TABLE `carrepair` (
+	`carserviceid` INT NOT NULL,
+	`vehicleid` INT NOT NULL,
+	`description` VARCHAR(100),
+	FOREIGN KEY(carserviceid) REFERENCES carservice(id),
+	FOREIGN KEY(vehicleid) REFERENCES vehicle(id)
+);

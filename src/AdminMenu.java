@@ -417,10 +417,8 @@ public class AdminMenu {
         // Vypis poctu aut kazdej znacky, ktore pozicovna ponuka
         try {
             brandInfoTextArea.clear();
-//            String sqlModel = ("SELECT *, COUNT(carmodel) OVER(PARTITION BY carbrand) as grand_total \n" +
-//                    "FROM crdb.model order by carbrand");
 
-            String sql = ("select *, COUNT(carmodel) OVER(PARTITION BY carbrand) as grand_total from crdb.vehicle inner join crdb.model on vehicle.modelid = model.id order by carbrand");
+            String sql = ("select *, COUNT(carmodel) OVER(PARTITION BY carbrand) as countModel from crdb.vehicle inner join crdb.model on vehicle.modelid = model.id order by carbrand");
 
             Connection connection = DriverManager.getConnection(Main.DBcon, Main.DBuser, Main.DBpassword);
             Statement statement = connection.createStatement();
@@ -428,7 +426,7 @@ public class AdminMenu {
             ArrayList<String> ar = new ArrayList<String>();
 
             while (rs.next()) {
-                String carBrandInfo = rs.getString("carbrand") + " " + rs.getString("grand_total");
+                String carBrandInfo = rs.getString("carbrand") + " " + rs.getString("countModel");
                 if (!(ar.contains(carBrandInfo))) {
                     ar.add(carBrandInfo);
                 }
